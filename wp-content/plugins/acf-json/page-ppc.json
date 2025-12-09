@@ -1,0 +1,777 @@
+{
+  "key": "group_ppc_services_template_fields",
+  "title": "PPC Services (page-ppc.php)",
+  "fields": [
+    {
+      "key": "field_ppc_hero_tab",
+      "label": "Hero",
+      "name": "ppc_hero_tab",
+      "type": "tab",
+      "placement": "top"
+    },
+    {
+      "key": "field_ppc_hero_label",
+      "label": "Hero Label",
+      "name": "ppc_hero_label",
+      "type": "text",
+      "default_value": "Pay-Per-Click Advertising"
+    },
+    {
+      "key": "field_ppc_hero_heading_line_1",
+      "label": "Hero Heading Line 1",
+      "name": "ppc_hero_heading_line_1",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "default_value": "Instant Visibility"
+    },
+    {
+      "key": "field_ppc_hero_heading_line_2",
+      "label": "Hero Heading Line 2",
+      "name": "ppc_hero_heading_line_2",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "default_value": "<span class=\"highlight-text-italic\">Measurable Results</span>"
+    },
+    {
+      "key": "field_ppc_hero_description",
+      "label": "Hero Description",
+      "name": "ppc_hero_description",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "default_value": "PPC really is for every business and it can really help you get new customers in the short and long term. You spend money to make money."
+    },
+    {
+      "key": "field_ppc_hero_background_type",
+      "label": "Hero Background Type",
+      "name": "ppc_hero_background_type",
+      "type": "select",
+      "choices": {
+        "none": "None",
+        "image": "Image",
+        "video": "Video"
+      },
+      "default_value": "none",
+      "ui": 1,
+      "return_format": "value"
+    },
+    {
+      "key": "field_ppc_hero_background_image",
+      "label": "Hero Background Image",
+      "name": "ppc_hero_background_image",
+      "type": "image",
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all",
+      "conditional_logic": [
+        [
+          {
+            "field": "field_ppc_hero_background_type",
+            "operator": "==",
+            "value": "image"
+          }
+        ]
+      ]
+    },
+    {
+      "key": "field_ppc_hero_background_video_mp4",
+      "label": "Hero Background Video (MP4 URL)",
+      "name": "ppc_hero_background_video_mp4",
+      "type": "url",
+      "conditional_logic": [
+        [
+          {
+            "field": "field_ppc_hero_background_type",
+            "operator": "==",
+            "value": "video"
+          }
+        ]
+      ]
+    },
+    {
+      "key": "field_ppc_hero_background_video_webm",
+      "label": "Hero Background Video (WEBM URL)",
+      "name": "ppc_hero_background_video_webm",
+      "type": "url",
+      "conditional_logic": [
+        [
+          {
+            "field": "field_ppc_hero_background_type",
+            "operator": "==",
+            "value": "video"
+          }
+        ]
+      ]
+    },
+    {
+      "key": "field_ppc_hero_background_video_poster",
+      "label": "Hero Video Poster Image",
+      "name": "ppc_hero_background_video_poster",
+      "type": "image",
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all",
+      "conditional_logic": [
+        [
+          {
+            "field": "field_ppc_hero_background_type",
+            "operator": "==",
+            "value": "video"
+          }
+        ]
+      ]
+    },
+    {
+      "key": "field_ppc_hero_background_overlay_opacity",
+      "label": "Hero Overlay Opacity (0–1)",
+      "name": "ppc_hero_background_overlay_opacity",
+      "type": "number",
+      "default_value": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.05
+    },
+    {
+      "key": "field_ppc_hero_primary_button",
+      "label": "Hero Primary Button",
+      "name": "ppc_hero_primary_button",
+      "type": "link",
+      "return_format": "array"
+    },
+    {
+      "key": "field_ppc_hero_secondary_button",
+      "label": "Hero Secondary Button",
+      "name": "ppc_hero_secondary_button",
+      "type": "link",
+      "return_format": "array"
+    },
+
+    {
+      "key": "field_ppc_stats_tab",
+      "label": "Stats",
+      "name": "ppc_stats_tab",
+      "type": "tab",
+      "placement": "top"
+    },
+    {
+      "key": "field_ppc_stats",
+      "label": "Stats",
+      "name": "ppc_stats",
+      "type": "repeater",
+      "layout": "row",
+      "button_label": "Add Stat",
+      "sub_fields": [
+        {
+          "key": "field_ppc_stats_number",
+          "label": "Number",
+          "name": "number",
+          "type": "text"
+        },
+        {
+          "key": "field_ppc_stats_label",
+          "label": "Label",
+          "name": "label",
+          "type": "text"
+        }
+      ],
+      "min": 0
+    },
+
+    {
+      "key": "field_ppc_info1_tab",
+      "label": "Info Section 1 (What is PPC?)",
+      "name": "ppc_info1_tab",
+      "type": "tab",
+      "placement": "top"
+    },
+    {
+      "key": "field_ppc_what_is_heading_line1",
+      "label": "Heading Line 1",
+      "name": "ppc_what_is_heading_line1",
+      "type": "text",
+      "default_value": "What is"
+    },
+    {
+      "key": "field_ppc_what_is_heading_line2",
+      "label": "Heading Line 2",
+      "name": "ppc_what_is_heading_line2",
+      "type": "text",
+      "default_value": "PPC?"
+    },
+    {
+      "key": "field_ppc_what_is_content",
+      "label": "Content",
+      "name": "ppc_what_is_content",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0
+    },
+    {
+      "key": "field_ppc_what_is_image",
+      "label": "Image",
+      "name": "ppc_what_is_image",
+      "type": "image",
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_ppc_what_is_button",
+      "label": "Button",
+      "name": "ppc_what_is_button",
+      "type": "link",
+      "return_format": "array"
+    },
+
+    {
+      "key": "field_ppc_longcta1_tab",
+      "label": "Long CTA 1",
+      "name": "ppc_longcta1_tab",
+      "type": "tab",
+      "placement": "top"
+    },
+    {
+      "key": "field_ppc_long_cta1_label",
+      "label": "Label",
+      "name": "ppc_long_cta1_label",
+      "type": "text",
+      "default_value": "READY TO ADVERTISE?"
+    },
+    {
+      "key": "field_ppc_long_cta1_heading_line1",
+      "label": "Heading Line 1",
+      "name": "ppc_long_cta1_heading_line_1",
+      "type": "text",
+      "default_value": "Drive Immediate"
+    },
+    {
+      "key": "field_ppc_long_cta1_heading_line2",
+      "label": "Heading Line 2",
+      "name": "ppc_long_cta1_heading_line_2",
+      "type": "text",
+      "default_value": "Qualified Traffic"
+    },
+    {
+      "key": "field_ppc_long_cta1_text",
+      "label": "Text",
+      "name": "ppc_long_cta1_text",
+      "type": "textarea",
+      "new_lines": "br"
+    },
+    {
+      "key": "field_ppc_long_cta1_features",
+      "label": "Features",
+      "name": "ppc_long_cta1_features",
+      "type": "repeater",
+      "layout": "row",
+      "button_label": "Add Feature",
+      "sub_fields": [
+        {
+          "key": "field_ppc_long_cta1_feature_icon_svg",
+          "label": "Icon SVG",
+          "name": "icon_svg",
+          "type": "textarea",
+          "new_lines": ""
+        },
+        {
+          "key": "field_ppc_long_cta1_feature_title",
+          "label": "Title",
+          "name": "title",
+          "type": "text"
+        },
+        {
+          "key": "field_ppc_long_cta1_feature_description",
+          "label": "Description",
+          "name": "description",
+          "type": "text"
+        }
+      ],
+      "min": 0
+    },
+    {
+      "key": "field_ppc_long_cta1_primary_button",
+      "label": "Primary Button",
+      "name": "ppc_long_cta1_primary_button",
+      "type": "link",
+      "return_format": "array"
+    },
+    {
+      "key": "field_ppc_long_cta1_secondary_button",
+      "label": "Secondary Button",
+      "name": "ppc_long_cta1_secondary_button",
+      "type": "link",
+      "return_format": "array"
+    },
+
+    {
+      "key": "field_ppc_services_tab",
+      "label": "Services",
+      "name": "ppc_services_tab",
+      "type": "tab",
+      "placement": "top"
+    },
+    {
+      "key": "field_ppc_services_label",
+      "label": "Services Label",
+      "name": "ppc_services_label",
+      "type": "text",
+      "default_value": "What We Offer"
+    },
+    {
+      "key": "field_ppc_services_heading",
+      "label": "Services Heading",
+      "name": "ppc_services_heading",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "default_value": "Our PPC <span class=\"highlight-text-italic\">Services</span>"
+    },
+    {
+      "key": "field_ppc_services_subheading",
+      "label": "Services Subheading",
+      "name": "ppc_services_subheading",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "default_value": "Comprehensive paid advertising solutions across all major platforms"
+    },
+    {
+      "key": "field_ppc_services",
+      "label": "Services",
+      "name": "ppc_services",
+      "type": "repeater",
+      "layout": "row",
+      "button_label": "Add Service",
+      "sub_fields": [
+        {
+          "key": "field_ppc_service_title",
+          "label": "Title",
+          "name": "title",
+          "type": "text"
+        },
+        {
+          "key": "field_ppc_service_description",
+          "label": "Description",
+          "name": "description",
+          "type": "textarea",
+          "new_lines": "br"
+        },
+        {
+          "key": "field_ppc_service_icon_svg",
+          "label": "Icon SVG",
+          "name": "icon_svg",
+          "type": "textarea",
+          "new_lines": ""
+        }
+      ],
+      "min": 0
+    },
+
+    {
+      "key": "field_ppc_info2_tab",
+      "label": "Info Section 2 (PPC Cost)",
+      "name": "ppc_info2_tab",
+      "type": "tab",
+      "placement": "top"
+    },
+    {
+      "key": "field_ppc_cost_heading_line1",
+      "label": "Heading Line 1",
+      "name": "ppc_cost_heading_line1",
+      "type": "text",
+      "default_value": "How Much Does"
+    },
+    {
+      "key": "field_ppc_cost_heading_line2",
+      "label": "Heading Line 2",
+      "name": "ppc_cost_heading_line2",
+      "type": "text",
+      "default_value": "PPC Cost?"
+    },
+    {
+      "key": "field_ppc_cost_content",
+      "label": "Content",
+      "name": "ppc_cost_content",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0
+    },
+    {
+      "key": "field_ppc_cost_image",
+      "label": "Image",
+      "name": "ppc_cost_image",
+      "type": "image",
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_ppc_cost_button",
+      "label": "Button",
+      "name": "ppc_cost_button",
+      "type": "link",
+      "return_format": "array"
+    },
+
+    {
+      "key": "field_ppc_longcta2_tab",
+      "label": "Long CTA 2",
+      "name": "ppc_longcta2_tab",
+      "type": "tab",
+      "placement": "top"
+    },
+    {
+      "key": "field_ppc_long_cta2_label",
+      "label": "Label",
+      "name": "ppc_long_cta2_label",
+      "type": "text",
+      "default_value": "FREE PPC AUDIT"
+    },
+    {
+      "key": "field_ppc_long_cta2_heading_line1",
+      "label": "Heading Line 1",
+      "name": "ppc_long_cta2_heading_line_1",
+      "type": "text",
+      "default_value": "See How Your Ads"
+    },
+    {
+      "key": "field_ppc_long_cta2_heading_line2",
+      "label": "Heading Line 2",
+      "name": "ppc_long_cta2_heading_line_2",
+      "type": "text",
+      "default_value": "Could Perform Better"
+    },
+    {
+      "key": "field_ppc_long_cta2_text",
+      "label": "Text",
+      "name": "ppc_long_cta2_text",
+      "type": "textarea",
+      "new_lines": "br"
+    },
+    {
+      "key": "field_ppc_long_cta2_primary_button",
+      "label": "Primary Button",
+      "name": "ppc_long_cta2_primary_button",
+      "type": "link",
+      "return_format": "array"
+    },
+    {
+      "key": "field_ppc_long_cta2_secondary_button",
+      "label": "Secondary Button",
+      "name": "ppc_long_cta2_secondary_button",
+      "type": "link",
+      "return_format": "array"
+    },
+
+    {
+      "key": "field_ppc_process_tab",
+      "label": "Process",
+      "name": "ppc_process_tab",
+      "type": "tab",
+      "placement": "top"
+    },
+    {
+      "key": "field_ppc_process_label",
+      "label": "Process Label",
+      "name": "ppc_process_label",
+      "type": "text",
+      "default_value": "How We Work"
+    },
+    {
+      "key": "field_ppc_process_heading",
+      "label": "Process Heading",
+      "name": "ppc_process_heading",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "default_value": "Our PPC <span class=\"highlight-text-italic\">Process</span>"
+    },
+    {
+      "key": "field_ppc_process_subheading",
+      "label": "Process Subheading",
+      "name": "ppc_process_subheading",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "default_value": "A proven methodology that maximises your return on ad spend"
+    },
+    {
+      "key": "field_ppc_process_steps",
+      "label": "Process Steps",
+      "name": "ppc_process_steps",
+      "type": "repeater",
+      "layout": "row",
+      "button_label": "Add Step",
+      "sub_fields": [
+        {
+          "key": "field_ppc_process_step_title",
+          "label": "Title",
+          "name": "title",
+          "type": "text"
+        },
+        {
+          "key": "field_ppc_process_step_description",
+          "label": "Description",
+          "name": "description",
+          "type": "textarea",
+          "new_lines": "br"
+        }
+      ],
+      "min": 0
+    },
+
+    {
+      "key": "field_ppc_info3_tab",
+      "label": "Info Section 3 (What Makes Us Different)",
+      "name": "ppc_info3_tab",
+      "type": "tab",
+      "placement": "top"
+    },
+    {
+      "key": "field_ppc_different_heading_line1",
+      "label": "Heading Line 1",
+      "name": "ppc_different_heading_line1",
+      "type": "text",
+      "default_value": "What Makes Us"
+    },
+    {
+      "key": "field_ppc_different_heading_line2",
+      "label": "Heading Line 2",
+      "name": "ppc_different_heading_line2",
+      "type": "text",
+      "default_value": "Different?"
+    },
+    {
+      "key": "field_ppc_different_content",
+      "label": "Content",
+      "name": "ppc_different_content",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0
+    },
+    {
+      "key": "field_ppc_different_image",
+      "label": "Image",
+      "name": "ppc_different_image",
+      "type": "image",
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_ppc_different_button",
+      "label": "Button",
+      "name": "ppc_different_button",
+      "type": "link",
+      "return_format": "array"
+    },
+
+    {
+      "key": "field_ppc_longcta3_tab",
+      "label": "Long CTA 3",
+      "name": "ppc_longcta3_tab",
+      "type": "tab",
+      "placement": "top"
+    },
+    {
+      "key": "field_ppc_long_cta3_label",
+      "label": "Label",
+      "name": "ppc_long_cta3_label",
+      "type": "text",
+      "default_value": "CERTIFIED EXPERTS"
+    },
+    {
+      "key": "field_ppc_long_cta3_heading_line1",
+      "label": "Heading Line 1",
+      "name": "ppc_long_cta3_heading_line_1",
+      "type": "text",
+      "default_value": "Ready to Maximise"
+    },
+    {
+      "key": "field_ppc_long_cta3_heading_line2",
+      "label": "Heading Line 2",
+      "name": "ppc_long_cta3_heading_line_2",
+      "type": "text",
+      "default_value": "Your Ad Spend?"
+    },
+    {
+      "key": "field_ppc_long_cta3_text",
+      "label": "Text",
+      "name": "ppc_long_cta3_text",
+      "type": "textarea",
+      "new_lines": "br"
+    },
+    {
+      "key": "field_ppc_long_cta3_features",
+      "label": "Features",
+      "name": "ppc_long_cta3_features",
+      "type": "repeater",
+      "layout": "row",
+      "button_label": "Add Feature",
+      "sub_fields": [
+        {
+          "key": "field_ppc_long_cta3_feature_icon_svg",
+          "label": "Icon SVG",
+          "name": "icon_svg",
+          "type": "textarea",
+          "new_lines": ""
+        },
+        {
+          "key": "field_ppc_long_cta3_feature_title",
+          "label": "Title",
+          "name": "title",
+          "type": "text"
+        },
+        {
+          "key": "field_ppc_long_cta3_feature_description",
+          "label": "Description",
+          "name": "description",
+          "type": "text"
+        }
+      ],
+      "min": 0
+    },
+    {
+      "key": "field_ppc_long_cta3_primary_button",
+      "label": "Primary Button",
+      "name": "ppc_long_cta3_primary_button",
+      "type": "link",
+      "return_format": "array"
+    },
+    {
+      "key": "field_ppc_long_cta3_secondary_button",
+      "label": "Secondary Button",
+      "name": "ppc_long_cta3_secondary_button",
+      "type": "link",
+      "return_format": "array"
+    },
+
+    {
+      "key": "field_ppc_results_tab",
+      "label": "Results / Case Studies",
+      "name": "ppc_results_tab",
+      "type": "tab",
+      "placement": "top"
+    },
+    {
+      "key": "field_ppc_results_label",
+      "label": "Label",
+      "name": "ppc_results_label",
+      "type": "text",
+      "default_value": "Case Studies"
+    },
+    {
+      "key": "field_ppc_results_heading",
+      "label": "Heading",
+      "name": "ppc_results_heading",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "default_value": "Real <span class=\"highlight-text-italic\">Results</span>"
+    },
+    {
+      "key": "field_ppc_results_subheading",
+      "label": "Subheading",
+      "name": "ppc_results_subheading",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "default_value": "See how we've helped businesses maximise their return on ad spend"
+    },
+    {
+      "key": "field_ppc_results",
+      "label": "Results",
+      "name": "ppc_results",
+      "type": "repeater",
+      "layout": "row",
+      "button_label": "Add Result",
+      "sub_fields": [
+        { "key": "field_ppc_result_industry", "label": "Industry", "name": "industry", "type": "text" },
+        { "key": "field_ppc_result_title", "label": "Title", "name": "title", "type": "text" },
+        { "key": "field_ppc_result_description", "label": "Description", "name": "description", "type": "textarea", "new_lines": "br" },
+        { "key": "field_ppc_result_metric1_value", "label": "Metric 1 Value", "name": "metric1_value", "type": "text" },
+        { "key": "field_ppc_result_metric1_label", "label": "Metric 1 Label", "name": "metric1_label", "type": "text" },
+        { "key": "field_ppc_result_metric2_value", "label": "Metric 2 Value", "name": "metric2_value", "type": "text" },
+        { "key": "field_ppc_result_metric2_label", "label": "Metric 2 Label", "name": "metric2_label", "type": "text" }
+      ],
+      "min": 0
+    },
+
+    {
+      "key": "field_ppc_faq_tab",
+      "label": "FAQ",
+      "name": "ppc_faq_tab",
+      "type": "tab",
+      "placement": "top"
+    },
+    {
+      "key": "field_ppc_faq_label",
+      "label": "FAQ Label",
+      "name": "ppc_faq_label",
+      "type": "text",
+      "default_value": "FAQ"
+    },
+    {
+      "key": "field_ppc_faq_heading",
+      "label": "FAQ Heading",
+      "name": "ppc_faq_heading",
+      "type": "wysiwyg",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "default_value": "Frequently Asked <span class=\"highlight-text-italic\">Questions</span>"
+    },
+    {
+      "key": "field_ppc_faqs",
+      "label": "FAQs",
+      "name": "ppc_faqs",
+      "type": "repeater",
+      "layout": "row",
+      "button_label": "Add FAQ",
+      "sub_fields": [
+        { "key": "field_ppc_faq_question", "label": "Question", "name": "question", "type": "text" },
+        { "key": "field_ppc_faq_answer", "label": "Answer", "name": "answer", "type": "textarea", "new_lines": "br" }
+      ],
+      "min": 0
+    },
+
+    {
+      "key": "field_ppc_missing_fields_note",
+      "label": "Note",
+      "name": "ppc_missing_fields_note",
+      "type": "message",
+      "message": "Your template contains an additional Long CTA + Reviews block at the end using variables like $long_cta_label and $reviews_heading_line_1, but there are no get_field() calls shown for those in the snippet. If that block is intended to be editable, you’ll need to add matching get_field() calls and then add corresponding ACF fields."
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page_template",
+        "operator": "==",
+        "value": "page-ppc.php"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": ""
+}

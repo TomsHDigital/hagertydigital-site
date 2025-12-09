@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hagerty Digital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: white;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #E87552;
+            text-transform: lowercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #E87552;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            min-height: calc(100vh - 200px);
+            padding: 80px 60px 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://www.hagertydigital.test:8890/wp-content/uploads/2025/11/uk-bristol-bridge.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 .black-text {
+            color: #000;
+        }
+
+        .hero h1 .orange-text {
+            color: #E87552;
+            display: block;
+        }
+
+        .cta-button {
+            background: #E87552;
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 80px;
+        }
+
+        .cta-button:hover {
+            background: #d66545;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(232, 117, 82, 0.3);
+        }
+
+        /* Service Cards */
+        .services {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 30px;
+            width: 320px;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card:nth-child(1) {
+            transform: rotate(-8deg);
+            background: #E87552;
+            color: white;
+        }
+
+        .service-card:nth-child(2) {
+            transform: translateY(-20px);
+            z-index: 2;
+        }
+
+        .service-card:nth-child(3) {
+            transform: rotate(8deg);
+            background: #E87552;
+            color: white;
+        }
+
+        .service-card:hover {
+            transform: translateY(-20px) rotate(0deg) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .service-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .service-card:nth-child(1) .service-icon {
+            background-image: url('https://www.hagertydigital.test:8890/wp-content/uploads/2025/11/white-ppc.png');
+        }
+
+        .service-card:nth-child(2) .service-icon {
+            background-image: url('https://www.hagertydigital.test:8890/wp-content/uploads/2025/11/Untitled-design-2025-11-14T123812.094.png');
+        }
+
+        .service-card:nth-child(3) .service-icon {
+            background-image: url('https://www.hagertydigital.test:8890/wp-content/uploads/2025/11/Untitled-design-2025-11-14T131021.913.png');
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        .service-card:nth-child(2) h3 {
+            color: #333;
+        }
+
+        .service-button {
+            background: white;
+            color: #E87552;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:nth-child(2) .service-button {
+            background: #E87552;
+            color: white;
+        }
+
+        .service-button:hover {
+            transform: scale(1.05);
+            border-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Logo Marquee Banner */
+        #logo-marquee {
+            --size: 80px;
+            --gap: 80px;
+            --duration: 20s;
+            --distance: 1000px;
+            width: 100%;
+            height: 140px;
+            overflow: hidden;
+            position: relative;
+            background: #E87552;
+            display: flex;
+            align-items: center;
+            line-height: 0;
+            font-size: 0;
+        }
+
+        #logo-marquee .marquee-track {
+            display: flex;
+            align-items: center;
+            gap: var(--gap);
+            width: max-content;
+            will-change: transform;
+            transform: translateX(0);
+            animation: none;
+        }
+
+        #logo-marquee.is-ready .marquee-track {
+            animation: marquee-scroll var(--duration) linear infinite;
+        }
+
+        @keyframes marquee-scroll {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(calc(-1 * var(--distance)));
+            }
+        }
+
+        #logo-marquee .marquee-slide {
+            flex: 0 0 auto;
+            height: var(--size);
+            margin: 0;
+            padding: 0;
+        }
+
+        #logo-marquee .marquee-slide img {
+            height: 100%;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            user-select: none;
+            -webkit-user-drag: none;
+            filter: brightness(0) invert(1);
+        }
+
+        #logo-marquee:hover .marquee-track {
+            animation-play-state: paused;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #logo-marquee .marquee-track {
+                animation: none;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px 30px;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .hero {
+                padding: 40px 30px 80px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .services {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-card {
+                transform: none !important;
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">hagerty</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#case-studies">Case Studies</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>
+                <span class="black-text">Lorem ipsum dolor sit</span>
+                <span class="orange-text">amet, consectetur</span>
+            </h1>
+            
+            <a href="#contact" class="cta-button">Get In Touch</a>
+
+            <!-- Service Cards -->
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3>PPC &<br>Lead Generation</h3>
+                    <a href="/ppc-lead-generation" class="service-button">Get In Touch</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3>Website &<br>UX Design</h3>
+                    <a href="/website-ux-design" class="service-button">Get In Touch</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3>SEO<br>Long-Term Growth</h3>
+                    <a href="/seo-long-term-growth" class="service-button">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo Marquee Banner -->
+    <div id="logo-marquee" data-size="80" data-gap="80" data-pps="60" aria-label="Client logos">
+        <div class="marquee-track">
+            <!-- Base set of logos -->
+            <figure class="marquee-slide" data-base="1"><img src="https://www.hagertydigital.test:8890/wp-content/uploads/2025/11/vileda-logo-1.png" alt="Vileda"></figure>
+            <figure class="marquee-slide" data-base="1"><img src="https://www.hagertydigital.test:8890/wp-content/uploads/2025/11/severnside-logo.png" alt="Clevercare"></figure>
+            <figure class="marquee-slide" data-base="1"><img src="https://www.hagertydigital.test:8890/wp-content/uploads/2025/11/micro-white.png" alt="MicroDetect"></figure>
+            <figure class="marquee-slide" data-base="1"><img src="https://www.hagertydigital.test:8890/wp-content/uploads/2025/11/vileda-logo-1.png" alt="ISGUS"></figure>
+            <figure class="marquee-slide" data-base="1"><img src="https://www.hagertydigital.test:8890/wp-content/uploads/2025/11/severnside-logo.png" alt="Vileda"></figure>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            var slider = document.getElementById('logo-marquee');
+            if (!slider) return;
+            var track = slider.querySelector('.marquee-track');
+            
+            function build(){
+                var size = parseInt(slider.getAttribute('data-size') || '80', 10);
+                var gap = parseFloat(slider.getAttribute('data-gap') || '80');
+                var pps = parseFloat(slider.getAttribute('data-pps') || '60');
+                
+                slider.style.setProperty('--size', size + 'px');
+                slider.style.setProperty('--gap', gap + 'px');
+                
+                track.querySelectorAll('.marquee-slide.is-clone').forEach(function(n){
+                    n.remove();
+                });
+                
+                var baseItems = Array.from(track.querySelectorAll('.marquee-slide[data-base="1"]'));
+                var baseWidth = 0;
+                baseItems.forEach(function(el){
+                    baseWidth += el.getBoundingClientRect().width;
+                });
+                
+                var baseWidthWithGaps = baseWidth + gap * (baseItems.length - 1);
+                var distance = baseWidthWithGaps + gap;
+                
+                var containerWidth = slider.clientWidth;
+                var requiredWidth = containerWidth + distance + size;
+                
+                while (track.scrollWidth < requiredWidth) {
+                    baseItems.forEach(function(orig){
+                        var clone = orig.cloneNode(true);
+                        clone.classList.add('is-clone');
+                        var img = clone.querySelector('img');
+                        if (img) img.setAttribute('aria-hidden','true');
+                        track.appendChild(clone);
+                    });
+                }
+                
+                slider.style.setProperty('--distance', distance + 'px');
+                slider.style.setProperty('--duration', (distance / pps) + 's');
+                
+                slider.classList.add('is-ready');
+            }
+            
+            function debounce(fn, t){
+                var id;
+                return function(){
+                    clearTimeout(id);
+                    id=setTimeout(fn, t);
+                };
+            }
+            
+            if (document.readyState === 'complete') build();
+            else window.addEventListener('load', build);
+            
+            window.addEventListener('resize', debounce(function(){
+                slider.classList.remove('is-ready');
+                build();
+            }, 120));
+        })();
+    </script>
+</body>
+</html>
