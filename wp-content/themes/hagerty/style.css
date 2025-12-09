@@ -7312,6 +7312,7 @@ display:none  }
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 40px;
 }
 
 .seo-page-longcta-btn {
@@ -9043,6 +9044,7 @@ display:none  }
     .ppc-page-info-content {
         grid-template-columns: 1fr;
         gap: 40px;
+        text-align: center;
     }
     
     .seo-page-info-reversed,
@@ -9076,6 +9078,20 @@ display:none  }
     .seo-page-hero h1,
     .ppc-page-hero h1 {
         font-size: 36px;
+    }
+
+    .seo-page-longcta-feature {
+      text-align: center;
+      justify-items: center;
+    }
+    .seo-page-service-card {
+      justify-items: center;
+      text-align: center;
+    }
+
+    .seo-page-result-content {
+      justify-items: center;
+      text-align: center;
     }
     
     .seo-page-hero-description,

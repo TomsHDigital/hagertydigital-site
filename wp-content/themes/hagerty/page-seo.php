@@ -97,9 +97,6 @@ $hero_text_class = $has_hero_media ? 'has-media' : '';
 
       <a href="<?php echo $hero_primary_btn['url']; ?>" target="<?php echo $hero_primary_btn['target']; ?>" class="cta-btn">
         <span><?php echo $hero_primary_btn['title']; ?></span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 5v14M5 12l7 7 7-7"/>
-        </svg>
       </a>
     </div>
   </div>
