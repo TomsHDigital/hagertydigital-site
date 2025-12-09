@@ -1,0 +1,1640 @@
+[
+  {
+    "key": "group_0ccc33c669554",
+    "title": "PPC Services Page",
+    "fields": [
+      {
+        "key": "field_67567488b8db4",
+        "label": "Hero",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_4cf5884d2d394",
+        "label": "Hero Label",
+        "name": "ppc_hero_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Pay-Per-Click Advertising",
+        "placeholder": "",
+        "maxlength": ""
+      },
+      {
+        "key": "field_3b46062e26e04",
+        "label": "Hero Heading Line 1",
+        "name": "ppc_hero_heading_line_1",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Instant Visibility",
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_3ab1086f28ce4",
+        "label": "Hero Heading Line 2",
+        "name": "ppc_hero_heading_line_2",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "<span class=\"highlight-text-italic\">Maximum ROI</span>",
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_6dfbecb9ca914",
+        "label": "Hero Description",
+        "name": "ppc_hero_description",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "PPC really is for every business and it can help you get new customers in the short and long term. You spend money to make money.",
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_8fa5b57520324",
+        "label": "Hero Background Type",
+        "name": "ppc_hero_background_type",
+        "type": "select",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "choices": {
+          "none": "None",
+          "image": "Image",
+          "video": "Video"
+        },
+        "default_value": "none",
+        "allow_null": 0,
+        "multiple": 0,
+        "ui": 1,
+        "ajax": 0,
+        "return_format": "value",
+        "placeholder": ""
+      },
+      {
+        "key": "field_9b4100e5844c4",
+        "label": "Hero Background Image",
+        "name": "ppc_hero_background_image",
+        "type": "image",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "preview_size": "medium",
+        "library": "all",
+        "min_width": 0,
+        "min_height": 0,
+        "min_size": 0,
+        "max_width": 0,
+        "max_height": 0,
+        "max_size": 0,
+        "mime_types": ""
+      },
+      {
+        "key": "field_c27e74fa31b34",
+        "label": "Hero Background Video (MP4)",
+        "name": "ppc_hero_background_video_mp4",
+        "type": "file",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "library": "all",
+        "min_size": 0,
+        "max_size": 0,
+        "mime_types": "mp4"
+      },
+      {
+        "key": "field_a23f85014fce4",
+        "label": "Hero Background Video (WEBM)",
+        "name": "ppc_hero_background_video_webm",
+        "type": "file",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "library": "all",
+        "min_size": 0,
+        "max_size": 0,
+        "mime_types": "webm"
+      },
+      {
+        "key": "field_b46c1248425a4",
+        "label": "Hero Video Poster",
+        "name": "ppc_hero_background_video_poster",
+        "type": "image",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "preview_size": "medium",
+        "library": "all",
+        "mime_types": ""
+      },
+      {
+        "key": "field_063f88c288b34",
+        "label": "Hero Background Overlay Opacity (0–1)",
+        "name": "ppc_hero_background_overlay_opacity",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": 0.5,
+        "placeholder": "0.5",
+        "prepend": "",
+        "append": "",
+        "min": 0,
+        "max": 1,
+        "step": 0.05
+      },
+      {
+        "key": "field_77fb96dbea2b4",
+        "label": "Hero Primary Button",
+        "name": "ppc_hero_primary_button",
+        "type": "link",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array"
+      },
+      {
+        "key": "field_022120cf30fa4",
+        "label": "Hero Secondary Button",
+        "name": "ppc_hero_secondary_button",
+        "type": "link",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array"
+      },
+      {
+        "key": "field_ab3a58a4cdb94",
+        "label": "Stats",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_11319ae18fe44",
+        "label": "Stats",
+        "name": "ppc_stats",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "collapsed": "",
+        "min": 0,
+        "max": 0,
+        "layout": "row",
+        "button_label": "Add Row",
+        "sub_fields": [
+          {
+            "key": "field_bcc79c070f6a4",
+            "label": "Number",
+            "name": "number",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_312562de4b4d4",
+            "label": "Label",
+            "name": "label",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          }
+        ]
+      },
+      {
+        "key": "field_16c18026eb0d4",
+        "label": "Section: What is PPC?",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_1c77079e7e4c4",
+        "label": "Heading Line 1",
+        "name": "ppc_what_is_heading_line1",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "What is"
+      },
+      {
+        "key": "field_836cefe0eab54",
+        "label": "Heading Line 2",
+        "name": "ppc_what_is_heading_line2",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "PPC?"
+      },
+      {
+        "key": "field_39cec4663fc74",
+        "label": "Content",
+        "name": "ppc_what_is_content",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_a3f30a2ef7464",
+        "label": "Image",
+        "name": "ppc_what_is_image",
+        "type": "image",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "preview_size": "medium",
+        "library": "all"
+      },
+      {
+        "key": "field_154e1c623a5d4",
+        "label": "Button",
+        "name": "ppc_what_is_button",
+        "type": "link",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array"
+      },
+      {
+        "key": "field_ee8d5d42b69a4",
+        "label": "Long CTA 1",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_c75e8dc4d0cc4",
+        "label": "Label",
+        "name": "ppc_long_cta1_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "READY TO GROW?"
+      },
+      {
+        "key": "field_6357f71491dc4",
+        "label": "Heading Line 1",
+        "name": "ppc_long_cta1_heading_line1",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Let's Drive"
+      },
+      {
+        "key": "field_010ceb01fa174",
+        "label": "Heading Line 2",
+        "name": "ppc_long_cta1_heading_line2",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Real Results"
+      },
+      {
+        "key": "field_32cb242625d24",
+        "label": "Text",
+        "name": "ppc_long_cta1_text",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "new_lines": "wpautop",
+        "maxlength": ""
+      },
+      {
+        "key": "field_283e27ce91414",
+        "label": "Features",
+        "name": "ppc_long_cta1_features",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "collapsed": "",
+        "min": 0,
+        "max": 0,
+        "layout": "row",
+        "button_label": "Add Row",
+        "sub_fields": [
+          {
+            "key": "field_4f9bd12e88e04",
+            "label": "Icon SVG",
+            "name": "icon_svg",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "new_lines": "",
+            "maxlength": ""
+          },
+          {
+            "key": "field_23d7fbd831044",
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_470c77c4dae14",
+            "label": "Description",
+            "name": "description",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          }
+        ]
+      },
+      {
+        "key": "field_1c8a79216ccd4",
+        "label": "Primary Button",
+        "name": "ppc_long_cta1_primary_button",
+        "type": "link",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array"
+      },
+      {
+        "key": "field_801b12b15f994",
+        "label": "Secondary Button",
+        "name": "ppc_long_cta1_secondary_button",
+        "type": "link",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array"
+      },
+      {
+        "key": "field_b6b393e907c94",
+        "label": "Services",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_01f0ba29f9e34",
+        "label": "Label",
+        "name": "ppc_services_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "What We Offer"
+      },
+      {
+        "key": "field_20e18333d1fd4",
+        "label": "Heading",
+        "name": "ppc_services_heading",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Our PPC <span class=\"highlight-text-italic\">Services</span>",
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_9cfadc5fe99a4",
+        "label": "Subheading",
+        "name": "ppc_services_subheading",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Comprehensive paid advertising solutions tailored to your business goals",
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_d8559d566abe4",
+        "label": "Services",
+        "name": "ppc_services",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "collapsed": "",
+        "min": 0,
+        "max": 0,
+        "layout": "row",
+        "button_label": "Add Row",
+        "sub_fields": [
+          {
+            "key": "field_fbe86e1d1fd24",
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_6eee989367014",
+            "label": "Description",
+            "name": "description",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_898bdd27ca814",
+            "label": "Icon SVG",
+            "name": "icon_svg",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "new_lines": "",
+            "maxlength": ""
+          }
+        ]
+      },
+      {
+        "key": "field_bdf489db00864",
+        "label": "Section: PPC Cost",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_074badc456144",
+        "label": "Heading Line 1",
+        "name": "ppc_cost_heading_line1",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "How Much Does"
+      },
+      {
+        "key": "field_86a6810cb0d04",
+        "label": "Heading Line 2",
+        "name": "ppc_cost_heading_line2",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "PPC Cost?"
+      },
+      {
+        "key": "field_fe4e6e8c72e74",
+        "label": "Content",
+        "name": "ppc_cost_content",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_dde6a5be50824",
+        "label": "Image",
+        "name": "ppc_cost_image",
+        "type": "image",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "preview_size": "medium",
+        "library": "all"
+      },
+      {
+        "key": "field_cb4f53b2c3044",
+        "label": "Button",
+        "name": "ppc_cost_button",
+        "type": "link",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array"
+      },
+      {
+        "key": "field_b215e747f9674",
+        "label": "Long CTA 2",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_07f2af1f66374",
+        "label": "Label",
+        "name": "ppc_long_cta2_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "FREE PPC AUDIT"
+      },
+      {
+        "key": "field_2d201cbb25d54",
+        "label": "Heading Line 1",
+        "name": "ppc_long_cta2_heading_line1",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Discover Your Campaign's"
+      },
+      {
+        "key": "field_1b01640f23694",
+        "label": "Heading Line 2",
+        "name": "ppc_long_cta2_heading_line2",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "True Potential"
+      },
+      {
+        "key": "field_dc089124f2484",
+        "label": "Text",
+        "name": "ppc_long_cta2_text",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Get a comprehensive analysis of your current PPC campaigns. We'll identify wasted spend, missed opportunities, and show you exactly how to improve your return on ad spend.",
+        "new_lines": "wpautop",
+        "maxlength": ""
+      },
+      {
+        "key": "field_c78c209acbb94",
+        "label": "Primary Button",
+        "name": "ppc_long_cta2_primary_button",
+        "type": "link",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array"
+      },
+      {
+        "key": "field_3fa9adfe61c34",
+        "label": "Secondary Button",
+        "name": "ppc_long_cta2_secondary_button",
+        "type": "link",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array"
+      },
+      {
+        "key": "field_59ec696c70f74",
+        "label": "Process",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_c9ba788b26384",
+        "label": "Label",
+        "name": "ppc_process_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "How We Work"
+      },
+      {
+        "key": "field_d972ede05e1b4",
+        "label": "Heading",
+        "name": "ppc_process_heading",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Our PPC <span class=\"highlight-text-italic\">Process</span>",
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_d57936f5bd0b4",
+        "label": "Subheading",
+        "name": "ppc_process_subheading",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "A proven methodology that maximises your return on ad spend",
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_b2bb2dc569794",
+        "label": "Steps",
+        "name": "ppc_process_steps",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "collapsed": "",
+        "min": 0,
+        "max": 0,
+        "layout": "row",
+        "button_label": "Add Row",
+        "sub_fields": [
+          {
+            "key": "field_9b13d6e5f9f74",
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_904e8625083d4",
+            "label": "Description",
+            "name": "description",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          }
+        ]
+      },
+      {
+        "key": "field_b393d34bfbf24",
+        "label": "Section: What Makes Us Different?",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_d2445ca00d954",
+        "label": "Heading Line 1",
+        "name": "ppc_different_heading_line1",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "What Makes Us"
+      },
+      {
+        "key": "field_3fdb716d84674",
+        "label": "Heading Line 2",
+        "name": "ppc_different_heading_line2",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Different?"
+      },
+      {
+        "key": "field_c3e65e4c58094",
+        "label": "Content",
+        "name": "ppc_different_content",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_8d0c986a00104",
+        "label": "Image",
+        "name": "ppc_different_image",
+        "type": "image",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "preview_size": "medium",
+        "library": "all"
+      },
+      {
+        "key": "field_080f4f0320c84",
+        "label": "Button",
+        "name": "ppc_different_button",
+        "type": "link",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array"
+      },
+      {
+        "key": "field_46597c3789f84",
+        "label": "Long CTA 3",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_732f6c195f304",
+        "label": "Label",
+        "name": "ppc_long_cta3_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "PROVEN RESULTS"
+      },
+      {
+        "key": "field_65b9ea88515e4",
+        "label": "Heading Line 1",
+        "name": "ppc_long_cta3_heading_line1",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Ready to Maximise"
+      },
+      {
+        "key": "field_198f258a5b0e4",
+        "label": "Heading Line 2",
+        "name": "ppc_long_cta3_heading_line2",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Your Ad Spend?"
+      },
+      {
+        "key": "field_5d6d5580b4614",
+        "label": "Text",
+        "name": "ppc_long_cta3_text",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "new_lines": "wpautop",
+        "maxlength": ""
+      },
+      {
+        "key": "field_c38ac6ce2b634",
+        "label": "Features",
+        "name": "ppc_long_cta3_features",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "collapsed": "",
+        "min": 0,
+        "max": 0,
+        "layout": "row",
+        "button_label": "Add Row",
+        "sub_fields": [
+          {
+            "key": "field_26cd9e0c11c54",
+            "label": "Icon SVG",
+            "name": "icon_svg",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "new_lines": "",
+            "maxlength": ""
+          },
+          {
+            "key": "field_326158e87f154",
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_13def8fdf9324",
+            "label": "Description",
+            "name": "description",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          }
+        ]
+      },
+      {
+        "key": "field_ab83858937b94",
+        "label": "Primary Button",
+        "name": "ppc_long_cta3_primary_button",
+        "type": "link",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array"
+      },
+      {
+        "key": "field_f269061870a74",
+        "label": "Secondary Button",
+        "name": "ppc_long_cta3_secondary_button",
+        "type": "link",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array"
+      },
+      {
+        "key": "field_68d64c133fd04",
+        "label": "Results / Case Studies",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_8f409e34706c4",
+        "label": "Label",
+        "name": "ppc_results_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Case Studies"
+      },
+      {
+        "key": "field_935a627b7fb34",
+        "label": "Heading",
+        "name": "ppc_results_heading",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Real <span class=\"highlight-text-italic\">Results</span>",
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_9dcf9079f4364",
+        "label": "Subheading",
+        "name": "ppc_results_subheading",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "See how we've helped businesses like yours achieve remarkable growth through PPC",
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_2063621233674",
+        "label": "Results",
+        "name": "ppc_results",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "collapsed": "",
+        "min": 0,
+        "max": 0,
+        "layout": "row",
+        "button_label": "Add Row",
+        "sub_fields": [
+          {
+            "key": "field_3b228284ea254",
+            "label": "Industry",
+            "name": "industry",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_26ee4da560fc4",
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_1a8e2e6cf2b04",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "new_lines": "wpautop",
+            "maxlength": ""
+          },
+          {
+            "key": "field_3b636781f3234",
+            "label": "Metric 1 Value",
+            "name": "metric1_value",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_6bd899db5f4f4",
+            "label": "Metric 1 Label",
+            "name": "metric1_label",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_567b882323d84",
+            "label": "Metric 2 Value",
+            "name": "metric2_value",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_408d23b039ac4",
+            "label": "Metric 2 Label",
+            "name": "metric2_label",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_4f80db0923804",
+            "label": "Image",
+            "name": "image",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+          }
+        ]
+      },
+      {
+        "key": "field_b88ca21378204",
+        "label": "FAQ",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_3720d933be7e4",
+        "label": "Label",
+        "name": "ppc_faq_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "FAQ"
+      },
+      {
+        "key": "field_59d7e663d6f54",
+        "label": "Heading",
+        "name": "ppc_faq_heading",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Frequently Asked <span class=\"highlight-text-italic\">Questions</span>",
+        "tabs": "all",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_39520ca0ec374",
+        "label": "FAQs",
+        "name": "ppc_faqs",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "collapsed": "",
+        "min": 0,
+        "max": 0,
+        "layout": "row",
+        "button_label": "Add Row",
+        "sub_fields": [
+          {
+            "key": "field_250e5c3718ed4",
+            "label": "Question",
+            "name": "question",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            }
+          },
+          {
+            "key": "field_94a72702e34d4",
+            "label": "Answer",
+            "name": "answer",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "new_lines": "wpautop",
+            "maxlength": ""
+          }
+        ]
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "page-ppc.php"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+  }
+]
