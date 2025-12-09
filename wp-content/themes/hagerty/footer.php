@@ -74,10 +74,10 @@
             <h4>Services</h4>
             <ul>
               <li><a href="/seo">SEO</a></li>
-              <li><a href="#ppc">PPC</a></li>
-              <li><a href="#web-design">Web Design</a></li>
-              <li><a href="#web-development">Web Development</a></li>
-              <li><a href="#digital-marketing">Digital Marketing</a></li>
+              <li><a href="/ppc">PPC</a></li>
+              <li><a href="/web-design">Web Design</a></li>
+              <li><a href="/web-development">Web Development</a></li>
+              <li><a href="/digital-marketing">Digital Marketing</a></li>
             </ul>
           </div>
 
@@ -86,9 +86,9 @@
             <ul>
               <li><a href="/about-us">About Us</a></li>
               <li><a href="/meet-the-team">Our Team</a></li>
-              <li><a href="#case-studies">Case Studies</a></li>
-              <li><a href="#news">News</a></li>
-              <li><a href="#careers">Careers</a></li>
+              <li><a href="/case-studies">Case Studies</a></li>
+              <li><a href="/news">News</a></li>
+              <li><a href="/careers">Careers</a></li>
             </ul>
           </div>
 

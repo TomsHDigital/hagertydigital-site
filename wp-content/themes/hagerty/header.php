@@ -40,14 +40,26 @@ if (function_exists('get_field')) {
         $menu_slideshow_images = $slideshow_data;
     }
 }
-// Fallback if no ACF data - single default image
-if (empty($menu_slideshow_images)) {
-    $menu_slideshow_images = [
-        [
-            'image' => ['url' => 'https://www.hagertydigital.test:8890/wp-content/uploads/2025/12/sam.webp'],
-            'link' => ['url' => '#calendly', 'target' => '_self']
-        ],
-    ];
+
+// Helper to support ACF link sub-field returning either array OR string URL
+function hd_get_link($link) {
+  $out = [
+    'url'    => '#',
+    'target' => '_self',
+  ];
+
+  if (is_array($link)) {
+    if (!empty($link['url']))    $out['url'] = $link['url'];
+    if (!empty($link['target'])) $out['target'] = $link['target'];
+    return $out;
+  }
+
+  if (is_string($link) && $link !== '') {
+    $out['url'] = $link;
+    return $out;
+  }
+
+  return $out;
 }
 ?>
 
@@ -98,24 +110,24 @@ if (empty($menu_slideshow_images)) {
       <div class="menu-column">
         <h3>What We Do</h3>
         <ul>
-          <li><a href="#ppc">PPC</a></li>
+          <li><a href="/ppc">PPC</a></li>
           <li><a href="/seo">SEO</a></li>
-          <li><a href="#web-design">Web Design</a></li>
-          <li><a href="#web-development">Web Development</a></li>
-          <li><a href="#cro">CRO</a></li>
-          <li><a href="#email-marketing">Email Marketing</a></li>
-          <li><a href="#digital-strategy">Digital Strategy</a></li>
-          <li><a href="#automation">Automation</a></li>
+          <li><a href="/web-design">Web Design</a></li>
+          <li><a href="/web-development">Web Development</a></li>
+          <li><a href="/cro">CRO</a></li>
+          <li><a href="/email-marketing">Email Marketing</a></li>
+          <li><a href="/digital-strategy">Digital Strategy</a></li>
+          <li><a href="/automation">Automation</a></li>
         </ul>
       </div>
 
       <div class="menu-column">
         <h3>Our Work</h3>
         <ul>
-          <li><a href="#case-studies">Case Studies</a></li>
-          <li><a href="#results">Our Results</a></li>
-          <li><a href="#testimonials">Client Testimonials</a></li>
-          <li><a href="#news">News</a></li>
+          <li><a href="/case-studies">Case Studies</a></li>
+          <li><a href="/results">Our Results</a></li>
+          <li><a href="/testimonials">Client Testimonials</a></li>
+          <li><a href="/news">News</a></li>
         </ul>
       </div>
 
@@ -124,8 +136,9 @@ if (empty($menu_slideshow_images)) {
         <div class="menu-contact-slideshow" id="menuContactSlideshow">
           <?php foreach ($menu_slideshow_images as $index => $slide) : 
             $slide_image_url = isset($slide['image']['url']) ? esc_url($slide['image']['url']) : '';
-            $slide_link_url = isset($slide['link']['url']) ? esc_url($slide['link']['url']) : '#';
-            $slide_link_target = isset($slide['link']['target']) && $slide['link']['target'] ? esc_attr($slide['link']['target']) : '_self';
+            $link = hd_get_link($slide['link'] ?? null);
+            $slide_link_url = esc_url($link['url']);
+            $slide_link_target = esc_attr($link['target']);
             if (!$slide_image_url) continue;
           ?>
             <a href="<?php echo $slide_link_url; ?>" target="<?php echo $slide_link_target; ?>" class="menu-slideshow-slide <?php echo $index === 0 ? 'active' : ''; ?>">
@@ -171,14 +184,14 @@ if (empty($menu_slideshow_images)) {
           <span class="menu-arrow">▼</span>
         </div>
         <div class="menu-mobile-submenu">
-          <a href="#ppc">PPC</a>
+          <a href="/ppc">PPC</a>
           <a href="/seo">SEO</a>
-          <a href="#web-design">Web Design</a>
-          <a href="#web-development">Web Development</a>
-          <a href="#cro">CRO</a>
-          <a href="#email-marketing">Email Marketing</a>
-          <a href="#digital-strategy">Digital Strategy</a>
-          <a href="#automation">Automation</a>
+          <a href="/web-design">Web Design</a>
+          <a href="/web-development">Web Development</a>
+          <a href="/cro">CRO</a>
+          <a href="/email-marketing">Email Marketing</a>
+          <a href="/digital-strategy">Digital Strategy</a>
+          <a href="/automation">Automation</a>
         </div>
       </div>
 
@@ -201,8 +214,9 @@ if (empty($menu_slideshow_images)) {
       <div class="menu-mobile-contact-slideshow" id="menuMobileSlideshow">
         <?php foreach ($menu_slideshow_images as $index => $slide) : 
           $slide_image_url = isset($slide['image']['url']) ? esc_url($slide['image']['url']) : '';
-          $slide_link_url = isset($slide['link']['url']) ? esc_url($slide['link']['url']) : '#';
-          $slide_link_target = isset($slide['link']['target']) && $slide['link']['target'] ? esc_attr($slide['link']['target']) : '_self';
+          $link = hd_get_link($slide['link'] ?? null);
+          $slide_link_url = esc_url($link['url']);
+          $slide_link_target = esc_attr($link['target']);
           if (!$slide_image_url) continue;
         ?>
           <a href="<?php echo $slide_link_url; ?>" target="<?php echo $slide_link_target; ?>" class="menu-slideshow-slide <?php echo $index === 0 ? 'active' : ''; ?>">

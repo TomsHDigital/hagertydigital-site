@@ -1388,6 +1388,103 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 })();
+
+// ==========================
+// PPC PAGE - STATS COUNTER ANIMATION
+// ==========================
+(function(){
+    var statNumbers = document.querySelectorAll('.ppc-page-stat-number');
+    
+    if (statNumbers.length === 0) return;
+    
+    var animated = false;
+    
+    function parseStatValue(text) {
+        var numMatch = text.match(/[\d.]+/);
+        if (numMatch) {
+            var num = parseFloat(numMatch[0]);
+            var prefix = text.substring(0, text.indexOf(numMatch[0]));
+            var suffix = text.substring(text.indexOf(numMatch[0]) + numMatch[0].length);
+            return { num: num, prefix: prefix, suffix: suffix, original: text };
+        }
+        return null;
+    }
+    
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting && !animated) {
+                animated = true;
+                
+                statNumbers.forEach(function(stat) {
+                    var originalText = stat.textContent;
+                    var parsed = parseStatValue(originalText);
+                    
+                    if (parsed && parsed.num > 0) {
+                        stat.textContent = parsed.prefix + '0' + parsed.suffix;
+                        
+                        setTimeout(function() {
+                            var startTimestamp = null;
+                            var duration = 2000;
+                            
+                            var step = function(timestamp) {
+                                if (!startTimestamp) startTimestamp = timestamp;
+                                var progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                                var easeProgress = 1 - Math.pow(1 - progress, 3);
+                                var currentValue = easeProgress * parsed.num;
+                                
+                                if (parsed.num % 1 !== 0) {
+                                    stat.textContent = parsed.prefix + currentValue.toFixed(1) + parsed.suffix;
+                                } else {
+                                    stat.textContent = parsed.prefix + Math.floor(currentValue) + parsed.suffix;
+                                }
+                                
+                                if (progress < 1) {
+                                    window.requestAnimationFrame(step);
+                                } else {
+                                    stat.textContent = originalText;
+                                }
+                            };
+                            window.requestAnimationFrame(step);
+                        }, 100);
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    var statsSection = document.querySelector('.ppc-page-stats');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+})();
+
+// ==========================
+// PPC PAGE - SMOOTH SCROLL FOR ANCHOR LINKS
+// ==========================
+(function(){
+    var ppcPage = document.querySelector('.ppc-page-hero');
+    if (!ppcPage) return;
+    
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+            var targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            var targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                var headerOffset = 100;
+                var elementPosition = targetElement.getBoundingClientRect().top;
+                var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+})();
 // ==========================
 // SEO PAGE - SMOOTH SCROLL FOR ANCHOR LINKS
 // ==========================

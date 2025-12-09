@@ -34,16 +34,18 @@ if (!function_exists('hd_link')) {
     }
 }
 
-// HERO
+// ============================================
+// HERO SECTION
+// ============================================
 $hero_label = $has_acf ? (get_field('ppc_hero_label') ?: 'Pay-Per-Click Advertising') : 'Pay-Per-Click Advertising';
 $hero_line1 = hd_wysiwyg_or_default($has_acf ? get_field('ppc_hero_heading_line_1') : '', 'Instant Visibility');
-$hero_line2 = hd_wysiwyg_or_default($has_acf ? get_field('ppc_hero_heading_line_2') : '', '<span class="highlight-text-italic">Measurable Results</span>');
-$hero_desc  = hd_wysiwyg_or_default($has_acf ? get_field('ppc_hero_description') : '', 'PPC really is for every business and it can really help you get new customers in the short and long term. You spend money to make money.');
+$hero_line2 = hd_wysiwyg_or_default($has_acf ? get_field('ppc_hero_heading_line_2') : '', '<span class="highlight-text-italic">Maximum ROI</span>');
+$hero_desc  = hd_wysiwyg_or_default($has_acf ? get_field('ppc_hero_description') : '', 'PPC really is for every business and it can help you get new customers in the short and long term. You spend money to make money.');
 
 $hero_bg_type = $has_acf ? (get_field('ppc_hero_background_type') ?: 'none') : 'none';
 $hero_bg_image = $has_acf ? get_field('ppc_hero_background_image') : null;
-$hero_bg_video_mp4 = $has_acf ? get_field('ppc_hero_background_video_mp4') : '';
-$hero_bg_video_webm = $has_acf ? get_field('ppc_hero_background_video_webm') : '';
+$hero_bg_video_mp4 = $has_acf ? get_field('ppc_hero_background_video_mp4') : null;
+$hero_bg_video_webm = $has_acf ? get_field('ppc_hero_background_video_webm') : null;
 $hero_bg_video_poster = $has_acf ? get_field('ppc_hero_background_video_poster') : null;
 $hero_bg_overlay = $has_acf ? get_field('ppc_hero_background_overlay_opacity') : '';
 $hero_bg_overlay = ($hero_bg_overlay === '' || $hero_bg_overlay === null) ? 0.5 : floatval($hero_bg_overlay);
@@ -59,46 +61,66 @@ if (!$hero_secondary_btn) $hero_secondary_btn = ['url' => '#services', 'title' =
 $hero_image_url = ($hero_bg_image && is_array($hero_bg_image) && !empty($hero_bg_image['url'])) ? esc_url($hero_bg_image['url']) : '';
 $hero_video_poster_url = ($hero_bg_video_poster && is_array($hero_bg_video_poster) && !empty($hero_bg_video_poster['url'])) ? esc_url($hero_bg_video_poster['url']) : '';
 
-$has_hero_media = ($hero_bg_type === 'video' && ($hero_bg_video_mp4 || $hero_bg_video_webm)) || ($hero_bg_type === 'image' && $hero_image_url);
+// Extract video URLs from File arrays
+$hero_video_mp4_url = ($hero_bg_video_mp4 && is_array($hero_bg_video_mp4) && !empty($hero_bg_video_mp4['url'])) ? esc_url($hero_bg_video_mp4['url']) : '';
+$hero_video_webm_url = ($hero_bg_video_webm && is_array($hero_bg_video_webm) && !empty($hero_bg_video_webm['url'])) ? esc_url($hero_bg_video_webm['url']) : '';
+
+$has_hero_media = ($hero_bg_type === 'video' && ($hero_video_mp4_url || $hero_video_webm_url)) || ($hero_bg_type === 'image' && $hero_image_url);
 $hero_text_class = $has_hero_media ? 'has-media' : '';
 ?>
 
-<!-- HERO -->
-<section class="ppc-page-hero <?php echo esc_attr($hero_text_class); ?>" data-section-theme="light">
-    <?php if ($has_hero_media) : ?>
-    <div class="ppc-page-hero-bg" aria-hidden="true">
-        <?php if ($hero_bg_type === 'video' && ($hero_bg_video_mp4 || $hero_bg_video_webm)) : ?>
-            <video class="ppc-page-hero-bg-video" autoplay muted playsinline loop <?php echo $hero_video_poster_url ? 'poster="' . $hero_video_poster_url . '"' : ''; ?>>
-                <?php if ($hero_bg_video_webm) : ?><source src="<?php echo esc_url($hero_bg_video_webm); ?>" type="video/webm"><?php endif; ?>
-                <?php if ($hero_bg_video_mp4) : ?><source src="<?php echo esc_url($hero_bg_video_mp4); ?>" type="video/mp4"><?php endif; ?>
-            </video>
-        <?php elseif ($hero_bg_type === 'image' && $hero_image_url) : ?>
-            <div class="ppc-page-hero-bg-image" style="background-image:url('<?php echo $hero_image_url; ?>');"></div>
-        <?php endif; ?>
-        <div class="ppc-page-hero-bg-overlay" style="opacity: <?php echo esc_attr($hero_bg_overlay); ?>;"></div>
-    </div>
+<!-- HERO - Same style as SEO page -->
+<section class="ppc-page-hero" data-section-theme="dark">
+  <div class="ppc-page-hero-bg">
+    <?php if ($hero_bg_type === 'video' && ($hero_video_mp4_url || $hero_video_webm_url)) : ?>
+      <video autoplay muted loop playsinline class="ppc-page-hero-video">
+        <?php if ($hero_video_webm_url) : ?><source src="<?php echo $hero_video_webm_url; ?>" type="video/webm"><?php endif; ?>
+        <?php if ($hero_video_mp4_url) : ?><source src="<?php echo $hero_video_mp4_url; ?>" type="video/mp4"><?php endif; ?>
+      </video>
+    <?php elseif ($hero_bg_type === 'image' && $hero_image_url) : ?>
+      <img src="<?php echo $hero_image_url; ?>" alt="PPC Services" class="ppc-page-hero-image">
     <?php endif; ?>
+    <div class="ppc-page-hero-overlay"></div>
+  </div>
 
-    <div class="ppc-page-hero-content">
-        <span class="ppc-page-hero-label"><?php echo esc_html($hero_label); ?></span>
-        <h1><?php echo wp_kses_post($hero_line1); ?><br><?php echo wp_kses_post($hero_line2); ?></h1>
-        <p class="ppc-page-hero-description"><?php echo wp_kses_post($hero_desc); ?></p>
-        <div class="ppc-page-hero-buttons">
-            <a href="<?php echo $hero_primary_btn['url']; ?>" target="<?php echo $hero_primary_btn['target']; ?>" class="cta-btn"><?php echo $hero_primary_btn['title']; ?> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-            <a href="<?php echo $hero_secondary_btn['url']; ?>" target="<?php echo $hero_secondary_btn['target']; ?>" class="cta-btn-outline-dark"><?php echo $hero_secondary_btn['title']; ?></a>
-        </div>
+  <div class="ppc-page-hero-content">
+    <div class="ppc-page-hero-text animate-fade-in">
+      <span class="ppc-page-hero-label"><?php echo esc_html($hero_label); ?></span>
+
+      <h1>
+        <?php echo wp_kses_post($hero_line1); ?>
+        <br>
+        <?php echo wp_kses_post($hero_line2); ?>
+      </h1>
+
+      <p class="ppc-page-hero-description">
+        <?php echo wp_kses_post($hero_desc); ?>
+      </p>
+
+      <a href="<?php echo $hero_primary_btn['url']; ?>" target="<?php echo $hero_primary_btn['target']; ?>" class="cta-btn">
+        <span><?php echo $hero_primary_btn['title']; ?></span>
+      </a>
     </div>
+  </div>
+
+  <!-- Decorative Shapes -->
+  <div class="ppc-page-hero-shapes">
+    <div class="ppc-page-shape ppc-page-shape-1"></div>
+    <div class="ppc-page-shape ppc-page-shape-2"></div>
+  </div>
 </section>
 
 <?php
-// STATS
+// ============================================
+// STATS SECTION
+// ============================================
 $stats = $has_acf ? get_field('ppc_stats') : [];
 if (!$stats || !is_array($stats) || empty($stats)) {
     $stats = [
         ['number' => '500%', 'label' => 'Average ROAS'],
-        ['number' => '£5M+', 'label' => 'Ad Spend Managed'],
-        ['number' => '10K+', 'label' => 'Conversions Generated'],
-        ['number' => '50+', 'label' => 'Happy Clients'],
+        ['number' => '10M+', 'label' => 'Ad Spend Managed'],
+        ['number' => '£5M+', 'label' => 'Revenue Generated'],
+        ['number' => '100+', 'label' => 'Active Campaigns'],
     ];
 }
 ?>
@@ -115,7 +137,9 @@ if (!$stats || !is_array($stats) || empty($stats)) {
 </section>
 
 <?php
+// ============================================
 // INFO SECTION 1 - What is PPC?
+// ============================================
 $what_is_heading_line1 = $has_acf ? get_field('ppc_what_is_heading_line1') : '';
 $what_is_heading_line2 = $has_acf ? get_field('ppc_what_is_heading_line2') : '';
 $what_is_content = $has_acf ? get_field('ppc_what_is_content') : '';
@@ -146,7 +170,7 @@ if (!$what_is_button) $what_is_button = ['url' => '#contact', 'title' => 'Get in
                 <?php if ($what_is_image_url) : ?>
                     <img src="<?php echo $what_is_image_url; ?>" alt="What is PPC">
                 <?php else : ?>
-                    <div class="ppc-page-info-placeholder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+                    <div class="ppc-page-info-placeholder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v2M15 1v2M9 21v2M15 21v2M1 9h2M1 15h2M21 9h2M21 15h2"/></svg></div>
                 <?php endif; ?>
             </div>
         </div>
@@ -154,7 +178,9 @@ if (!$what_is_button) $what_is_button = ['url' => '#contact', 'title' => 'Get in
 </section>
 
 <?php
+// ============================================
 // LONG CTA 1
+// ============================================
 $long_cta1_label = $has_acf ? get_field('ppc_long_cta1_label') : '';
 $long_cta1_heading_line1 = $has_acf ? get_field('ppc_long_cta1_heading_line1') : '';
 $long_cta1_heading_line2 = $has_acf ? get_field('ppc_long_cta1_heading_line2') : '';
@@ -163,16 +189,16 @@ $long_cta1_features = $has_acf ? get_field('ppc_long_cta1_features') : [];
 $long_cta1_primary_button = $has_acf ? hd_link(get_field('ppc_long_cta1_primary_button')) : null;
 $long_cta1_secondary_button = $has_acf ? hd_link(get_field('ppc_long_cta1_secondary_button')) : null;
 if (!$long_cta1_primary_button) $long_cta1_primary_button = ['url' => '#contact', 'title' => 'Start Your Campaign', 'target' => '_self'];
-if (!$long_cta1_secondary_button) $long_cta1_secondary_button = ['url' => 'tel:01onal275792114', 'title' => 'Call Us: 01275 792 114', 'target' => '_self'];
+if (!$long_cta1_secondary_button) $long_cta1_secondary_button = ['url' => 'tel:01275792114', 'title' => 'Call Us: 01275 792 114', 'target' => '_self'];
 ?>
 
 <section class="ppc-page-longcta ppc-page-longcta-1" data-section-theme="light">
     <div class="ppc-page-longcta-container">
         <div class="ppc-page-longcta-content animate-fade-in">
-            <span class="ppc-page-longcta-label"><?php echo $long_cta1_label ? esc_html($long_cta1_label) : 'READY TO ADVERTISE?'; ?></span>
+            <span class="ppc-page-longcta-label"><?php echo $long_cta1_label ? esc_html($long_cta1_label) : 'READY TO GROW?'; ?></span>
             <h2 class="ppc-page-longcta-heading">
-                <span class="black-text"><?php echo $long_cta1_heading_line1 ? esc_html($long_cta1_heading_line1) : 'Drive Immediate'; ?></span><br>
-                <span class="highlight-text-italic"><?php echo $long_cta1_heading_line2 ? esc_html($long_cta1_heading_line2) : 'Qualified Traffic'; ?></span>
+                <span class="black-text"><?php echo $long_cta1_heading_line1 ? esc_html($long_cta1_heading_line1) : 'Let\'s Drive'; ?></span><br>
+                <span class="highlight-text-italic"><?php echo $long_cta1_heading_line2 ? esc_html($long_cta1_heading_line2) : 'Real Results'; ?></span>
             </h2>
             <?php if ($long_cta1_text) : ?><p class="ppc-page-longcta-text"><?php echo wp_kses_post($long_cta1_text); ?></p><?php endif; ?>
             <div class="ppc-page-longcta-features">
@@ -184,9 +210,9 @@ if (!$long_cta1_secondary_button) $long_cta1_secondary_button = ['url' => 'tel:0
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>
-                    <div class="ppc-page-longcta-feature"><div class="ppc-page-longcta-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="ppc-page-longcta-feature-text"><h4>Instant Results</h4><p>Start driving traffic to your website the moment your campaign goes live</p></div></div>
-                    <div class="ppc-page-longcta-feature"><div class="ppc-page-longcta-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="ppc-page-longcta-feature-text"><h4>You Control the Budget</h4><p>Set your own spend limits and only pay for actual clicks</p></div></div>
-                    <div class="ppc-page-longcta-feature"><div class="ppc-page-longcta-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div><div class="ppc-page-longcta-feature-text"><h4>Measurable ROI</h4><p>Track every click, conversion, and pound spent with complete transparency</p></div></div>
+                    <div class="ppc-page-longcta-feature"><div class="ppc-page-longcta-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="ppc-page-longcta-feature-text"><h4>Instant Traffic</h4><p>Start getting qualified visitors to your site within hours of launching</p></div></div>
+                    <div class="ppc-page-longcta-feature"><div class="ppc-page-longcta-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="ppc-page-longcta-feature-text"><h4>Transparent Pricing</h4><p>No hidden costs - you decide exactly how much you want to spend</p></div></div>
+                    <div class="ppc-page-longcta-feature"><div class="ppc-page-longcta-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div><div class="ppc-page-longcta-feature-text"><h4>Measurable Results</h4><p>Track every click, conversion and pound spent in real-time</p></div></div>
                 <?php endif; ?>
             </div>
             <div class="ppc-page-longcta-buttons">
@@ -198,17 +224,19 @@ if (!$long_cta1_secondary_button) $long_cta1_secondary_button = ['url' => 'tel:0
 </section>
 
 <?php
-// SERVICES
+// ============================================
+// SERVICES SECTION
+// ============================================
 $services_label = $has_acf ? (get_field('ppc_services_label') ?: 'What We Offer') : 'What We Offer';
 $services_heading = hd_wysiwyg_or_default($has_acf ? get_field('ppc_services_heading') : '', 'Our PPC <span class="highlight-text-italic">Services</span>');
-$services_subheading = hd_wysiwyg_or_default($has_acf ? get_field('ppc_services_subheading') : '', 'Comprehensive paid advertising solutions across all major platforms');
+$services_subheading = hd_wysiwyg_or_default($has_acf ? get_field('ppc_services_subheading') : '', 'Comprehensive paid advertising solutions tailored to your business goals');
 $services = $has_acf ? get_field('ppc_services') : [];
 if (!$services || !is_array($services) || empty($services)) {
     $services = [
-        ['title' => 'Google Ads', 'description' => 'Search, Display, Shopping, and YouTube campaigns that reach customers at the moment they\'re looking for you.', 'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>'],
-        ['title' => 'Social Media Ads', 'description' => 'Facebook, Instagram, LinkedIn and TikTok advertising that targets your ideal audience with precision.', 'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>'],
-        ['title' => 'Remarketing', 'description' => 'Re-engage visitors who\'ve shown interest in your products or services with tailored follow-up campaigns.', 'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>'],
-        ['title' => 'Shopping Campaigns', 'description' => 'E-commerce focused campaigns that showcase your products directly in search results and drive sales.', 'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>'],
+        ['title' => 'Google Ads', 'description' => 'Reach customers actively searching for your products and services on Google.', 'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>'],
+        ['title' => 'Social Media Ads', 'description' => 'Target your ideal audience on Facebook, Instagram, LinkedIn and more.', 'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>'],
+        ['title' => 'Shopping Campaigns', 'description' => 'Showcase your products directly in search results with eye-catching ads.', 'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>'],
+        ['title' => 'Remarketing', 'description' => 'Re-engage visitors who have shown interest in your business before.', 'icon_svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>'],
     ];
 }
 ?>
@@ -233,7 +261,9 @@ if (!$services || !is_array($services) || empty($services)) {
 </section>
 
 <?php
+// ============================================
 // INFO SECTION 2 - How Much Does PPC Cost? (Reversed)
+// ============================================
 $cost_heading_line1 = $has_acf ? get_field('ppc_cost_heading_line1') : '';
 $cost_heading_line2 = $has_acf ? get_field('ppc_cost_heading_line2') : '';
 $cost_content = $has_acf ? get_field('ppc_cost_content') : '';
@@ -263,7 +293,7 @@ if (!$cost_button) $cost_button = ['url' => '#contact', 'title' => 'Get a Quote'
                 <?php else : ?>
                     <p>We offer a transparent management fee, which is based upon your advertising budget, with absolutely no hidden costs.</p>
                     <p>You decide what you spend. We will help you find the "sweet spot" with your advertising spend; however, it is up to you how much you want to spend each month, week or day on advertising.</p>
-                    <p>Advertising spend should be seen as an investment in your growth, not a cost to the company. With our team of certified PPC experts managing your campaign you can focus on running your business.</p>
+                    <p>Our team will work with the budget that you are comfortable with to drive direct sales, leads and conversions to your website. Advertising spend should be seen as an investment in your growth, not a cost to the company.</p>
                 <?php endif; ?>
                 <a href="<?php echo esc_url($cost_button['url']); ?>" class="cta-button"><?php echo esc_html($cost_button['title']); ?></a>
             </div>
@@ -272,7 +302,9 @@ if (!$cost_button) $cost_button = ['url' => '#contact', 'title' => 'Get a Quote'
 </section>
 
 <?php
+// ============================================
 // LONG CTA 2 (Simpler, no features)
+// ============================================
 $long_cta2_label = $has_acf ? get_field('ppc_long_cta2_label') : '';
 $long_cta2_heading_line1 = $has_acf ? get_field('ppc_long_cta2_heading_line1') : '';
 $long_cta2_heading_line2 = $has_acf ? get_field('ppc_long_cta2_heading_line2') : '';
@@ -288,8 +320,8 @@ if (!$long_cta2_secondary_button) $long_cta2_secondary_button = ['url' => 'tel:0
         <div class="ppc-page-longcta-content animate-fade-in">
             <span class="ppc-page-longcta-label"><?php echo $long_cta2_label ? esc_html($long_cta2_label) : 'FREE PPC AUDIT'; ?></span>
             <h2 class="ppc-page-longcta-heading">
-                <span class="black-text"><?php echo $long_cta2_heading_line1 ? esc_html($long_cta2_heading_line1) : 'See How Your Ads'; ?></span><br>
-                <span class="highlight-text-italic"><?php echo $long_cta2_heading_line2 ? esc_html($long_cta2_heading_line2) : 'Could Perform Better'; ?></span>
+                <span class="black-text"><?php echo $long_cta2_heading_line1 ? esc_html($long_cta2_heading_line1) : 'Discover Your Campaign\'s'; ?></span><br>
+                <span class="highlight-text-italic"><?php echo $long_cta2_heading_line2 ? esc_html($long_cta2_heading_line2) : 'True Potential'; ?></span>
             </h2>
             <p class="ppc-page-longcta-text"><?php echo $long_cta2_text ? wp_kses_post($long_cta2_text) : 'Get a comprehensive analysis of your current PPC campaigns. We\'ll identify wasted spend, missed opportunities, and show you exactly how to improve your return on ad spend.'; ?></p>
             <div class="ppc-page-longcta-buttons">
@@ -301,17 +333,19 @@ if (!$long_cta2_secondary_button) $long_cta2_secondary_button = ['url' => 'tel:0
 </section>
 
 <?php
-// PROCESS
+// ============================================
+// PROCESS SECTION
+// ============================================
 $process_label = $has_acf ? (get_field('ppc_process_label') ?: 'How We Work') : 'How We Work';
 $process_heading = hd_wysiwyg_or_default($has_acf ? get_field('ppc_process_heading') : '', 'Our PPC <span class="highlight-text-italic">Process</span>');
 $process_subheading = hd_wysiwyg_or_default($has_acf ? get_field('ppc_process_subheading') : '', 'A proven methodology that maximises your return on ad spend');
 $process_steps = $has_acf ? get_field('ppc_process_steps') : [];
 if (!$process_steps || !is_array($process_steps) || empty($process_steps)) {
     $process_steps = [
-        ['title' => 'Discovery & Research', 'description' => 'We analyse your business, competitors, and target audience to identify the best opportunities for your campaigns.'],
-        ['title' => 'Campaign Setup', 'description' => 'We build your campaigns from the ground up with optimised ad copy, targeting, and bid strategies.'],
-        ['title' => 'Launch & Monitor', 'description' => 'Your campaigns go live and we monitor performance closely, making adjustments in real-time.'],
-        ['title' => 'Optimise & Scale', 'description' => 'We continuously refine your campaigns based on data, scaling what works and cutting what doesn\'t.'],
+        ['title' => 'Discovery & Strategy', 'description' => 'We start by understanding your business goals, target audience, and competition to create a winning PPC strategy.'],
+        ['title' => 'Campaign Setup', 'description' => 'Our team builds your campaigns from the ground up with carefully researched keywords, compelling ad copy, and optimised landing pages.'],
+        ['title' => 'Launch & Monitor', 'description' => 'We launch your campaigns and continuously monitor performance, making real-time adjustments to maximise results.'],
+        ['title' => 'Optimise & Scale', 'description' => 'Through ongoing optimisation and testing, we improve performance and scale what works to drive even better results.'],
     ];
 }
 ?>
@@ -335,14 +369,16 @@ if (!$process_steps || !is_array($process_steps) || empty($process_steps)) {
 </section>
 
 <?php
-// INFO SECTION 3 - What Makes Us Different
+// ============================================
+// INFO SECTION 3 - What Makes Us Different?
+// ============================================
 $different_heading_line1 = $has_acf ? get_field('ppc_different_heading_line1') : '';
 $different_heading_line2 = $has_acf ? get_field('ppc_different_heading_line2') : '';
 $different_content = $has_acf ? get_field('ppc_different_content') : '';
 $different_image = $has_acf ? get_field('ppc_different_image') : null;
 $different_button = $has_acf ? hd_link(get_field('ppc_different_button')) : null;
 $different_image_url = ($different_image && is_array($different_image) && !empty($different_image['url'])) ? esc_url($different_image['url']) : '';
-if (!$different_button) $different_button = ['url' => '#contact', 'title' => 'Get in Touch', 'target' => '_self'];
+if (!$different_button) $different_button = ['url' => '#contact', 'title' => 'Let\'s Talk', 'target' => '_self'];
 ?>
 
 <section class="ppc-page-info ppc-page-info-3" data-section-theme="light">
@@ -357,7 +393,7 @@ if (!$different_button) $different_button = ['url' => '#contact', 'title' => 'Ge
                     <?php echo wp_kses_post(apply_filters('the_content', $different_content)); ?>
                 <?php else : ?>
                     <p>We want to help you understand what PPC is and that it should not just be used as a quick fix, but as a long term plan that will help your business grow.</p>
-                    <p>Everything we do, from creating new campaigns, all the way through to new landing pages, we will explain to you our decisions and why making those changes will benefit your business.</p>
+                    <p>Everything we do, from creating new campaigns, all the way through to new landing pages, we will explain to you our decisions and why making those changes will benefit your business. We want to help you grow.</p>
                     <p>If you want to learn more about PPC then please feel free to give us a call. Even if it is just for a friendly chat.</p>
                 <?php endif; ?>
                 <a href="<?php echo esc_url($different_button['url']); ?>" class="cta-button"><?php echo esc_html($different_button['title']); ?></a>
@@ -374,7 +410,9 @@ if (!$different_button) $different_button = ['url' => '#contact', 'title' => 'Ge
 </section>
 
 <?php
+// ============================================
 // LONG CTA 3
+// ============================================
 $long_cta3_label = $has_acf ? get_field('ppc_long_cta3_label') : '';
 $long_cta3_heading_line1 = $has_acf ? get_field('ppc_long_cta3_heading_line1') : '';
 $long_cta3_heading_line2 = $has_acf ? get_field('ppc_long_cta3_heading_line2') : '';
@@ -382,14 +420,14 @@ $long_cta3_text = $has_acf ? get_field('ppc_long_cta3_text') : '';
 $long_cta3_features = $has_acf ? get_field('ppc_long_cta3_features') : [];
 $long_cta3_primary_button = $has_acf ? hd_link(get_field('ppc_long_cta3_primary_button')) : null;
 $long_cta3_secondary_button = $has_acf ? hd_link(get_field('ppc_long_cta3_secondary_button')) : null;
-if (!$long_cta3_primary_button) $long_cta3_primary_button = ['url' => '#contact', 'title' => 'Start Your Campaign', 'target' => '_self'];
+if (!$long_cta3_primary_button) $long_cta3_primary_button = ['url' => '#contact', 'title' => 'Start Growing Today', 'target' => '_self'];
 if (!$long_cta3_secondary_button) $long_cta3_secondary_button = ['url' => 'tel:01275792114', 'title' => 'Call Us: 01275 792 114', 'target' => '_self'];
 ?>
 
 <section class="ppc-page-longcta ppc-page-longcta-3" data-section-theme="light">
     <div class="ppc-page-longcta-container">
         <div class="ppc-page-longcta-content animate-fade-in">
-            <span class="ppc-page-longcta-label"><?php echo $long_cta3_label ? esc_html($long_cta3_label) : 'CERTIFIED EXPERTS'; ?></span>
+            <span class="ppc-page-longcta-label"><?php echo $long_cta3_label ? esc_html($long_cta3_label) : 'PROVEN RESULTS'; ?></span>
             <h2 class="ppc-page-longcta-heading">
                 <span class="black-text"><?php echo $long_cta3_heading_line1 ? esc_html($long_cta3_heading_line1) : 'Ready to Maximise'; ?></span><br>
                 <span class="highlight-text-italic"><?php echo $long_cta3_heading_line2 ? esc_html($long_cta3_heading_line2) : 'Your Ad Spend?'; ?></span>
@@ -404,9 +442,9 @@ if (!$long_cta3_secondary_button) $long_cta3_secondary_button = ['url' => 'tel:0
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>
-                    <div class="ppc-page-longcta-feature"><div class="ppc-page-longcta-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg></div><div class="ppc-page-longcta-feature-text"><h4>Google Certified</h4><p>Our team holds Google Ads certifications across all campaign types</p></div></div>
-                    <div class="ppc-page-longcta-feature"><div class="ppc-page-longcta-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div class="ppc-page-longcta-feature-text"><h4>Transparent Reporting</h4><p>Weekly and monthly reports you can actually understand</p></div></div>
-                    <div class="ppc-page-longcta-feature"><div class="ppc-page-longcta-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="ppc-page-longcta-feature-text"><h4>No Hidden Fees</h4><p>Clear pricing with no surprises or additional charges</p></div></div>
+                    <div class="ppc-page-longcta-feature"><div class="ppc-page-longcta-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg></div><div class="ppc-page-longcta-feature-text"><h4>No Long-Term Contracts</h4><p>We believe in earning your business every month</p></div></div>
+                    <div class="ppc-page-longcta-feature"><div class="ppc-page-longcta-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div class="ppc-page-longcta-feature-text"><h4>Transparent Reporting</h4><p>Monthly reports you can actually understand</p></div></div>
+                    <div class="ppc-page-longcta-feature"><div class="ppc-page-longcta-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="ppc-page-longcta-feature-text"><h4>Google Certified</h4><p>Our team holds Google Ads certifications</p></div></div>
                 <?php endif; ?>
             </div>
             <div class="ppc-page-longcta-buttons">
@@ -418,16 +456,18 @@ if (!$long_cta3_secondary_button) $long_cta3_secondary_button = ['url' => 'tel:0
 </section>
 
 <?php
-// RESULTS
+// ============================================
+// RESULTS/CASE STUDIES SECTION
+// ============================================
 $results_label = $has_acf ? (get_field('ppc_results_label') ?: 'Case Studies') : 'Case Studies';
 $results_heading = hd_wysiwyg_or_default($has_acf ? get_field('ppc_results_heading') : '', 'Real <span class="highlight-text-italic">Results</span>');
-$results_subheading = hd_wysiwyg_or_default($has_acf ? get_field('ppc_results_subheading') : '', 'See how we\'ve helped businesses maximise their return on ad spend');
+$results_subheading = hd_wysiwyg_or_default($has_acf ? get_field('ppc_results_subheading') : '', 'See how we\'ve helped businesses like yours achieve remarkable growth through PPC');
 $results = $has_acf ? get_field('ppc_results') : [];
 if (!$results || !is_array($results) || empty($results)) {
     $results = [
-        ['industry' => 'E-commerce', 'title' => 'My Reusable', 'description' => 'Scaled from £5k to £50k monthly ad spend while maintaining 5x ROAS.', 'metric1_value' => '500%', 'metric1_label' => 'ROAS', 'metric2_value' => '+800%', 'metric2_label' => 'Revenue'],
-        ['industry' => 'Services', 'title' => 'LaserX', 'description' => 'Reduced cost per lead by 60% while increasing overall lead volume.', 'metric1_value' => '-60%', 'metric1_label' => 'Cost Per Lead', 'metric2_value' => '+200%', 'metric2_label' => 'Leads'],
-        ['industry' => 'Automotive', 'title' => 'Severnside Campervans', 'description' => 'Generated over 500 qualified enquiries in the first 6 months.', 'metric1_value' => '500+', 'metric1_label' => 'Enquiries', 'metric2_value' => '£3.20', 'metric2_label' => 'Cost Per Click'],
+        ['industry' => 'E-commerce', 'title' => 'Online Retailer', 'description' => 'Achieved 500% ROAS within the first 3 months of campaign launch.', 'metric1_value' => '500%', 'metric1_label' => 'ROAS', 'metric2_value' => '+340%', 'metric2_label' => 'Revenue', 'image' => null],
+        ['industry' => 'Professional Services', 'title' => 'Law Firm', 'description' => 'Reduced cost per lead by 60% while increasing lead volume.', 'metric1_value' => '-60%', 'metric1_label' => 'Cost Per Lead', 'metric2_value' => '+200%', 'metric2_label' => 'Leads', 'image' => null],
+        ['industry' => 'Healthcare', 'title' => 'Private Clinic', 'description' => 'Generated consistent appointment bookings through targeted campaigns.', 'metric1_value' => '£15', 'metric1_label' => 'Cost Per Booking', 'metric2_value' => '+450%', 'metric2_label' => 'Bookings', 'image' => null],
     ];
 }
 ?>
@@ -440,9 +480,20 @@ if (!$results || !is_array($results) || empty($results)) {
             <p><?php echo wp_kses_post($results_subheading); ?></p>
         </div>
         <div class="ppc-page-results-grid">
-            <?php foreach ($results as $result) : ?>
+            <?php foreach ($results as $result) : 
+                $result_image = null;
+                if (!empty($result['image']) && is_array($result['image']) && !empty($result['image']['url'])) {
+                    $result_image = esc_url($result['image']['url']);
+                }
+            ?>
                 <div class="ppc-page-result-card">
-                    <div class="ppc-page-result-image"><div class="ppc-page-result-placeholder"><span><?php echo esc_html(substr($result['title'] ?? 'C', 0, 1)); ?></span></div></div>
+                    <div class="ppc-page-result-image">
+                        <?php if ($result_image) : ?>
+                            <img src="<?php echo $result_image; ?>" alt="<?php echo esc_attr($result['title'] ?? 'Case Study'); ?>">
+                        <?php else : ?>
+                            <div class="ppc-page-result-placeholder"><span><?php echo esc_html(substr($result['title'] ?? 'C', 0, 1)); ?></span></div>
+                        <?php endif; ?>
+                    </div>
                     <div class="ppc-page-result-content">
                         <span class="ppc-page-result-industry"><?php echo esc_html($result['industry'] ?? ''); ?></span>
                         <h3><?php echo esc_html($result['title'] ?? ''); ?></h3>
@@ -459,17 +510,19 @@ if (!$results || !is_array($results) || empty($results)) {
 </section>
 
 <?php
-// FAQ
+// ============================================
+// FAQ SECTION
+// ============================================
 $faq_label = $has_acf ? (get_field('ppc_faq_label') ?: 'FAQ') : 'FAQ';
 $faq_heading = hd_wysiwyg_or_default($has_acf ? get_field('ppc_faq_heading') : '', 'Frequently Asked <span class="highlight-text-italic">Questions</span>');
 $faqs = $has_acf ? get_field('ppc_faqs') : [];
 if (!$faqs || !is_array($faqs) || empty($faqs)) {
     $faqs = [
-        ['question' => 'How quickly will I see results from PPC?', 'answer' => 'Unlike SEO, PPC delivers immediate results. You can start driving traffic the moment your campaigns go live.'],
-        ['question' => 'What platforms do you advertise on?', 'answer' => 'We manage campaigns across Google Ads, Microsoft Ads, Facebook, Instagram, LinkedIn, TikTok, and more.'],
-        ['question' => 'How much should I spend on PPC?', 'answer' => 'Budget depends on your goals and industry. We\'ll help you find the right spend level to achieve your objectives.'],
-        ['question' => 'What\'s included in your management fee?', 'answer' => 'Campaign setup, ongoing optimisation, A/B testing, competitor analysis, and regular reporting with actionable insights.'],
-        ['question' => 'Do you require long-term contracts?', 'answer' => 'No. We work on a month-to-month basis because we believe in earning your business through results.'],
+        ['question' => 'How quickly will I see results from PPC?', 'answer' => 'Unlike SEO, PPC can deliver results almost immediately. You can start seeing traffic within hours of launching your campaign, with meaningful data within the first few weeks.'],
+        ['question' => 'What platforms do you advertise on?', 'answer' => 'We manage campaigns across Google Ads, Microsoft Ads (Bing), Facebook, Instagram, LinkedIn, and other platforms depending on where your audience is most active.'],
+        ['question' => 'How much should I budget for PPC?', 'answer' => 'Budget varies based on your industry, competition, and goals. We work with budgets of all sizes and will help you find the optimal spend to achieve your objectives.'],
+        ['question' => 'Do you guarantee results?', 'answer' => 'While we cannot guarantee specific results (no ethical agency can), we guarantee transparent reporting, continuous optimisation, and a commitment to improving your ROI.'],
+        ['question' => 'What\'s included in your PPC management?', 'answer' => 'Full campaign setup, keyword research, ad copywriting, landing page recommendations, bid management, A/B testing, conversion tracking, and detailed monthly reporting.'],
     ];
 }
 ?>
@@ -489,9 +542,9 @@ if (!$faqs || !is_array($faqs) || empty($faqs)) {
             <?php endforeach; ?>
         </div>
     </div>
+</section>
 
 
-    
 <!-- Long CTA Section - Before Reviews -->
 <section class="long-cta-section" data-section-theme="light">
   <div class="long-cta-container">
@@ -604,38 +657,38 @@ if (!$faqs || !is_array($faqs) || empty($faqs)) {
 
           <div class="review-card">
             <div class="review-header">
-              <div class="reviewer-avatar" style="background:#4285f4;">L</div>
+              <div class="reviewer-avatar" style="background:#4285f4;">S</div>
               <div class="reviewer-info">
-                <h4>Lucy P.</h4>
-                <p class="review-date">2025-01-01</p>
+                <h4>Sophie C.</h4>
+                <p class="review-date">2025-01-15</p>
               </div>
             </div>
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">Really easy to deal with, nothing was too much trouble. Super happy with the end result.</p>
+            <p class="review-text">Recently went self-employed and was feeling a bit overwhelmed. Hagerty Digital have been absolutely brilliant, not only did they help me make the most of my marketing budget, but they also recommended systems and tools to help streamline my business.</p>
           </div>
 
           <div class="review-card">
             <div class="review-header">
-              <div class="reviewer-avatar" style="background:#34a853;">J</div>
+              <div class="reviewer-avatar" style="background:#34a853;">L</div>
               <div class="reviewer-info">
-                <h4>James R.</h4>
-                <p class="review-date">2025-02-14</p>
+                <h4>Libby J.</h4>
+                <p class="review-date">2025-02-20</p>
               </div>
             </div>
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">Prompt, professional, and the quality was spot on. Would absolutely recommend.</p>
+            <p class="review-text">Hagerty Digital are incredibly knowledgeable when it comes to website development and digital marketing. Their expertise, professionalism, and support have been outstanding throughout.</p>
           </div>
 
           <div class="review-card">
             <div class="review-header">
-              <div class="reviewer-avatar" style="background:#fbbc05;">S</div>
+              <div class="reviewer-avatar" style="background:#fbbc05;">T</div>
               <div class="reviewer-info">
-                <h4>Sophie T.</h4>
-                <p class="review-date">2025-03-06</p>
+                <h4>Tom H.</h4>
+                <p class="review-date">2025-03-01</p>
               </div>
             </div>
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">Great communication throughout and everything was left tidy. Five stars.</p>
+            <p class="review-text">Fantastic Company! Built my companies website in a very quick timeframe and have been helping my business generate leads ever since! Would highly recommend.</p>
           </div>
 
         </div>
@@ -650,6 +703,5 @@ if (!$faqs || !is_array($faqs) || empty($faqs)) {
     </div>
   </div>
 </section>
-
 
 <?php get_footer(); ?>

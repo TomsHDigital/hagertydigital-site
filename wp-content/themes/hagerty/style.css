@@ -296,6 +296,7 @@ body.nav-open {
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   border: 3px solid #e65616;
+  tex
 }
 
 .menu-mobile-contact-slideshow .menu-slideshow-slide {
@@ -416,6 +417,7 @@ body.nav-open {
 
 .menu-mobile-contact {
   padding-top: 30px;
+  text-align: center;
 }
 
 .menu-mobile-contact h4 {
@@ -451,6 +453,32 @@ body.nav-open {
     display: block;
   }
 }
+
+
+.mtt-hero .mtt-hero-content h1 .orange-text {
+  color: #e65616 !important;
+}
+.mtt-hero .mtt-hero-content h1 .white-text {
+  color: #ffffff !important;
+}
+.about-hero .about-hero-content h1 .orange-text {
+  color: #e65616 !important;
+}
+.about-hero .about-hero-content h1 .white-text {
+  color: #ffffff !important;
+}
+
+/* Only the active slide should be clickable */
+.menu-contact-slideshow .menu-slideshow-slide,
+.menu-mobile-contact-slideshow .menu-slideshow-slide {
+  pointer-events: none;
+}
+
+.menu-contact-slideshow .menu-slideshow-slide.active,
+.menu-mobile-contact-slideshow .menu-slideshow-slide.active {
+  pointer-events: auto;
+}
+
 
 /* ==========================
    HERO SECTION
@@ -8012,6 +8040,7 @@ display:none  }
 }
 
 
+
 /* ================================================
    PPC PAGE STYLES - All classes prefixed with ppc-page-
    Background pattern: #f8f8f8 → #ffffff alternating from stats
@@ -8019,14 +8048,13 @@ display:none  }
 
 /* PPC Hero */
 .ppc-page-hero {
-    min-height: 100vh;
+    position: relative;
+    min-height: 80vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    background: #1a1a1e;
-    padding: 120px 40px 80px;
+    justify-content: flex-start;
     overflow: hidden;
+    background: #1a1a1e;
 }
 
 .ppc-page-hero-bg {
@@ -8035,48 +8063,52 @@ display:none  }
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 0;
 }
 
-.ppc-page-hero-bg-video,
-.ppc-page-hero-bg-image {
+.ppc-page-hero-video,
+.ppc-page-hero-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    background-size: cover;
-    background-position: center;
 }
 
-.ppc-page-hero-bg-overlay {
+.ppc-page-hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000;
+    background: linear-gradient(135deg, rgba(26, 26, 30, 0.85) 0%, rgba(26, 26, 30, 0.6) 100%);
 }
 
 .ppc-page-hero-content {
     position: relative;
     z-index: 2;
-    max-width: 900px;
-    text-align: center;
+    width: 90%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 180px 5% 120px;
+}
+
+.ppc-page-hero-text {
+    max-width: 700px;
 }
 
 .ppc-page-hero-label {
     display: inline-block;
     font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 3px;
     color: #e65616;
     margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
 .ppc-page-hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(48px, 8vw, 90px);
-    font-weight: 700;
+    font-size: 72px;
+    font-weight: 900;
     line-height: 1.1;
     color: #ffffff;
     margin-bottom: 30px;
@@ -8084,16 +8116,54 @@ display:none  }
 
 .ppc-page-hero-description {
     font-size: 20px;
-    line-height: 1.6;
+    line-height: 1.7;
     color: rgba(255, 255, 255, 0.8);
-    max-width: 600px;
-    margin: 0 auto 40px;
+    margin-bottom: 40px;
+    max-width: 550px;
+}
+
+.ppc-page-hero-shapes {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.ppc-page-shape {
+    position: absolute;
+    transform: rotate(45deg);
+}
+
+.ppc-page-shape-1 {
+    top: -100px;
+    right: -50px;
+    width: 300px;
+    height: 300px;
+    background: rgba(230, 86, 22, 0.15);
+    animation: ppcFloat 8s ease-in-out infinite;
+}
+
+.ppc-page-shape-2 {
+    top: 150px;
+    right: 100px;
+    width: 200px;
+    height: 200px;
+    background: rgba(51, 51, 51, 0.3);
+    animation: ppcFloat 10s ease-in-out infinite reverse;
+}
+
+@keyframes ppcFloat {
+    0%, 100% { transform: rotate(45deg) translate(0, 0); }
+    50% { transform: rotate(45deg) translate(20px, -20px); }
 }
 
 .ppc-page-hero-buttons {
     display: flex;
     gap: 20px;
-    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -8229,6 +8299,64 @@ display:none  }
     transform: rotate(-10deg);
 }
 
+/* PPC Info 2 - #f8f8f8 */
+.ppc-page-info-2 {
+    background: #f8f8f8;
+}
+
+.ppc-page-info-2::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: -80px;
+    width: 250px;
+    height: 250px;
+    background: rgba(230, 86, 22, 0.04);
+    border-radius: 25px;
+    transform: rotate(-20deg);
+}
+
+.ppc-page-info-2::after {
+    content: '';
+    position: absolute;
+    bottom: 10%;
+    right: -60px;
+    width: 180px;
+    height: 180px;
+    background: rgba(230, 86, 22, 0.06);
+    border-radius: 20px;
+    transform: rotate(25deg);
+}
+
+/* PPC Info 3 - #ffffff */
+.ppc-page-info-3 {
+    background: #ffffff;
+}
+
+.ppc-page-info-3::before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    right: -70px;
+    width: 220px;
+    height: 220px;
+    background: rgba(230, 86, 22, 0.03);
+    border-radius: 25px;
+    transform: rotate(10deg);
+}
+
+.ppc-page-info-3::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    left: -40px;
+    width: 150px;
+    height: 150px;
+    background: rgba(230, 86, 22, 0.05);
+    border-radius: 15px;
+    transform: rotate(-15deg);
+}
+
 /* PPC Long CTA Base */
 .ppc-page-longcta {
     padding: 100px 40px;
@@ -8319,6 +8447,7 @@ display:none  }
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 40px;
 }
 
 .ppc-page-longcta-btn {
@@ -8366,6 +8495,16 @@ display:none  }
 
 /* PPC Long CTA 1 - #f8f8f8 */
 .ppc-page-longcta-1 {
+    background: #f8f8f8;
+}
+
+/* PPC Long CTA 2 - #ffffff */
+.ppc-page-longcta-2 {
+    background: #ffffff;
+}
+
+/* PPC Long CTA 3 - #f8f8f8 */
+.ppc-page-longcta-3 {
     background: #f8f8f8;
 }
 
@@ -8453,40 +8592,6 @@ display:none  }
     font-size: 15px;
     line-height: 1.6;
     color: #666;
-}
-
-/* PPC Info 2 - #f8f8f8 */
-.ppc-page-info-2 {
-    background: #f8f8f8;
-}
-
-.ppc-page-info-2::before {
-    content: '';
-    position: absolute;
-    top: 20%;
-    left: -80px;
-    width: 250px;
-    height: 250px;
-    background: rgba(230, 86, 22, 0.04);
-    border-radius: 25px;
-    transform: rotate(-20deg);
-}
-
-.ppc-page-info-2::after {
-    content: '';
-    position: absolute;
-    bottom: 10%;
-    right: -60px;
-    width: 180px;
-    height: 180px;
-    background: rgba(230, 86, 22, 0.06);
-    border-radius: 20px;
-    transform: rotate(25deg);
-}
-
-/* PPC Long CTA 2 - #ffffff */
-.ppc-page-longcta-2 {
-    background: #ffffff;
 }
 
 /* PPC Process - #f8f8f8 */
@@ -8585,40 +8690,6 @@ display:none  }
     font-size: 16px;
     line-height: 1.7;
     color: #666;
-}
-
-/* PPC Info 3 - #ffffff */
-.ppc-page-info-3 {
-    background: #ffffff;
-}
-
-.ppc-page-info-3::before {
-    content: '';
-    position: absolute;
-    top: 15%;
-    right: -70px;
-    width: 220px;
-    height: 220px;
-    background: rgba(230, 86, 22, 0.03);
-    border-radius: 25px;
-    transform: rotate(10deg);
-}
-
-.ppc-page-info-3::after {
-    content: '';
-    position: absolute;
-    bottom: 20%;
-    left: -40px;
-    width: 150px;
-    height: 150px;
-    background: rgba(230, 86, 22, 0.05);
-    border-radius: 15px;
-    transform: rotate(-15deg);
-}
-
-/* PPC Long CTA 3 - #f8f8f8 */
-.ppc-page-longcta-3 {
-    background: #f8f8f8;
 }
 
 /* PPC Results - #ffffff */
@@ -8782,7 +8853,7 @@ display:none  }
 
 .ppc-page-faq-header h2 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 5vw, 48px);
+    font-size: clamp(36px, 5vw, 56px);
     font-weight: 700;
 }
 
@@ -8816,12 +8887,14 @@ display:none  }
     font-size: 18px;
     font-weight: 600;
     color: #1a1a1e;
+    transition: all 0.3s ease;
 }
 
 .ppc-page-faq-question svg {
+    flex-shrink: 0;
     width: 20px;
     height: 20px;
-    stroke: #666;
+    stroke: #e65616;
     transition: transform 0.3s ease;
 }
 
@@ -8832,371 +8905,200 @@ display:none  }
 .ppc-page-faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.3s ease, padding 0.3s ease;
 }
 
 .ppc-page-faq-item.active .ppc-page-faq-answer {
-    max-height: 300px;
+    max-height: 500px;
 }
 
 .ppc-page-faq-answer p {
     padding: 0 30px 25px;
     font-size: 16px;
-    line-height: 1.7;
     color: #666;
-}
-
-/* PPC CTA - Dark */
-.ppc-page-cta {
-    background: #1a1a1e;
-    padding: 120px 40px;
-    text-align: center;
-}
-
-.ppc-page-cta-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.ppc-page-cta-label {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #e65616;
-    margin-bottom: 20px;
-}
-
-.ppc-page-cta h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 20px;
-}
-
-.ppc-page-cta p {
-    font-size: 18px;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 40px;
 }
 
-.ppc-page-cta-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
+/* PPC Utility Classes */
+.ppc-page-hero .black-text,
+.ppc-page-info .black-text,
+.ppc-page-longcta .black-text {
+    color: inherit;
 }
 
-/* PPC Reviews - #ffffff */
-.ppc-page-reviews {
-    background: #ffffff;
-    padding: 120px 40px;
-}
-
-.ppc-page-reviews-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 60px;
-    align-items: center;
-}
-
-.ppc-page-reviews-left h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.ppc-page-star-rating {
-    margin-bottom: 15px;
-}
-
-.ppc-page-star-rating .star {
-    color: #fbbc04;
-    font-size: 28px;
-}
-
-.ppc-page-review-count {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.ppc-page-google-logo {
-    height: 30px;
-    width: auto;
-}
-
-.ppc-page-reviews-carousel {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.ppc-page-carousel-nav {
-    width: 50px;
-    height: 50px;
-    border: 2px solid #ddd;
-    border-radius: 50%;
-    background: #fff;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-}
-
-.ppc-page-carousel-nav:hover {
-    border-color: #e65616;
+.ppc-page-hero .highlight-text-italic,
+.ppc-page-info .highlight-text-italic,
+.ppc-page-services .highlight-text-italic,
+.ppc-page-process .highlight-text-italic,
+.ppc-page-results .highlight-text-italic,
+.ppc-page-faq .highlight-text-italic,
+.ppc-page-longcta .highlight-text-italic {
     color: #e65616;
+    font-style: italic;
 }
 
-.ppc-page-carousel-track-container {
-    flex: 1;
-    overflow: hidden;
-}
-
-.ppc-page-carousel-track {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.5s ease;
-}
-
-.ppc-page-review-card {
-    min-width: 350px;
-    background: #f8f8f8;
-    padding: 30px;
-    border-radius: 20px;
-}
-
-.ppc-page-review-header {
-    display: flex;
+.ppc-page-info .cta-button {
+    display: inline-flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.ppc-page-reviewer-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: #e65616;
     color: #fff;
-    font-weight: 600;
-    font-size: 20px;
-}
-
-.ppc-page-reviewer-info h4 {
     font-size: 16px;
     font-weight: 600;
-    color: #1a1a1e;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
 }
 
-.ppc-page-review-date {
-    font-size: 13px;
-    color: #888;
+.ppc-page-info .cta-button:hover {
+    background: #d14a0f;
+    transform: translateY(-2px);
 }
-
-.ppc-page-review-stars {
-    color: #fbbc04;
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-.ppc-page-review-text {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #444;
-}
-
 
 /* ================================================
-   RESPONSIVE STYLES - SEO & PPC Pages
+   PPC PAGE RESPONSIVE
    ================================================ */
 
-@media (max-width: 1200px) {
-    .seo-page-stats-container,
-    .ppc-page-stats-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .seo-page-services-grid,
+@media (max-width: 1024px) {
     .ppc-page-services-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
-    .seo-page-results-grid,
-    .ppc-page-results-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
-@media (max-width: 992px) {
-    .seo-page-info-content,
-    .ppc-page-info-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
-    }
-    
-    .seo-page-info-reversed,
-    .ppc-page-info-reversed {
-        direction: ltr;
-    }
-    
-    .seo-page-longcta-features,
-    .ppc-page-longcta-features {
-        grid-template-columns: 1fr;
-    }
-    
-    .seo-page-reviews-container,
-    .ppc-page-reviews-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    
-    .seo-page-reviews-left,
-    .ppc-page-reviews-left {
-        text-align: center;
-    }
-}
-
-@media (max-width: 768px) {
-    .seo-page-hero,
-    .ppc-page-hero {
-        padding: 100px 20px 60px;
-    }
-    
-    .seo-page-hero h1,
-    .ppc-page-hero h1 {
-        font-size: 36px;
-    }
-
-    .seo-page-longcta-feature {
-      text-align: center;
-      justify-items: center;
-    }
-    .seo-page-service-card {
-      justify-items: center;
-      text-align: center;
-    }
-
-    .seo-page-result-content {
-      justify-items: center;
-      text-align: center;
-    }
-    
-    .seo-page-hero-description,
-    .ppc-page-hero-description {
-        font-size: 16px;
-    }
-    
-    .seo-page-hero-shapes {
-        display: none;
-    }
-    
-    .seo-page-hero-content {
-        padding: 120px 5% 80px;
-    }
-    
-    .seo-page-stats,
-    .ppc-page-stats {
-        padding: 60px 20px;
-    }
-    
-    .seo-page-stats-container,
-    .ppc-page-stats-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-    
-    .seo-page-stat-number,
-    .ppc-page-stat-number {
-        font-size: 36px;
-    }
-    
-    .seo-page-info,
+@media (max-width: 900px) {
     .ppc-page-info {
         padding: 80px 20px;
     }
     
-    .seo-page-info-heading,
+    .ppc-page-info-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .ppc-page-info-reversed {
+        direction: ltr;
+    }
+    
     .ppc-page-info-heading {
         font-size: 36px;
         margin-bottom: 40px;
     }
     
-    .seo-page-longcta,
+    .ppc-page-results {
+        padding: 80px 20px;
+    }
+    
+    .ppc-page-results-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .ppc-page-hero {
+        min-height: auto;
+    }
+
+.ppc-page-info-container {
+  text-align: center;
+}
+
+.ppc-page-longcta-feature {
+  text-align: center;
+  justify-items: center;
+}
+    
+
+.ppc-page-result-content {
+  justify-items: center;
+  text-align: center;
+}
+    .ppc-page-service-card {
+      justify-items: center;
+      text-align: center;
+    }
+
+
+    .ppc-page-hero-content {
+        padding: 140px 20px 80px;
+    }
+    
+    .ppc-page-hero h1 {
+        font-size: 42px;
+    }
+    
+    .ppc-page-hero-description {
+        font-size: 18px;
+    }
+    
+    .ppc-page-hero-shapes {
+        display: none;
+    }
+    
+    .ppc-page-stats {
+        padding: 60px 20px;
+    }
+    
+    .ppc-page-stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .ppc-page-stat-number {
+        font-size: 36px;
+    }
+    
     .ppc-page-longcta {
         padding: 60px 20px;
     }
     
-    .seo-page-longcta-heading,
-    .ppc-page-longcta-heading {
-        font-size: 32px;
+    .ppc-page-longcta-features {
+        grid-template-columns: 1fr;
     }
     
-    .seo-page-services,
-    .ppc-page-services,
-    .seo-page-process,
-    .ppc-page-process,
-    .seo-page-results,
-    .ppc-page-results,
-    .seo-page-faq,
-    .ppc-page-faq,
-    .seo-page-cta,
-    .ppc-page-cta,
-    .seo-page-reviews,
-    .ppc-page-reviews {
+    .ppc-page-longcta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .ppc-page-services {
         padding: 80px 20px;
     }
     
-    .seo-page-services-grid,
-    .ppc-page-services-grid {
-        grid-template-columns: 1fr;
+    .ppc-page-process {
+        padding: 80px 20px;
     }
     
-    .seo-page-results-grid,
-    .ppc-page-results-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .seo-page-process-timeline::before,
     .ppc-page-process-timeline::before {
-        left: 20px;
+        left: 30px;
     }
     
-    .seo-page-process-step,
-    .ppc-page-process-step {
-        gap: 20px;
-    }
-    
-    .seo-page-process-number,
     .ppc-page-process-number {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         font-size: 18px;
     }
     
-    .seo-page-review-card,
-    .ppc-page-review-card {
-        min-width: 280px;
+    .ppc-page-process-step {
+        gap: 25px;
     }
     
-    .seo-page-info-1::before,
-    .seo-page-info-1::after,
-    .seo-page-info-2::before,
-    .seo-page-info-2::after,
-    .seo-page-info-3::before,
-    .seo-page-info-3::after,
+    .ppc-page-faq {
+        padding: 80px 20px;
+    }
+    
+    .ppc-page-faq-question {
+        font-size: 16px;
+        padding: 20px;
+    }
+    
+    .ppc-page-faq-answer p {
+        padding: 0 20px 20px;
+    }
+    
     .ppc-page-info-1::before,
     .ppc-page-info-1::after,
     .ppc-page-info-2::before,
@@ -9207,24 +9109,26 @@ display:none  }
     }
 }
 
+@media (max-width: 600px) {
+    .ppc-page-services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 480px) {
-    .seo-page-hero-buttons,
-    .ppc-page-hero-buttons,
-    .seo-page-longcta-buttons,
-    .ppc-page-longcta-buttons,
-    .seo-page-cta-buttons,
-    .ppc-page-cta-buttons {
+    .ppc-page-stats-container {
+            }
+    
+    .ppc-page-hero-buttons {
         flex-direction: column;
         align-items: center;
     }
     
-    .seo-page-longcta-btn,
     .ppc-page-longcta-btn {
         width: 100%;
         justify-content: center;
     }
     
-    .seo-page-result-metrics,
     .ppc-page-result-metrics {
         flex-direction: column;
         gap: 15px;
