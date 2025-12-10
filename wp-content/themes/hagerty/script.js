@@ -1713,3 +1713,257 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 })();
+// ==========================
+// WEB DEVELOPMENT PAGE - FAQ ACCORDION
+// ==========================
+(function(){
+    var faqItems = document.querySelectorAll('.webdev-page-faq-item');
+    
+    if (faqItems.length === 0) return;
+    
+    faqItems.forEach(function(item) {
+        var question = item.querySelector('.webdev-page-faq-question');
+        
+        if (question) {
+            question.addEventListener('click', function() {
+                var isActive = item.classList.contains('active');
+                
+                // Close all other FAQ items
+                faqItems.forEach(function(otherItem) {
+                    otherItem.classList.remove('active');
+                    var otherQuestion = otherItem.querySelector('.webdev-page-faq-question');
+                    if (otherQuestion) {
+                        otherQuestion.setAttribute('aria-expanded', 'false');
+                    }
+                });
+                
+                // Toggle current item
+                if (!isActive) {
+                    item.classList.add('active');
+                    question.setAttribute('aria-expanded', 'true');
+                }
+            });
+        }
+    });
+})();
+
+// ==========================
+// WEB DEVELOPMENT PAGE - STATS COUNTER ANIMATION
+// ==========================
+(function(){
+    var statNumbers = document.querySelectorAll('.webdev-page-stat-number');
+    
+    if (statNumbers.length === 0) return;
+    
+    var animated = false;
+    
+    function parseStatValue(text) {
+        var numMatch = text.match(/[\d.]+/);
+        if (numMatch) {
+            var num = parseFloat(numMatch[0]);
+            var prefix = text.substring(0, text.indexOf(numMatch[0]));
+            var suffix = text.substring(text.indexOf(numMatch[0]) + numMatch[0].length);
+            return { num: num, prefix: prefix, suffix: suffix, original: text };
+        }
+        return null;
+    }
+    
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting && !animated) {
+                animated = true;
+                
+                statNumbers.forEach(function(stat) {
+                    var originalText = stat.textContent;
+                    var parsed = parseStatValue(originalText);
+                    
+                    if (parsed && parsed.num > 0) {
+                        stat.textContent = parsed.prefix + '0' + parsed.suffix;
+                        
+                        setTimeout(function() {
+                            var startTimestamp = null;
+                            var duration = 2000;
+                            
+                            var step = function(timestamp) {
+                                if (!startTimestamp) startTimestamp = timestamp;
+                                var progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                                var easeProgress = 1 - Math.pow(1 - progress, 3);
+                                var currentValue = easeProgress * parsed.num;
+                                
+                                if (parsed.num % 1 !== 0) {
+                                    stat.textContent = parsed.prefix + currentValue.toFixed(1) + parsed.suffix;
+                                } else {
+                                    stat.textContent = parsed.prefix + Math.floor(currentValue) + parsed.suffix;
+                                }
+                                
+                                if (progress < 1) {
+                                    window.requestAnimationFrame(step);
+                                } else {
+                                    stat.textContent = originalText;
+                                }
+                            };
+                            window.requestAnimationFrame(step);
+                        }, 100);
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    var statsSection = document.querySelector('.webdev-page-stats');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+})();
+
+// ==========================
+// WEB DEVELOPMENT PAGE - SMOOTH SCROLL FOR ANCHOR LINKS
+// ==========================
+(function(){
+    var webdevPage = document.querySelector('.webdev-page-hero');
+    if (!webdevPage) return;
+    
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+            var targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            var targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                var headerOffset = 100;
+                var elementPosition = targetElement.getBoundingClientRect().top;
+                var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+})();
+// ==========================
+// CRO PAGE - FAQ ACCORDION
+// ==========================
+(function(){
+    var faqItems = document.querySelectorAll('.cro-page-faq-item');
+    
+    if (faqItems.length === 0) return;
+    
+    faqItems.forEach(function(item) {
+        var question = item.querySelector('.cro-page-faq-question');
+        
+        if (question) {
+            question.addEventListener('click', function() {
+                var isActive = item.classList.contains('active');
+                
+                // Close all other FAQs
+                faqItems.forEach(function(otherItem) {
+                    otherItem.classList.remove('active');
+                    var otherQuestion = otherItem.querySelector('.cro-page-faq-question');
+                    if (otherQuestion) {
+                        otherQuestion.setAttribute('aria-expanded', 'false');
+                    }
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    item.classList.add('active');
+                    question.setAttribute('aria-expanded', 'true');
+                }
+            });
+        }
+    });
+})();
+
+// ==========================
+// CRO PAGE - STATS COUNTER ANIMATION
+// ==========================
+(function(){
+    var statNumbers = document.querySelectorAll('.cro-page-stat-number');
+    
+    if (statNumbers.length === 0) return;
+    
+    var animated = false;
+    
+    function parseStatValue(text) {
+        var numMatch = text.match(/[\d.]+/);
+        if (numMatch) {
+            var num = parseFloat(numMatch[0]);
+            var prefix = text.substring(0, text.indexOf(numMatch[0]));
+            var suffix = text.substring(text.indexOf(numMatch[0]) + numMatch[0].length);
+            return { num: num, prefix: prefix, suffix: suffix, original: text };
+        }
+        return null;
+    }
+    
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting && !animated) {
+                animated = true;
+                
+                statNumbers.forEach(function(stat) {
+                    var originalText = stat.textContent;
+                    var parsed = parseStatValue(originalText);
+                    
+                    if (parsed && parsed.num > 0) {
+                        stat.textContent = parsed.prefix + '0' + parsed.suffix;
+                        
+                        setTimeout(function() {
+                            var startTimestamp = null;
+                            var duration = 2000;
+                            
+                            var step = function(timestamp) {
+                                if (!startTimestamp) startTimestamp = timestamp;
+                                var progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                                var easeProgress = 1 - Math.pow(1 - progress, 3);
+                                var currentValue = easeProgress * parsed.num;
+                                
+                                if (parsed.num % 1 !== 0) {
+                                    stat.textContent = parsed.prefix + currentValue.toFixed(1) + parsed.suffix;
+                                } else {
+                                    stat.textContent = parsed.prefix + Math.floor(currentValue) + parsed.suffix;
+                                }
+                                
+                                if (progress < 1) {
+                                    window.requestAnimationFrame(step);
+                                } else {
+                                    stat.textContent = originalText;
+                                }
+                            };
+                            window.requestAnimationFrame(step);
+                        }, 100);
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    var statsSection = document.querySelector('.cro-page-stats');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+})();
+
+// ==========================
+// CRO PAGE - SCROLL ANIMATIONS
+// ==========================
+(function(){
+    var croPage = document.querySelector('.cro-page-hero');
+    if (!croPage) return;
+    
+    var animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-left, .animate-slide-right, .animate-scale-in');
+    
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    animatedElements.forEach(function(el) {
+        observer.observe(el);
+    });
+})();
