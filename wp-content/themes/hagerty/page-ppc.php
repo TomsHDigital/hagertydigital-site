@@ -320,11 +320,6 @@ $hero_text_class = $has_hero_media ? 'has-media' : '';
     </div>
   </div>
 
-  <!-- Decorative Shapes -->
-  <div class="ppc-page-hero-shapes">
-    <div class="ppc-page-shape ppc-page-shape-1"></div>
-    <div class="ppc-page-shape ppc-page-shape-2"></div>
-  </div>
 </section>
 
 <?php

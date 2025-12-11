@@ -1967,3 +1967,156 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 })();
+
+// ==========================
+// EMAIL MARKETING PAGE - FAQ ACCORDION
+// ==========================
+(function(){
+    function initEmailFAQ() {
+        var faqItems = document.querySelectorAll('.email-page-faq-item');
+        
+        if (faqItems.length === 0) return;
+        
+        faqItems.forEach(function(item) {
+            var question = item.querySelector('.email-page-faq-question');
+            
+            if (question) {
+                question.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var isActive = item.classList.contains('active');
+                    
+                    // Close all other FAQs
+                    faqItems.forEach(function(otherItem) {
+                        otherItem.classList.remove('active');
+                        var otherQuestion = otherItem.querySelector('.email-page-faq-question');
+                        if (otherQuestion) {
+                            otherQuestion.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                    
+                    // Toggle current FAQ
+                    if (!isActive) {
+                        item.classList.add('active');
+                        question.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            }
+        });
+    }
+    
+    // Run when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initEmailFAQ);
+    } else {
+        initEmailFAQ();
+    }
+})();
+
+// ==========================
+// EMAIL MARKETING PAGE - STATS COUNTER ANIMATION
+// ==========================
+(function(){
+    function initEmailStats() {
+        var statNumbers = document.querySelectorAll('.email-page-stat-number');
+        
+        if (statNumbers.length === 0) return;
+        
+        var animated = false;
+        
+        function parseStatValue(text) {
+            var numMatch = text.match(/[\d.]+/);
+            if (numMatch) {
+                var num = parseFloat(numMatch[0]);
+                var prefix = text.substring(0, text.indexOf(numMatch[0]));
+                var suffix = text.substring(text.indexOf(numMatch[0]) + numMatch[0].length);
+                return { num: num, prefix: prefix, suffix: suffix, original: text };
+            }
+            return null;
+        }
+        
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting && !animated) {
+                    animated = true;
+                    
+                    statNumbers.forEach(function(stat) {
+                        var originalText = stat.textContent;
+                        var parsed = parseStatValue(originalText);
+                        
+                        if (parsed && parsed.num > 0) {
+                            stat.textContent = parsed.prefix + '0' + parsed.suffix;
+                            
+                            setTimeout(function() {
+                                var startTimestamp = null;
+                                var duration = 2000;
+                                
+                                var step = function(timestamp) {
+                                    if (!startTimestamp) startTimestamp = timestamp;
+                                    var progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                                    var easeProgress = 1 - Math.pow(1 - progress, 3);
+                                    var currentValue = easeProgress * parsed.num;
+                                    
+                                    if (parsed.num % 1 !== 0) {
+                                        stat.textContent = parsed.prefix + currentValue.toFixed(1) + parsed.suffix;
+                                    } else {
+                                        stat.textContent = parsed.prefix + Math.floor(currentValue) + parsed.suffix;
+                                    }
+                                    
+                                    if (progress < 1) {
+                                        window.requestAnimationFrame(step);
+                                    } else {
+                                        stat.textContent = originalText;
+                                    }
+                                };
+                                window.requestAnimationFrame(step);
+                            }, 100);
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        var statsSection = document.querySelector('.email-page-stats');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    }
+    
+    // Run when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initEmailStats);
+    } else {
+        initEmailStats();
+    }
+})();
+
+// ==========================
+// EMAIL MARKETING PAGE - SCROLL ANIMATIONS
+// ==========================
+(function(){
+    function initEmailAnimations() {
+        var emailPage = document.querySelector('.email-page-hero');
+        if (!emailPage) return;
+        
+        var animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-left, .animate-slide-right, .animate-scale-in');
+        
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        animatedElements.forEach(function(el) {
+            observer.observe(el);
+        });
+    }
+    
+    // Run when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initEmailAnimations);
+    } else {
+        initEmailAnimations();
+    }
+})();

@@ -320,11 +320,6 @@ $hero_text_class = $has_hero_media ? 'has-media' : '';
     </div>
   </div>
 
-  <!-- Decorative Shapes -->
-  <div class="webdesign-page-hero-shapes">
-    <div class="webdesign-page-shape webdesign-page-shape-1"></div>
-    <div class="webdesign-page-shape webdesign-page-shape-2"></div>
-  </div>
 </section>
 
 <?php
