@@ -34,10 +34,228 @@ if (!function_exists('hd_link')) {
     }
 }
 
+// SVG Output Helper - allows all SVG elements and attributes
+if (!function_exists('hd_svg_output')) {
+    function hd_svg_output($svg_string) {
+        if (empty($svg_string)) return '';
+        
+        $allowed_svg = array(
+            'svg' => array(
+                'xmlns' => true,
+                'viewbox' => true,
+                'width' => true,
+                'height' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'stroke-linecap' => true,
+                'stroke-linejoin' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'preserveaspectratio' => true,
+                'x' => true,
+                'y' => true,
+                'role' => true,
+                'aria-hidden' => true,
+                'aria-label' => true,
+                'focusable' => true,
+            ),
+            'path' => array(
+                'd' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'stroke-linecap' => true,
+                'stroke-linejoin' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'circle' => array(
+                'cx' => true,
+                'cy' => true,
+                'r' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'rect' => array(
+                'x' => true,
+                'y' => true,
+                'width' => true,
+                'height' => true,
+                'rx' => true,
+                'ry' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'line' => array(
+                'x1' => true,
+                'y1' => true,
+                'x2' => true,
+                'y2' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'stroke-linecap' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'polyline' => array(
+                'points' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'stroke-linecap' => true,
+                'stroke-linejoin' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'polygon' => array(
+                'points' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'ellipse' => array(
+                'cx' => true,
+                'cy' => true,
+                'rx' => true,
+                'ry' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'g' => array(
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'defs' => array(),
+            'clippath' => array(
+                'id' => true,
+            ),
+            'mask' => array(
+                'id' => true,
+            ),
+            'use' => array(
+                'href' => true,
+                'xlink:href' => true,
+                'x' => true,
+                'y' => true,
+                'width' => true,
+                'height' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+            ),
+            'text' => array(
+                'x' => true,
+                'y' => true,
+                'dx' => true,
+                'dy' => true,
+                'text-anchor' => true,
+                'font-family' => true,
+                'font-size' => true,
+                'font-weight' => true,
+                'fill' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+            ),
+            'tspan' => array(
+                'x' => true,
+                'y' => true,
+                'dx' => true,
+                'dy' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+            ),
+            'lineargradient' => array(
+                'id' => true,
+                'x1' => true,
+                'y1' => true,
+                'x2' => true,
+                'y2' => true,
+                'gradientunits' => true,
+                'gradienttransform' => true,
+            ),
+            'radialgradient' => array(
+                'id' => true,
+                'cx' => true,
+                'cy' => true,
+                'r' => true,
+                'fx' => true,
+                'fy' => true,
+                'gradientunits' => true,
+                'gradienttransform' => true,
+            ),
+            'stop' => array(
+                'offset' => true,
+                'stop-color' => true,
+                'stop-opacity' => true,
+                'style' => true,
+            ),
+        );
+        
+        return wp_kses($svg_string, $allowed_svg);
+    }
+}
+
 // ============================================
 // HERO SECTION
+// ACF Fields:
+// - webdev_hero_label (WYSIWYG)
+// - webdev_hero_heading_line_1 (WYSIWYG)
+// - webdev_hero_heading_line_2 (WYSIWYG)
+// - webdev_hero_description (WYSIWYG)
+// - webdev_hero_background_type (Select: none, image, video)
+// - webdev_hero_background_image (Image)
+// - webdev_hero_background_video_mp4 (File)
+// - webdev_hero_background_video_webm (File)
+// - webdev_hero_background_video_poster (Image)
+// - webdev_hero_background_overlay_opacity (Number)
+// - webdev_hero_primary_button (Link)
+// - webdev_hero_secondary_button (Link)
 // ============================================
-$hero_label = $has_acf ? (get_field('webdev_hero_label') ?: 'Web Development') : 'Web Development';
+$hero_label = hd_wysiwyg_or_default($has_acf ? get_field('webdev_hero_label') : '', 'Web Development');
 $hero_line1 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_hero_heading_line_1') : '', 'Build Powerful');
 $hero_line2 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_hero_heading_line_2') : '', '<span class="highlight-text-italic">Digital Experiences</span>');
 $hero_desc  = hd_wysiwyg_or_default($has_acf ? get_field('webdev_hero_description') : '', 'Custom web development solutions that deliver performance, scalability, and exceptional user experiences for your business.');
@@ -61,7 +279,6 @@ if (!$hero_secondary_btn) $hero_secondary_btn = ['url' => '#services', 'title' =
 $hero_image_url = ($hero_bg_image && is_array($hero_bg_image) && !empty($hero_bg_image['url'])) ? esc_url($hero_bg_image['url']) : '';
 $hero_video_poster_url = ($hero_bg_video_poster && is_array($hero_bg_video_poster) && !empty($hero_bg_video_poster['url'])) ? esc_url($hero_bg_video_poster['url']) : '';
 
-// Extract video URLs from File arrays
 $hero_video_mp4_url = ($hero_bg_video_mp4 && is_array($hero_bg_video_mp4) && !empty($hero_bg_video_mp4['url'])) ? esc_url($hero_bg_video_mp4['url']) : '';
 $hero_video_webm_url = ($hero_bg_video_webm && is_array($hero_bg_video_webm) && !empty($hero_bg_video_webm['url'])) ? esc_url($hero_bg_video_webm['url']) : '';
 
@@ -85,7 +302,7 @@ $hero_text_class = $has_hero_media ? 'has-media' : '';
 
   <div class="webdev-page-hero-content">
     <div class="webdev-page-hero-text animate-fade-in">
-      <span class="webdev-page-hero-label"><?php echo esc_html($hero_label); ?></span>
+      <span class="webdev-page-hero-label"><?php echo wp_kses_post($hero_label); ?></span>
 
       <h1>
         <?php echo wp_kses_post($hero_line1); ?>
@@ -103,11 +320,20 @@ $hero_text_class = $has_hero_media ? 'has-media' : '';
     </div>
   </div>
 
+  <!-- Decorative Shapes -->
+  <div class="webdev-page-hero-shapes">
+    <div class="webdev-page-shape webdev-page-shape-1"></div>
+    <div class="webdev-page-shape webdev-page-shape-2"></div>
+  </div>
 </section>
 
 <?php
 // ============================================
 // STATS SECTION
+// ACF Fields:
+// - webdev_stats (Repeater)
+//   - number (WYSIWYG)
+//   - label (WYSIWYG)
 // ============================================
 $stats = $has_acf ? get_field('webdev_stats') : [];
 if (!$stats || !is_array($stats) || empty($stats)) {
@@ -124,8 +350,8 @@ if (!$stats || !is_array($stats) || empty($stats)) {
     <div class="webdev-page-stats-container">
         <?php foreach ($stats as $stat) : ?>
             <div class="webdev-page-stat-item">
-                <span class="webdev-page-stat-number"><?php echo esc_html($stat['number'] ?? ''); ?></span>
-                <span class="webdev-page-stat-label"><?php echo esc_html($stat['label'] ?? ''); ?></span>
+                <span class="webdev-page-stat-number"><?php echo wp_kses_post(hd_wysiwyg_or_default($stat['number'] ?? '', '')); ?></span>
+                <span class="webdev-page-stat-label"><?php echo wp_kses_post(hd_wysiwyg_or_default($stat['label'] ?? '', '')); ?></span>
             </div>
         <?php endforeach; ?>
     </div>
@@ -134,9 +360,15 @@ if (!$stats || !is_array($stats) || empty($stats)) {
 <?php
 // ============================================
 // INFO SECTION 1 - What is Web Development?
+// ACF Fields:
+// - webdev_what_is_heading_line1 (WYSIWYG)
+// - webdev_what_is_heading_line2 (WYSIWYG)
+// - webdev_what_is_content (WYSIWYG)
+// - webdev_what_is_image (Image)
+// - webdev_what_is_button (Link)
 // ============================================
-$what_is_heading_line1 = $has_acf ? get_field('webdev_what_is_heading_line1') : '';
-$what_is_heading_line2 = $has_acf ? get_field('webdev_what_is_heading_line2') : '';
+$what_is_heading_line1 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_what_is_heading_line1') : '', 'What is');
+$what_is_heading_line2 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_what_is_heading_line2') : '', 'Web Development?');
 $what_is_content = $has_acf ? get_field('webdev_what_is_content') : '';
 $what_is_image = $has_acf ? get_field('webdev_what_is_image') : null;
 $what_is_button = $has_acf ? hd_link(get_field('webdev_what_is_button')) : null;
@@ -147,8 +379,8 @@ if (!$what_is_button) $what_is_button = ['url' => '#contact', 'title' => 'Get in
 <section class="webdev-page-info webdev-page-info-1" data-section-theme="light">
     <div class="webdev-page-info-container">
         <h2 class="webdev-page-info-heading animate-fade-in">
-            <span class="black-text"><?php echo $what_is_heading_line1 ? esc_html($what_is_heading_line1) : 'What is'; ?></span><br>
-            <span class="highlight-text-italic"><?php echo $what_is_heading_line2 ? esc_html($what_is_heading_line2) : 'Web Development?'; ?></span>
+            <span class="black-text"><?php echo wp_kses_post($what_is_heading_line1); ?></span><br>
+            <span class="highlight-text-italic"><?php echo wp_kses_post($what_is_heading_line2); ?></span>
         </h2>
         <div class="webdev-page-info-content">
             <div class="webdev-page-info-text animate-slide-left">
@@ -175,11 +407,22 @@ if (!$what_is_button) $what_is_button = ['url' => '#contact', 'title' => 'Get in
 <?php
 // ============================================
 // LONG CTA 1
+// ACF Fields:
+// - webdev_long_cta1_label (WYSIWYG)
+// - webdev_long_cta1_heading_line1 (WYSIWYG)
+// - webdev_long_cta1_heading_line2 (WYSIWYG)
+// - webdev_long_cta1_text (WYSIWYG)
+// - webdev_long_cta1_features (Repeater)
+//   - icon_svg (Textarea)
+//   - title (WYSIWYG)
+//   - description (WYSIWYG)
+// - webdev_long_cta1_primary_button (Link)
+// - webdev_long_cta1_secondary_button (Link)
 // ============================================
-$long_cta1_label = $has_acf ? get_field('webdev_long_cta1_label') : '';
-$long_cta1_heading_line1 = $has_acf ? get_field('webdev_long_cta1_heading_line1') : '';
-$long_cta1_heading_line2 = $has_acf ? get_field('webdev_long_cta1_heading_line2') : '';
-$long_cta1_text = $has_acf ? get_field('webdev_long_cta1_text') : '';
+$long_cta1_label = hd_wysiwyg_or_default($has_acf ? get_field('webdev_long_cta1_label') : '', 'CUSTOM SOLUTIONS');
+$long_cta1_heading_line1 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_long_cta1_heading_line1') : '', 'Built for Performance');
+$long_cta1_heading_line2 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_long_cta1_heading_line2') : '', 'Designed for Growth');
+$long_cta1_text = hd_wysiwyg_or_default($has_acf ? get_field('webdev_long_cta1_text') : '', '');
 $long_cta1_features = $has_acf ? get_field('webdev_long_cta1_features') : [];
 $long_cta1_primary_button = $has_acf ? hd_link(get_field('webdev_long_cta1_primary_button')) : null;
 $long_cta1_secondary_button = $has_acf ? hd_link(get_field('webdev_long_cta1_secondary_button')) : null;
@@ -190,18 +433,21 @@ if (!$long_cta1_secondary_button) $long_cta1_secondary_button = ['url' => 'tel:0
 <section class="webdev-page-longcta webdev-page-longcta-1" data-section-theme="light">
     <div class="webdev-page-longcta-container">
         <div class="webdev-page-longcta-content animate-fade-in">
-            <span class="webdev-page-longcta-label"><?php echo $long_cta1_label ? esc_html($long_cta1_label) : 'CUSTOM SOLUTIONS'; ?></span>
+            <span class="webdev-page-longcta-label"><?php echo wp_kses_post($long_cta1_label); ?></span>
             <h2 class="webdev-page-longcta-heading">
-                <span class="black-text"><?php echo $long_cta1_heading_line1 ? esc_html($long_cta1_heading_line1) : 'Built for Performance'; ?></span><br>
-                <span class="highlight-text-italic"><?php echo $long_cta1_heading_line2 ? esc_html($long_cta1_heading_line2) : 'Designed for Growth'; ?></span>
+                <span class="black-text"><?php echo wp_kses_post($long_cta1_heading_line1); ?></span><br>
+                <span class="highlight-text-italic"><?php echo wp_kses_post($long_cta1_heading_line2); ?></span>
             </h2>
             <?php if ($long_cta1_text) : ?><p class="webdev-page-longcta-text"><?php echo wp_kses_post($long_cta1_text); ?></p><?php endif; ?>
             <div class="webdev-page-longcta-features">
                 <?php if ($long_cta1_features && is_array($long_cta1_features)) : ?>
                     <?php foreach ($long_cta1_features as $feature) : ?>
                         <div class="webdev-page-longcta-feature">
-                            <div class="webdev-page-longcta-feature-icon"><?php echo !empty($feature['icon_svg']) ? wp_kses_post($feature['icon_svg']) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'; ?></div>
-                            <div class="webdev-page-longcta-feature-text"><h4><?php echo esc_html($feature['title'] ?? ''); ?></h4><p><?php echo esc_html($feature['description'] ?? ''); ?></p></div>
+                            <div class="webdev-page-longcta-feature-icon"><?php echo !empty($feature['icon_svg']) ? hd_svg_output($feature['icon_svg']) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'; ?></div>
+                            <div class="webdev-page-longcta-feature-text">
+                                <h4><?php echo wp_kses_post(hd_wysiwyg_or_default($feature['title'] ?? '', '')); ?></h4>
+                                <p><?php echo wp_kses_post(hd_wysiwyg_or_default($feature['description'] ?? '', '')); ?></p>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>
@@ -221,8 +467,16 @@ if (!$long_cta1_secondary_button) $long_cta1_secondary_button = ['url' => 'tel:0
 <?php
 // ============================================
 // SERVICES SECTION
+// ACF Fields:
+// - webdev_services_label (WYSIWYG)
+// - webdev_services_heading (WYSIWYG)
+// - webdev_services_subheading (WYSIWYG)
+// - webdev_services (Repeater)
+//   - title (WYSIWYG)
+//   - description (WYSIWYG)
+//   - icon_svg (Textarea)
 // ============================================
-$services_label = $has_acf ? (get_field('webdev_services_label') ?: 'What We Offer') : 'What We Offer';
+$services_label = hd_wysiwyg_or_default($has_acf ? get_field('webdev_services_label') : '', 'What We Offer');
 $services_heading = hd_wysiwyg_or_default($has_acf ? get_field('webdev_services_heading') : '', 'Our Development <span class="highlight-text-italic">Services</span>');
 $services_subheading = hd_wysiwyg_or_default($has_acf ? get_field('webdev_services_subheading') : '', 'Comprehensive web development solutions tailored to your business needs');
 $services = $has_acf ? get_field('webdev_services') : [];
@@ -239,16 +493,16 @@ if (!$services || !is_array($services) || empty($services)) {
 <section class="webdev-page-services" id="services" data-section-theme="light">
     <div class="webdev-page-services-container">
         <div class="webdev-page-services-header">
-            <span class="webdev-page-services-label"><?php echo esc_html($services_label); ?></span>
+            <span class="webdev-page-services-label"><?php echo wp_kses_post($services_label); ?></span>
             <h2><?php echo wp_kses_post($services_heading); ?></h2>
             <p><?php echo wp_kses_post($services_subheading); ?></p>
         </div>
         <div class="webdev-page-services-grid">
             <?php foreach (array_slice($services, 0, 4) as $service) : ?>
                 <div class="webdev-page-service-card">
-                    <div class="webdev-page-service-icon"><?php echo wp_kses_post($service['icon_svg'] ?? ''); ?></div>
-                    <h3><?php echo esc_html($service['title'] ?? ''); ?></h3>
-                    <p><?php echo esc_html($service['description'] ?? ''); ?></p>
+                    <div class="webdev-page-service-icon"><?php echo hd_svg_output($service['icon_svg'] ?? ''); ?></div>
+                    <h3><?php echo wp_kses_post(hd_wysiwyg_or_default($service['title'] ?? '', '')); ?></h3>
+                    <p><?php echo wp_kses_post(hd_wysiwyg_or_default($service['description'] ?? '', '')); ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -258,9 +512,15 @@ if (!$services || !is_array($services) || empty($services)) {
 <?php
 // ============================================
 // INFO SECTION 2 - Why Choose Us (Reversed)
+// ACF Fields:
+// - webdev_why_different_heading_line1 (WYSIWYG)
+// - webdev_why_different_heading_line2 (WYSIWYG)
+// - webdev_why_different_content (WYSIWYG)
+// - webdev_why_different_image (Image)
+// - webdev_why_different_button (Link)
 // ============================================
-$why_heading_line1 = $has_acf ? get_field('webdev_why_different_heading_line1') : '';
-$why_heading_line2 = $has_acf ? get_field('webdev_why_different_heading_line2') : '';
+$why_heading_line1 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_why_different_heading_line1') : '', 'Why Choose');
+$why_heading_line2 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_why_different_heading_line2') : '', 'Hagerty Digital?');
 $why_content = $has_acf ? get_field('webdev_why_different_content') : '';
 $why_image = $has_acf ? get_field('webdev_why_different_image') : null;
 $why_button = $has_acf ? hd_link(get_field('webdev_why_different_button')) : null;
@@ -271,8 +531,8 @@ if (!$why_button) $why_button = ['url' => '#contact', 'title' => 'Get in Touch',
 <section class="webdev-page-info webdev-page-info-2" data-section-theme="light">
     <div class="webdev-page-info-container">
         <h2 class="webdev-page-info-heading animate-fade-in">
-            <span class="black-text"><?php echo $why_heading_line1 ? esc_html($why_heading_line1) : 'Why Choose'; ?></span><br>
-            <span class="highlight-text-italic"><?php echo $why_heading_line2 ? esc_html($why_heading_line2) : 'Hagerty Digital?'; ?></span>
+            <span class="black-text"><?php echo wp_kses_post($why_heading_line1); ?></span><br>
+            <span class="highlight-text-italic"><?php echo wp_kses_post($why_heading_line2); ?></span>
         </h2>
         <div class="webdev-page-info-content webdev-page-info-reversed">
             <div class="webdev-page-info-image animate-slide-left">
@@ -299,11 +559,18 @@ if (!$why_button) $why_button = ['url' => '#contact', 'title' => 'Get in Touch',
 <?php
 // ============================================
 // LONG CTA 2 (Simpler, no features)
+// ACF Fields:
+// - webdev_long_cta2_label (WYSIWYG)
+// - webdev_long_cta2_heading_line1 (WYSIWYG)
+// - webdev_long_cta2_heading_line2 (WYSIWYG)
+// - webdev_long_cta2_text (WYSIWYG)
+// - webdev_long_cta2_primary_button (Link)
+// - webdev_long_cta2_secondary_button (Link)
 // ============================================
-$long_cta2_label = $has_acf ? get_field('webdev_long_cta2_label') : '';
-$long_cta2_heading_line1 = $has_acf ? get_field('webdev_long_cta2_heading_line1') : '';
-$long_cta2_heading_line2 = $has_acf ? get_field('webdev_long_cta2_heading_line2') : '';
-$long_cta2_text = $has_acf ? get_field('webdev_long_cta2_text') : '';
+$long_cta2_label = hd_wysiwyg_or_default($has_acf ? get_field('webdev_long_cta2_label') : '', 'FREE CONSULTATION');
+$long_cta2_heading_line1 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_long_cta2_heading_line1') : '', 'Ready to Build');
+$long_cta2_heading_line2 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_long_cta2_heading_line2') : '', 'Something Amazing?');
+$long_cta2_text = hd_wysiwyg_or_default($has_acf ? get_field('webdev_long_cta2_text') : '', 'Let\'s discuss your project. We\'ll provide a detailed proposal outlining timeline, technology stack, and investment required to bring your vision to life.');
 $long_cta2_primary_button = $has_acf ? hd_link(get_field('webdev_long_cta2_primary_button')) : null;
 $long_cta2_secondary_button = $has_acf ? hd_link(get_field('webdev_long_cta2_secondary_button')) : null;
 if (!$long_cta2_primary_button) $long_cta2_primary_button = ['url' => '#contact', 'title' => 'Get a Free Quote', 'target' => '_self'];
@@ -313,12 +580,12 @@ if (!$long_cta2_secondary_button) $long_cta2_secondary_button = ['url' => 'tel:0
 <section class="webdev-page-longcta webdev-page-longcta-2" data-section-theme="light">
     <div class="webdev-page-longcta-container">
         <div class="webdev-page-longcta-content animate-fade-in">
-            <span class="webdev-page-longcta-label"><?php echo $long_cta2_label ? esc_html($long_cta2_label) : 'FREE CONSULTATION'; ?></span>
+            <span class="webdev-page-longcta-label"><?php echo wp_kses_post($long_cta2_label); ?></span>
             <h2 class="webdev-page-longcta-heading">
-                <span class="black-text"><?php echo $long_cta2_heading_line1 ? esc_html($long_cta2_heading_line1) : 'Ready to Build'; ?></span><br>
-                <span class="highlight-text-italic"><?php echo $long_cta2_heading_line2 ? esc_html($long_cta2_heading_line2) : 'Something Amazing?'; ?></span>
+                <span class="black-text"><?php echo wp_kses_post($long_cta2_heading_line1); ?></span><br>
+                <span class="highlight-text-italic"><?php echo wp_kses_post($long_cta2_heading_line2); ?></span>
             </h2>
-            <p class="webdev-page-longcta-text"><?php echo $long_cta2_text ? wp_kses_post($long_cta2_text) : 'Let\'s discuss your project. We\'ll provide a detailed proposal outlining timeline, technology stack, and investment required to bring your vision to life.'; ?></p>
+            <p class="webdev-page-longcta-text"><?php echo wp_kses_post($long_cta2_text); ?></p>
             <div class="webdev-page-longcta-buttons">
                 <a href="<?php echo esc_url($long_cta2_primary_button['url']); ?>" class="webdev-page-longcta-btn webdev-page-longcta-btn-primary"><span><?php echo esc_html($long_cta2_primary_button['title']); ?></span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                 <a href="<?php echo esc_url($long_cta2_secondary_button['url']); ?>" class="webdev-page-longcta-btn webdev-page-longcta-btn-secondary"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><?php echo esc_html($long_cta2_secondary_button['title']); ?></span></a>
@@ -330,8 +597,15 @@ if (!$long_cta2_secondary_button) $long_cta2_secondary_button = ['url' => 'tel:0
 <?php
 // ============================================
 // PROCESS SECTION
+// ACF Fields:
+// - webdev_process_label (WYSIWYG)
+// - webdev_process_heading (WYSIWYG)
+// - webdev_process_subheading (WYSIWYG)
+// - webdev_process_steps (Repeater)
+//   - title (WYSIWYG)
+//   - description (WYSIWYG)
 // ============================================
-$process_label = $has_acf ? (get_field('webdev_process_label') ?: 'How We Work') : 'How We Work';
+$process_label = hd_wysiwyg_or_default($has_acf ? get_field('webdev_process_label') : '', 'How We Work');
 $process_heading = hd_wysiwyg_or_default($has_acf ? get_field('webdev_process_heading') : '', 'Our Development <span class="highlight-text-italic">Process</span>');
 $process_subheading = hd_wysiwyg_or_default($has_acf ? get_field('webdev_process_subheading') : '', 'A proven methodology that delivers consistent, high-quality results');
 $process_steps = $has_acf ? get_field('webdev_process_steps') : [];
@@ -348,7 +622,7 @@ if (!$process_steps || !is_array($process_steps) || empty($process_steps)) {
 <section class="webdev-page-process" data-section-theme="light">
     <div class="webdev-page-process-container">
         <div class="webdev-page-process-header">
-            <span class="webdev-page-process-label"><?php echo esc_html($process_label); ?></span>
+            <span class="webdev-page-process-label"><?php echo wp_kses_post($process_label); ?></span>
             <h2><?php echo wp_kses_post($process_heading); ?></h2>
             <p><?php echo wp_kses_post($process_subheading); ?></p>
         </div>
@@ -356,7 +630,10 @@ if (!$process_steps || !is_array($process_steps) || empty($process_steps)) {
             <?php foreach ($process_steps as $index => $step) : ?>
                 <div class="webdev-page-process-step">
                     <div class="webdev-page-process-number"><?php echo esc_html(str_pad($index + 1, 2, '0', STR_PAD_LEFT)); ?></div>
-                    <div class="webdev-page-process-content"><h3><?php echo esc_html($step['title'] ?? ''); ?></h3><p><?php echo esc_html($step['description'] ?? ''); ?></p></div>
+                    <div class="webdev-page-process-content">
+                        <h3><?php echo wp_kses_post(hd_wysiwyg_or_default($step['title'] ?? '', '')); ?></h3>
+                        <p><?php echo wp_kses_post(hd_wysiwyg_or_default($step['description'] ?? '', '')); ?></p>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -366,9 +643,15 @@ if (!$process_steps || !is_array($process_steps) || empty($process_steps)) {
 <?php
 // ============================================
 // INFO SECTION 3 - Technologies
+// ACF Fields:
+// - webdev_tech_heading_line1 (WYSIWYG)
+// - webdev_tech_heading_line2 (WYSIWYG)
+// - webdev_tech_content (WYSIWYG)
+// - webdev_tech_image (Image)
+// - webdev_tech_button (Link)
 // ============================================
-$tech_heading_line1 = $has_acf ? get_field('webdev_tech_heading_line1') : '';
-$tech_heading_line2 = $has_acf ? get_field('webdev_tech_heading_line2') : '';
+$tech_heading_line1 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_tech_heading_line1') : '', 'Our');
+$tech_heading_line2 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_tech_heading_line2') : '', 'Tech Stack');
 $tech_content = $has_acf ? get_field('webdev_tech_content') : '';
 $tech_image = $has_acf ? get_field('webdev_tech_image') : null;
 $tech_button = $has_acf ? hd_link(get_field('webdev_tech_button')) : null;
@@ -379,8 +662,8 @@ if (!$tech_button) $tech_button = ['url' => '#contact', 'title' => 'Discuss Your
 <section class="webdev-page-info webdev-page-info-3" data-section-theme="light">
     <div class="webdev-page-info-container">
         <h2 class="webdev-page-info-heading animate-fade-in">
-            <span class="black-text"><?php echo $tech_heading_line1 ? esc_html($tech_heading_line1) : 'Our'; ?></span><br>
-            <span class="highlight-text-italic"><?php echo $tech_heading_line2 ? esc_html($tech_heading_line2) : 'Tech Stack'; ?></span>
+            <span class="black-text"><?php echo wp_kses_post($tech_heading_line1); ?></span><br>
+            <span class="highlight-text-italic"><?php echo wp_kses_post($tech_heading_line2); ?></span>
         </h2>
         <div class="webdev-page-info-content">
             <div class="webdev-page-info-text animate-slide-left">
@@ -407,11 +690,22 @@ if (!$tech_button) $tech_button = ['url' => '#contact', 'title' => 'Discuss Your
 <?php
 // ============================================
 // LONG CTA 3
+// ACF Fields:
+// - webdev_long_cta3_label (WYSIWYG)
+// - webdev_long_cta3_heading_line1 (WYSIWYG)
+// - webdev_long_cta3_heading_line2 (WYSIWYG)
+// - webdev_long_cta3_text (WYSIWYG)
+// - webdev_long_cta3_features (Repeater)
+//   - icon_svg (Textarea)
+//   - title (WYSIWYG)
+//   - description (WYSIWYG)
+// - webdev_long_cta3_primary_button (Link)
+// - webdev_long_cta3_secondary_button (Link)
 // ============================================
-$long_cta3_label = $has_acf ? get_field('webdev_long_cta3_label') : '';
-$long_cta3_heading_line1 = $has_acf ? get_field('webdev_long_cta3_heading_line1') : '';
-$long_cta3_heading_line2 = $has_acf ? get_field('webdev_long_cta3_heading_line2') : '';
-$long_cta3_text = $has_acf ? get_field('webdev_long_cta3_text') : '';
+$long_cta3_label = hd_wysiwyg_or_default($has_acf ? get_field('webdev_long_cta3_label') : '', 'WHY WAIT?');
+$long_cta3_heading_line1 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_long_cta3_heading_line1') : '', 'Your Next Website');
+$long_cta3_heading_line2 = hd_wysiwyg_or_default($has_acf ? get_field('webdev_long_cta3_heading_line2') : '', 'Starts Here');
+$long_cta3_text = hd_wysiwyg_or_default($has_acf ? get_field('webdev_long_cta3_text') : '', '');
 $long_cta3_features = $has_acf ? get_field('webdev_long_cta3_features') : [];
 $long_cta3_primary_button = $has_acf ? hd_link(get_field('webdev_long_cta3_primary_button')) : null;
 $long_cta3_secondary_button = $has_acf ? hd_link(get_field('webdev_long_cta3_secondary_button')) : null;
@@ -422,18 +716,21 @@ if (!$long_cta3_secondary_button) $long_cta3_secondary_button = ['url' => 'tel:0
 <section class="webdev-page-longcta webdev-page-longcta-3" data-section-theme="light">
     <div class="webdev-page-longcta-container">
         <div class="webdev-page-longcta-content animate-fade-in">
-            <span class="webdev-page-longcta-label"><?php echo $long_cta3_label ? esc_html($long_cta3_label) : 'WHY WAIT?'; ?></span>
+            <span class="webdev-page-longcta-label"><?php echo wp_kses_post($long_cta3_label); ?></span>
             <h2 class="webdev-page-longcta-heading">
-                <span class="black-text"><?php echo $long_cta3_heading_line1 ? esc_html($long_cta3_heading_line1) : 'Your Next Website'; ?></span><br>
-                <span class="highlight-text-italic"><?php echo $long_cta3_heading_line2 ? esc_html($long_cta3_heading_line2) : 'Starts Here'; ?></span>
+                <span class="black-text"><?php echo wp_kses_post($long_cta3_heading_line1); ?></span><br>
+                <span class="highlight-text-italic"><?php echo wp_kses_post($long_cta3_heading_line2); ?></span>
             </h2>
             <?php if ($long_cta3_text) : ?><p class="webdev-page-longcta-text"><?php echo wp_kses_post($long_cta3_text); ?></p><?php endif; ?>
             <div class="webdev-page-longcta-features">
                 <?php if ($long_cta3_features && is_array($long_cta3_features)) : ?>
                     <?php foreach ($long_cta3_features as $feature) : ?>
                         <div class="webdev-page-longcta-feature">
-                            <div class="webdev-page-longcta-feature-icon"><?php echo !empty($feature['icon_svg']) ? wp_kses_post($feature['icon_svg']) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'; ?></div>
-                            <div class="webdev-page-longcta-feature-text"><h4><?php echo esc_html($feature['title'] ?? ''); ?></h4><p><?php echo esc_html($feature['description'] ?? ''); ?></p></div>
+                            <div class="webdev-page-longcta-feature-icon"><?php echo !empty($feature['icon_svg']) ? hd_svg_output($feature['icon_svg']) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'; ?></div>
+                            <div class="webdev-page-longcta-feature-text">
+                                <h4><?php echo wp_kses_post(hd_wysiwyg_or_default($feature['title'] ?? '', '')); ?></h4>
+                                <p><?php echo wp_kses_post(hd_wysiwyg_or_default($feature['description'] ?? '', '')); ?></p>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>
@@ -453,8 +750,21 @@ if (!$long_cta3_secondary_button) $long_cta3_secondary_button = ['url' => 'tel:0
 <?php
 // ============================================
 // RESULTS SECTION
+// ACF Fields:
+// - webdev_results_label (WYSIWYG)
+// - webdev_results_heading (WYSIWYG)
+// - webdev_results_subheading (WYSIWYG)
+// - webdev_results (Repeater)
+//   - industry (WYSIWYG)
+//   - title (WYSIWYG)
+//   - description (WYSIWYG)
+//   - metric1_value (WYSIWYG)
+//   - metric1_label (WYSIWYG)
+//   - metric2_value (WYSIWYG)
+//   - metric2_label (WYSIWYG)
+//   - image (Image)
 // ============================================
-$results_label = $has_acf ? (get_field('webdev_results_label') ?: 'Case Studies') : 'Case Studies';
+$results_label = hd_wysiwyg_or_default($has_acf ? get_field('webdev_results_label') : '', 'Case Studies');
 $results_heading = hd_wysiwyg_or_default($has_acf ? get_field('webdev_results_heading') : '', 'Real <span class="highlight-text-italic">Results</span>');
 $results_subheading = hd_wysiwyg_or_default($has_acf ? get_field('webdev_results_subheading') : '', 'See how we\'ve helped businesses transform their digital presence');
 $results = $has_acf ? get_field('webdev_results') : [];
@@ -470,7 +780,7 @@ if (!$results || !is_array($results) || empty($results)) {
 <section class="webdev-page-results" data-section-theme="light">
     <div class="webdev-page-results-container">
         <div class="webdev-page-results-header">
-            <span class="webdev-page-results-label"><?php echo esc_html($results_label); ?></span>
+            <span class="webdev-page-results-label"><?php echo wp_kses_post($results_label); ?></span>
             <h2><?php echo wp_kses_post($results_heading); ?></h2>
             <p><?php echo wp_kses_post($results_subheading); ?></p>
         </div>
@@ -484,18 +794,24 @@ if (!$results || !is_array($results) || empty($results)) {
                 <div class="webdev-page-result-card">
                     <div class="webdev-page-result-image">
                         <?php if ($result_image) : ?>
-                            <img src="<?php echo $result_image; ?>" alt="<?php echo esc_attr($result['title'] ?? 'Case Study'); ?>">
+                            <img src="<?php echo $result_image; ?>" alt="<?php echo esc_attr(strip_tags($result['title'] ?? 'Case Study')); ?>">
                         <?php else : ?>
-                            <div class="webdev-page-result-placeholder"><span><?php echo esc_html(substr($result['title'] ?? 'C', 0, 1)); ?></span></div>
+                            <div class="webdev-page-result-placeholder"><span><?php echo esc_html(substr(strip_tags($result['title'] ?? 'C'), 0, 1)); ?></span></div>
                         <?php endif; ?>
                     </div>
                     <div class="webdev-page-result-content">
-                        <span class="webdev-page-result-industry"><?php echo esc_html($result['industry'] ?? ''); ?></span>
-                        <h3><?php echo esc_html($result['title'] ?? ''); ?></h3>
-                        <p><?php echo esc_html($result['description'] ?? ''); ?></p>
+                        <span class="webdev-page-result-industry"><?php echo wp_kses_post(hd_wysiwyg_or_default($result['industry'] ?? '', '')); ?></span>
+                        <h3><?php echo wp_kses_post(hd_wysiwyg_or_default($result['title'] ?? '', '')); ?></h3>
+                        <p><?php echo wp_kses_post(hd_wysiwyg_or_default($result['description'] ?? '', '')); ?></p>
                         <div class="webdev-page-result-metrics">
-                            <div class="webdev-page-result-metric"><span class="webdev-page-result-metric-value"><?php echo esc_html($result['metric1_value'] ?? ''); ?></span><span class="webdev-page-result-metric-label"><?php echo esc_html($result['metric1_label'] ?? ''); ?></span></div>
-                            <div class="webdev-page-result-metric"><span class="webdev-page-result-metric-value"><?php echo esc_html($result['metric2_value'] ?? ''); ?></span><span class="webdev-page-result-metric-label"><?php echo esc_html($result['metric2_label'] ?? ''); ?></span></div>
+                            <div class="webdev-page-result-metric">
+                                <span class="webdev-page-result-metric-value"><?php echo wp_kses_post(hd_wysiwyg_or_default($result['metric1_value'] ?? '', '')); ?></span>
+                                <span class="webdev-page-result-metric-label"><?php echo wp_kses_post(hd_wysiwyg_or_default($result['metric1_label'] ?? '', '')); ?></span>
+                            </div>
+                            <div class="webdev-page-result-metric">
+                                <span class="webdev-page-result-metric-value"><?php echo wp_kses_post(hd_wysiwyg_or_default($result['metric2_value'] ?? '', '')); ?></span>
+                                <span class="webdev-page-result-metric-label"><?php echo wp_kses_post(hd_wysiwyg_or_default($result['metric2_label'] ?? '', '')); ?></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -507,8 +823,14 @@ if (!$results || !is_array($results) || empty($results)) {
 <?php
 // ============================================
 // FAQ SECTION
+// ACF Fields:
+// - webdev_faq_label (WYSIWYG)
+// - webdev_faq_heading (WYSIWYG)
+// - webdev_faqs (Repeater)
+//   - question (WYSIWYG)
+//   - answer (WYSIWYG)
 // ============================================
-$faq_label = $has_acf ? (get_field('webdev_faq_label') ?: 'FAQ') : 'FAQ';
+$faq_label = hd_wysiwyg_or_default($has_acf ? get_field('webdev_faq_label') : '', 'FAQ');
 $faq_heading = hd_wysiwyg_or_default($has_acf ? get_field('webdev_faq_heading') : '', 'Frequently Asked <span class="highlight-text-italic">Questions</span>');
 $faqs = $has_acf ? get_field('webdev_faqs') : [];
 if (!$faqs || !is_array($faqs) || empty($faqs)) {
@@ -525,14 +847,17 @@ if (!$faqs || !is_array($faqs) || empty($faqs)) {
 <section class="webdev-page-faq" data-section-theme="light">
     <div class="webdev-page-faq-container">
         <div class="webdev-page-faq-header">
-            <span class="webdev-page-faq-label"><?php echo esc_html($faq_label); ?></span>
+            <span class="webdev-page-faq-label"><?php echo wp_kses_post($faq_label); ?></span>
             <h2><?php echo wp_kses_post($faq_heading); ?></h2>
         </div>
         <div class="webdev-page-faq-list">
             <?php foreach ($faqs as $index => $faq) : ?>
                 <div class="webdev-page-faq-item" data-faq-index="<?php echo $index; ?>">
-                    <button class="webdev-page-faq-question" aria-expanded="false"><span><?php echo esc_html($faq['question'] ?? ''); ?></span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-                    <div class="webdev-page-faq-answer"><p><?php echo wp_kses_post($faq['answer'] ?? ''); ?></p></div>
+                    <button class="webdev-page-faq-question" aria-expanded="false">
+                        <span><?php echo wp_kses_post(hd_wysiwyg_or_default($faq['question'] ?? '', '')); ?></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="webdev-page-faq-answer"><p><?php echo wp_kses_post(hd_wysiwyg_or_default($faq['answer'] ?? '', '')); ?></p></div>
                 </div>
             <?php endforeach; ?>
         </div>

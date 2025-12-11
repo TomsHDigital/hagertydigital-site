@@ -819,6 +819,35 @@ body.nav-open {
   margin: 0 auto;
 }
 
+.services-grid-bottom-cta {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.services-grid-footer {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.services-grid-footer-button {
+  display: inline-block;
+  background: #1a1a1e;
+  color: #fff;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.services-grid-footer-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+
 .service-card {
   width: 100%;
   max-width: 400px;
@@ -8029,6 +8058,222 @@ display:none  }
     color: #444;
 }
 
+/* ================================================
+   SEO PAGE RESPONSIVE STYLES
+   ================================================ */
+
+@media (max-width: 1024px) {
+    .seo-page-services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .seo-page-info {
+        padding: 80px 20px;
+    }
+    
+    .seo-page-info-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .seo-page-info-reversed {
+        direction: ltr;
+    }
+    
+    .seo-page-info-heading {
+        font-size: 36px;
+        margin-bottom: 40px;
+    }
+    
+    .seo-page-results {
+        padding: 80px 20px;
+    }
+    
+    .seo-page-results-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .seo-page-reviews-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .seo-page-reviews-left {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .seo-page-hero {
+        min-height: auto;
+    }
+
+    .seo-page-info-container {
+        text-align: center;
+    }
+
+    .seo-page-longcta-feature {
+        text-align: center;
+        justify-items: center;
+    }
+
+    .seo-page-result-content {
+        justify-items: center;
+        text-align: center;
+    }
+
+    .seo-page-service-card {
+        justify-items: center;
+        text-align: center;
+    }
+
+    .seo-page-hero-content {
+        padding: 140px 20px 80px;
+    }
+    
+    .seo-page-hero h1 {
+        font-size: 42px;
+    }
+    
+    .seo-page-hero-description {
+        font-size: 18px;
+    }
+    
+    .seo-page-hero-shapes {
+        display: none;
+    }
+    
+    .seo-page-stats {
+        padding: 60px 20px;
+    }
+    
+    .seo-page-stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .seo-page-stat-number {
+        font-size: 36px;
+    }
+    
+    .seo-page-longcta {
+        padding: 60px 20px;
+    }
+    
+    .seo-page-longcta-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .seo-page-longcta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .seo-page-services {
+        padding: 80px 20px;
+    }
+    
+    .seo-page-process {
+        padding: 80px 20px;
+    }
+    
+    .seo-page-process-timeline::before {
+        left: 30px;
+    }
+    
+    .seo-page-process-number {
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+    }
+    
+    .seo-page-process-step {
+        gap: 25px;
+    }
+    
+    .seo-page-faq {
+        padding: 80px 20px;
+    }
+    
+    .seo-page-faq-question {
+        font-size: 16px;
+        padding: 20px;
+    }
+    
+    .seo-page-faq-answer p {
+        padding: 0 20px 20px;
+    }
+    
+    .seo-page-cta {
+        padding: 80px 20px;
+    }
+    
+    .seo-page-reviews {
+        padding: 80px 20px;
+    }
+    
+    .seo-page-review-card {
+        min-width: 280px;
+    }
+    
+    .seo-page-info-1::before,
+    .seo-page-info-1::after,
+    .seo-page-info-2::before,
+    .seo-page-info-2::after,
+    .seo-page-info-3::before,
+    .seo-page-info-3::after {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .seo-page-services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .seo-page-reviews-carousel {
+        flex-direction: column;
+    }
+    
+    .seo-page-carousel-nav {
+        display: none;
+    }
+    
+    .seo-page-carousel-track {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .seo-page-review-card {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .seo-page-hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .seo-page-longcta-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .seo-page-result-metrics {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .seo-page-cta-buttons {
+        flex-direction: column;
+    }
+}
 
 
 /* ================================================
@@ -12342,9 +12587,7 @@ display:none  }
 }
 
 @media (max-width: 480px) {
-    .cro-page-stats-container {
-        grid-template-columns: 1fr;
-    }
+
     
     .cro-page-hero-buttons {
         flex-direction: column;

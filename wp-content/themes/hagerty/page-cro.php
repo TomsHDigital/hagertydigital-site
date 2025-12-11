@@ -37,10 +37,215 @@ if (!function_exists('hd_link')) {
     }
 }
 
+// SVG Output Helper - allows all SVG elements and attributes
+if (!function_exists('hd_svg_output')) {
+    function hd_svg_output($svg_string) {
+        if (empty($svg_string)) return '';
+        
+        $allowed_svg = array(
+            'svg' => array(
+                'xmlns' => true,
+                'viewbox' => true,
+                'width' => true,
+                'height' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'stroke-linecap' => true,
+                'stroke-linejoin' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'preserveaspectratio' => true,
+                'x' => true,
+                'y' => true,
+                'role' => true,
+                'aria-hidden' => true,
+                'aria-label' => true,
+                'focusable' => true,
+            ),
+            'path' => array(
+                'd' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'stroke-linecap' => true,
+                'stroke-linejoin' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'circle' => array(
+                'cx' => true,
+                'cy' => true,
+                'r' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'rect' => array(
+                'x' => true,
+                'y' => true,
+                'width' => true,
+                'height' => true,
+                'rx' => true,
+                'ry' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'line' => array(
+                'x1' => true,
+                'y1' => true,
+                'x2' => true,
+                'y2' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'stroke-linecap' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'polyline' => array(
+                'points' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'stroke-linecap' => true,
+                'stroke-linejoin' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'polygon' => array(
+                'points' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'ellipse' => array(
+                'cx' => true,
+                'cy' => true,
+                'rx' => true,
+                'ry' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'g' => array(
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+                'opacity' => true,
+            ),
+            'defs' => array(),
+            'clippath' => array(
+                'id' => true,
+            ),
+            'mask' => array(
+                'id' => true,
+            ),
+            'use' => array(
+                'href' => true,
+                'xlink:href' => true,
+                'x' => true,
+                'y' => true,
+                'width' => true,
+                'height' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+            ),
+            'text' => array(
+                'x' => true,
+                'y' => true,
+                'dx' => true,
+                'dy' => true,
+                'text-anchor' => true,
+                'font-family' => true,
+                'font-size' => true,
+                'font-weight' => true,
+                'fill' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+                'transform' => true,
+            ),
+            'tspan' => array(
+                'x' => true,
+                'y' => true,
+                'dx' => true,
+                'dy' => true,
+                'class' => true,
+                'id' => true,
+                'style' => true,
+            ),
+            'lineargradient' => array(
+                'id' => true,
+                'x1' => true,
+                'y1' => true,
+                'x2' => true,
+                'y2' => true,
+                'gradientunits' => true,
+                'gradienttransform' => true,
+            ),
+            'radialgradient' => array(
+                'id' => true,
+                'cx' => true,
+                'cy' => true,
+                'r' => true,
+                'fx' => true,
+                'fy' => true,
+                'gradientunits' => true,
+                'gradienttransform' => true,
+            ),
+            'stop' => array(
+                'offset' => true,
+                'stop-color' => true,
+                'stop-opacity' => true,
+                'style' => true,
+            ),
+        );
+        
+        return wp_kses($svg_string, $allowed_svg);
+    }
+}
+
 // ============================================
 // HERO SECTION
 // ACF Fields:
-// - cro_hero_label (Text)
+// - cro_hero_label (WYSIWYG)
 // - cro_hero_heading_line_1 (WYSIWYG)
 // - cro_hero_heading_line_2 (WYSIWYG)
 // - cro_hero_description (WYSIWYG)
@@ -53,7 +258,7 @@ if (!function_exists('hd_link')) {
 // - cro_hero_primary_button (Link)
 // - cro_hero_secondary_button (Link)
 // ============================================
-$hero_label = $has_acf ? (get_field('cro_hero_label') ?: 'Conversion Rate Optimisation') : 'Conversion Rate Optimisation';
+$hero_label = hd_wysiwyg_or_default($has_acf ? get_field('cro_hero_label') : '', 'Conversion Rate Optimisation');
 $hero_line1 = hd_wysiwyg_or_default($has_acf ? get_field('cro_hero_heading_line_1') : '', 'Turn Visitors Into');
 $hero_line2 = hd_wysiwyg_or_default($has_acf ? get_field('cro_hero_heading_line_2') : '', '<span class="highlight-text-italic">Customers</span>');
 $hero_desc  = hd_wysiwyg_or_default($has_acf ? get_field('cro_hero_description') : '', 'Data-driven CRO strategies that transform your website into a high-performing conversion machine, maximising the value of every visitor.');
@@ -99,7 +304,7 @@ $hero_text_class = $has_hero_media ? 'has-media' : '';
 
   <div class="cro-page-hero-content">
     <div class="cro-page-hero-text animate-fade-in <?php echo $hero_text_class; ?>">
-      <span class="cro-page-hero-label"><?php echo esc_html($hero_label); ?></span>
+      <span class="cro-page-hero-label"><?php echo wp_kses_post($hero_label); ?></span>
 
       <h1>
         <?php echo wp_kses_post($hero_line1); ?>
@@ -117,6 +322,11 @@ $hero_text_class = $has_hero_media ? 'has-media' : '';
     </div>
   </div>
 
+  <!-- Decorative Shapes -->
+  <div class="cro-page-hero-shapes">
+    <div class="cro-page-shape cro-page-shape-1"></div>
+    <div class="cro-page-shape cro-page-shape-2"></div>
+  </div>
 </section>
 
 <?php
@@ -124,8 +334,8 @@ $hero_text_class = $has_hero_media ? 'has-media' : '';
 // STATS SECTION - Background: #f8f8f8
 // ACF Fields:
 // - cro_stats (Repeater)
-//   - number (Text)
-//   - label (Text)
+//   - number (WYSIWYG)
+//   - label (WYSIWYG)
 // ============================================
 $stats = $has_acf ? get_field('cro_stats') : [];
 if (!$stats || !is_array($stats) || empty($stats)) {
@@ -142,8 +352,8 @@ if (!$stats || !is_array($stats) || empty($stats)) {
     <div class="cro-page-stats-container">
         <?php foreach ($stats as $stat) : ?>
             <div class="cro-page-stat-item">
-                <span class="cro-page-stat-number"><?php echo esc_html($stat['number'] ?? ''); ?></span>
-                <span class="cro-page-stat-label"><?php echo esc_html($stat['label'] ?? ''); ?></span>
+                <span class="cro-page-stat-number"><?php echo wp_kses_post(hd_wysiwyg_or_default($stat['number'] ?? '', '')); ?></span>
+                <span class="cro-page-stat-label"><?php echo wp_kses_post(hd_wysiwyg_or_default($stat['label'] ?? '', '')); ?></span>
             </div>
         <?php endforeach; ?>
     </div>
@@ -153,14 +363,14 @@ if (!$stats || !is_array($stats) || empty($stats)) {
 // ============================================
 // INFO SECTION 1 - What is CRO? - Background: #ffffff
 // ACF Fields:
-// - cro_what_is_heading_line1 (Text)
-// - cro_what_is_heading_line2 (Text)
+// - cro_what_is_heading_line1 (WYSIWYG)
+// - cro_what_is_heading_line2 (WYSIWYG)
 // - cro_what_is_content (WYSIWYG)
 // - cro_what_is_image (Image)
 // - cro_what_is_button (Link)
 // ============================================
-$what_is_heading_line1 = $has_acf ? get_field('cro_what_is_heading_line1') : '';
-$what_is_heading_line2 = $has_acf ? get_field('cro_what_is_heading_line2') : '';
+$what_is_heading_line1 = hd_wysiwyg_or_default($has_acf ? get_field('cro_what_is_heading_line1') : '', 'What is');
+$what_is_heading_line2 = hd_wysiwyg_or_default($has_acf ? get_field('cro_what_is_heading_line2') : '', 'CRO?');
 $what_is_content = $has_acf ? get_field('cro_what_is_content') : '';
 $what_is_image = $has_acf ? get_field('cro_what_is_image') : null;
 $what_is_button = $has_acf ? hd_link(get_field('cro_what_is_button')) : null;
@@ -171,8 +381,8 @@ if (!$what_is_button) $what_is_button = ['url' => '#contact', 'title' => 'Get in
 <section class="cro-page-info cro-page-info-1" data-section-theme="light">
     <div class="cro-page-info-container">
         <h2 class="cro-page-info-heading animate-fade-in">
-            <span class="black-text"><?php echo $what_is_heading_line1 ? esc_html($what_is_heading_line1) : 'What is'; ?></span><br>
-            <span class="highlight-text-italic"><?php echo $what_is_heading_line2 ? esc_html($what_is_heading_line2) : 'CRO?'; ?></span>
+            <span class="black-text"><?php echo wp_kses_post($what_is_heading_line1); ?></span><br>
+            <span class="highlight-text-italic"><?php echo wp_kses_post($what_is_heading_line2); ?></span>
         </h2>
         <div class="cro-page-info-content">
             <div class="cro-page-info-text animate-slide-left">
@@ -200,21 +410,21 @@ if (!$what_is_button) $what_is_button = ['url' => '#contact', 'title' => 'Get in
 // ============================================
 // LONG CTA 1 - Background: #f8f8f8
 // ACF Fields:
-// - cro_long_cta1_label (Text)
-// - cro_long_cta1_heading_line1 (Text)
-// - cro_long_cta1_heading_line2 (Text)
-// - cro_long_cta1_text (Textarea)
+// - cro_long_cta1_label (WYSIWYG)
+// - cro_long_cta1_heading_line1 (WYSIWYG)
+// - cro_long_cta1_heading_line2 (WYSIWYG)
+// - cro_long_cta1_text (WYSIWYG)
 // - cro_long_cta1_features (Repeater)
 //   - icon_svg (Textarea)
-//   - title (Text)
-//   - description (Textarea)
+//   - title (WYSIWYG)
+//   - description (WYSIWYG)
 // - cro_long_cta1_primary_button (Link)
 // - cro_long_cta1_secondary_button (Link)
 // ============================================
-$long_cta1_label = $has_acf ? get_field('cro_long_cta1_label') : '';
-$long_cta1_heading_line1 = $has_acf ? get_field('cro_long_cta1_heading_line1') : '';
-$long_cta1_heading_line2 = $has_acf ? get_field('cro_long_cta1_heading_line2') : '';
-$long_cta1_text = $has_acf ? get_field('cro_long_cta1_text') : '';
+$long_cta1_label = hd_wysiwyg_or_default($has_acf ? get_field('cro_long_cta1_label') : '', 'READY TO CONVERT?');
+$long_cta1_heading_line1 = hd_wysiwyg_or_default($has_acf ? get_field('cro_long_cta1_heading_line1') : '', 'Let\'s Maximise Your');
+$long_cta1_heading_line2 = hd_wysiwyg_or_default($has_acf ? get_field('cro_long_cta1_heading_line2') : '', 'Conversion Rate');
+$long_cta1_text = hd_wysiwyg_or_default($has_acf ? get_field('cro_long_cta1_text') : '', '');
 $long_cta1_features = $has_acf ? get_field('cro_long_cta1_features') : [];
 $long_cta1_primary_button = $has_acf ? hd_link(get_field('cro_long_cta1_primary_button')) : null;
 $long_cta1_secondary_button = $has_acf ? hd_link(get_field('cro_long_cta1_secondary_button')) : null;
@@ -225,18 +435,21 @@ if (!$long_cta1_secondary_button) $long_cta1_secondary_button = ['url' => 'tel:0
 <section class="cro-page-longcta cro-page-longcta-1" data-section-theme="light">
     <div class="cro-page-longcta-container">
         <div class="cro-page-longcta-content animate-fade-in">
-            <span class="cro-page-longcta-label"><?php echo $long_cta1_label ? esc_html($long_cta1_label) : 'READY TO CONVERT?'; ?></span>
+            <span class="cro-page-longcta-label"><?php echo wp_kses_post($long_cta1_label); ?></span>
             <h2 class="cro-page-longcta-heading">
-                <span class="black-text"><?php echo $long_cta1_heading_line1 ? esc_html($long_cta1_heading_line1) : 'Let\'s Maximise Your'; ?></span><br>
-                <span class="highlight-text-italic"><?php echo $long_cta1_heading_line2 ? esc_html($long_cta1_heading_line2) : 'Conversion Rate'; ?></span>
+                <span class="black-text"><?php echo wp_kses_post($long_cta1_heading_line1); ?></span><br>
+                <span class="highlight-text-italic"><?php echo wp_kses_post($long_cta1_heading_line2); ?></span>
             </h2>
             <?php if ($long_cta1_text) : ?><p class="cro-page-longcta-text"><?php echo wp_kses_post($long_cta1_text); ?></p><?php endif; ?>
             <div class="cro-page-longcta-features">
                 <?php if ($long_cta1_features && is_array($long_cta1_features)) : ?>
                     <?php foreach ($long_cta1_features as $feature) : ?>
                         <div class="cro-page-longcta-feature">
-                            <div class="cro-page-longcta-feature-icon"><?php echo !empty($feature['icon_svg']) ? wp_kses_post($feature['icon_svg']) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'; ?></div>
-                            <div class="cro-page-longcta-feature-text"><h4><?php echo esc_html($feature['title'] ?? ''); ?></h4><p><?php echo esc_html($feature['description'] ?? ''); ?></p></div>
+                            <div class="cro-page-longcta-feature-icon"><?php echo !empty($feature['icon_svg']) ? hd_svg_output($feature['icon_svg']) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'; ?></div>
+                            <div class="cro-page-longcta-feature-text">
+                                <h4><?php echo wp_kses_post(hd_wysiwyg_or_default($feature['title'] ?? '', '')); ?></h4>
+                                <p><?php echo wp_kses_post(hd_wysiwyg_or_default($feature['description'] ?? '', '')); ?></p>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>
@@ -257,15 +470,15 @@ if (!$long_cta1_secondary_button) $long_cta1_secondary_button = ['url' => 'tel:0
 // ============================================
 // SERVICES SECTION - Background: #ffffff
 // ACF Fields:
-// - cro_services_label (Text)
+// - cro_services_label (WYSIWYG)
 // - cro_services_heading (WYSIWYG)
 // - cro_services_subheading (WYSIWYG)
 // - cro_services (Repeater)
-//   - title (Text)
-//   - description (Textarea)
+//   - title (WYSIWYG)
+//   - description (WYSIWYG)
 //   - icon_svg (Textarea)
 // ============================================
-$services_label = $has_acf ? (get_field('cro_services_label') ?: 'What We Offer') : 'What We Offer';
+$services_label = hd_wysiwyg_or_default($has_acf ? get_field('cro_services_label') : '', 'What We Offer');
 $services_heading = hd_wysiwyg_or_default($has_acf ? get_field('cro_services_heading') : '', 'Our CRO <span class="highlight-text-italic">Services</span>');
 $services_subheading = hd_wysiwyg_or_default($has_acf ? get_field('cro_services_subheading') : '', 'Comprehensive conversion optimisation solutions to maximise your website performance');
 $services = $has_acf ? get_field('cro_services') : [];
@@ -282,16 +495,16 @@ if (!$services || !is_array($services) || empty($services)) {
 <section class="cro-page-services" id="services" data-section-theme="light">
     <div class="cro-page-services-container">
         <div class="cro-page-services-header">
-            <span class="cro-page-services-label"><?php echo esc_html($services_label); ?></span>
+            <span class="cro-page-services-label"><?php echo wp_kses_post($services_label); ?></span>
             <h2><?php echo wp_kses_post($services_heading); ?></h2>
             <p><?php echo wp_kses_post($services_subheading); ?></p>
         </div>
         <div class="cro-page-services-grid">
             <?php foreach (array_slice($services, 0, 4) as $service) : ?>
                 <div class="cro-page-service-card">
-                    <div class="cro-page-service-icon"><?php echo wp_kses_post($service['icon_svg'] ?? ''); ?></div>
-                    <h3><?php echo esc_html($service['title'] ?? ''); ?></h3>
-                    <p><?php echo esc_html($service['description'] ?? ''); ?></p>
+                    <div class="cro-page-service-icon"><?php echo hd_svg_output($service['icon_svg'] ?? ''); ?></div>
+                    <h3><?php echo wp_kses_post(hd_wysiwyg_or_default($service['title'] ?? '', '')); ?></h3>
+                    <p><?php echo wp_kses_post(hd_wysiwyg_or_default($service['description'] ?? '', '')); ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -302,14 +515,14 @@ if (!$services || !is_array($services) || empty($services)) {
 // ============================================
 // INFO SECTION 2 - Why Different (Reversed) - Background: #f8f8f8
 // ACF Fields:
-// - cro_why_different_heading_line1 (Text)
-// - cro_why_different_heading_line2 (Text)
+// - cro_why_different_heading_line1 (WYSIWYG)
+// - cro_why_different_heading_line2 (WYSIWYG)
 // - cro_why_different_content (WYSIWYG)
 // - cro_why_different_image (Image)
 // - cro_why_different_button (Link)
 // ============================================
-$why_heading_line1 = $has_acf ? get_field('cro_why_different_heading_line1') : '';
-$why_heading_line2 = $has_acf ? get_field('cro_why_different_heading_line2') : '';
+$why_heading_line1 = hd_wysiwyg_or_default($has_acf ? get_field('cro_why_different_heading_line1') : '', 'Why We\'re');
+$why_heading_line2 = hd_wysiwyg_or_default($has_acf ? get_field('cro_why_different_heading_line2') : '', 'Different');
 $why_content = $has_acf ? get_field('cro_why_different_content') : '';
 $why_image = $has_acf ? get_field('cro_why_different_image') : null;
 $why_button = $has_acf ? hd_link(get_field('cro_why_different_button')) : null;
@@ -320,8 +533,8 @@ if (!$why_button) $why_button = ['url' => '#contact', 'title' => 'Get in Touch',
 <section class="cro-page-info cro-page-info-2" data-section-theme="light">
     <div class="cro-page-info-container">
         <h2 class="cro-page-info-heading animate-fade-in">
-            <span class="black-text"><?php echo $why_heading_line1 ? esc_html($why_heading_line1) : 'Why We\'re'; ?></span><br>
-            <span class="highlight-text-italic"><?php echo $why_heading_line2 ? esc_html($why_heading_line2) : 'Different'; ?></span>
+            <span class="black-text"><?php echo wp_kses_post($why_heading_line1); ?></span><br>
+            <span class="highlight-text-italic"><?php echo wp_kses_post($why_heading_line2); ?></span>
         </h2>
         <div class="cro-page-info-content cro-page-info-reversed">
             <div class="cro-page-info-image animate-slide-left">
@@ -349,17 +562,17 @@ if (!$why_button) $why_button = ['url' => '#contact', 'title' => 'Get in Touch',
 // ============================================
 // LONG CTA 2 - Background: #ffffff
 // ACF Fields:
-// - cro_long_cta2_label (Text)
-// - cro_long_cta2_heading_line1 (Text)
-// - cro_long_cta2_heading_line2 (Text)
-// - cro_long_cta2_text (Textarea)
+// - cro_long_cta2_label (WYSIWYG)
+// - cro_long_cta2_heading_line1 (WYSIWYG)
+// - cro_long_cta2_heading_line2 (WYSIWYG)
+// - cro_long_cta2_text (WYSIWYG)
 // - cro_long_cta2_primary_button (Link)
 // - cro_long_cta2_secondary_button (Link)
 // ============================================
-$long_cta2_label = $has_acf ? get_field('cro_long_cta2_label') : '';
-$long_cta2_heading_line1 = $has_acf ? get_field('cro_long_cta2_heading_line1') : '';
-$long_cta2_heading_line2 = $has_acf ? get_field('cro_long_cta2_heading_line2') : '';
-$long_cta2_text = $has_acf ? get_field('cro_long_cta2_text') : '';
+$long_cta2_label = hd_wysiwyg_or_default($has_acf ? get_field('cro_long_cta2_label') : '', 'FREE CRO AUDIT');
+$long_cta2_heading_line1 = hd_wysiwyg_or_default($has_acf ? get_field('cro_long_cta2_heading_line1') : '', 'Discover Your Website\'s');
+$long_cta2_heading_line2 = hd_wysiwyg_or_default($has_acf ? get_field('cro_long_cta2_heading_line2') : '', 'Hidden Potential');
+$long_cta2_text = hd_wysiwyg_or_default($has_acf ? get_field('cro_long_cta2_text') : '', 'Get a comprehensive analysis of your website\'s conversion performance. We\'ll identify quick wins, major opportunities, and a roadmap to higher conversions.');
 $long_cta2_primary_button = $has_acf ? hd_link(get_field('cro_long_cta2_primary_button')) : null;
 $long_cta2_secondary_button = $has_acf ? hd_link(get_field('cro_long_cta2_secondary_button')) : null;
 if (!$long_cta2_primary_button) $long_cta2_primary_button = ['url' => '#contact', 'title' => 'Get Your Free Audit', 'target' => '_self'];
@@ -369,12 +582,12 @@ if (!$long_cta2_secondary_button) $long_cta2_secondary_button = ['url' => 'tel:0
 <section class="cro-page-longcta cro-page-longcta-2" data-section-theme="light">
     <div class="cro-page-longcta-container">
         <div class="cro-page-longcta-content animate-fade-in">
-            <span class="cro-page-longcta-label"><?php echo $long_cta2_label ? esc_html($long_cta2_label) : 'FREE CRO AUDIT'; ?></span>
+            <span class="cro-page-longcta-label"><?php echo wp_kses_post($long_cta2_label); ?></span>
             <h2 class="cro-page-longcta-heading">
-                <span class="black-text"><?php echo $long_cta2_heading_line1 ? esc_html($long_cta2_heading_line1) : 'Discover Your Website\'s'; ?></span><br>
-                <span class="highlight-text-italic"><?php echo $long_cta2_heading_line2 ? esc_html($long_cta2_heading_line2) : 'Hidden Potential'; ?></span>
+                <span class="black-text"><?php echo wp_kses_post($long_cta2_heading_line1); ?></span><br>
+                <span class="highlight-text-italic"><?php echo wp_kses_post($long_cta2_heading_line2); ?></span>
             </h2>
-            <p class="cro-page-longcta-text"><?php echo $long_cta2_text ? wp_kses_post($long_cta2_text) : 'Get a comprehensive analysis of your website\'s conversion performance. We\'ll identify quick wins, major opportunities, and a roadmap to higher conversions.'; ?></p>
+            <p class="cro-page-longcta-text"><?php echo wp_kses_post($long_cta2_text); ?></p>
             <div class="cro-page-longcta-buttons">
                 <a href="<?php echo esc_url($long_cta2_primary_button['url']); ?>" class="cro-page-longcta-btn cro-page-longcta-btn-primary"><span><?php echo esc_html($long_cta2_primary_button['title']); ?></span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                 <a href="<?php echo esc_url($long_cta2_secondary_button['url']); ?>" class="cro-page-longcta-btn cro-page-longcta-btn-secondary"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><?php echo esc_html($long_cta2_secondary_button['title']); ?></span></a>
@@ -387,14 +600,14 @@ if (!$long_cta2_secondary_button) $long_cta2_secondary_button = ['url' => 'tel:0
 // ============================================
 // PROCESS SECTION - Background: #f8f8f8
 // ACF Fields:
-// - cro_process_label (Text)
+// - cro_process_label (WYSIWYG)
 // - cro_process_heading (WYSIWYG)
 // - cro_process_subheading (WYSIWYG)
 // - cro_process_steps (Repeater)
-//   - title (Text)
-//   - description (Textarea)
+//   - title (WYSIWYG)
+//   - description (WYSIWYG)
 // ============================================
-$process_label = $has_acf ? (get_field('cro_process_label') ?: 'How We Work') : 'How We Work';
+$process_label = hd_wysiwyg_or_default($has_acf ? get_field('cro_process_label') : '', 'How We Work');
 $process_heading = hd_wysiwyg_or_default($has_acf ? get_field('cro_process_heading') : '', 'Our CRO <span class="highlight-text-italic">Process</span>');
 $process_subheading = hd_wysiwyg_or_default($has_acf ? get_field('cro_process_subheading') : '', 'A proven methodology that delivers consistent, measurable improvements');
 $process_steps = $has_acf ? get_field('cro_process_steps') : [];
@@ -411,7 +624,7 @@ if (!$process_steps || !is_array($process_steps) || empty($process_steps)) {
 <section class="cro-page-process" data-section-theme="light">
     <div class="cro-page-process-container">
         <div class="cro-page-process-header">
-            <span class="cro-page-process-label"><?php echo esc_html($process_label); ?></span>
+            <span class="cro-page-process-label"><?php echo wp_kses_post($process_label); ?></span>
             <h2><?php echo wp_kses_post($process_heading); ?></h2>
             <p><?php echo wp_kses_post($process_subheading); ?></p>
         </div>
@@ -419,7 +632,10 @@ if (!$process_steps || !is_array($process_steps) || empty($process_steps)) {
             <?php foreach ($process_steps as $index => $step) : ?>
                 <div class="cro-page-process-step">
                     <div class="cro-page-process-number"><?php echo esc_html(str_pad($index + 1, 2, '0', STR_PAD_LEFT)); ?></div>
-                    <div class="cro-page-process-content"><h3><?php echo esc_html($step['title'] ?? ''); ?></h3><p><?php echo esc_html($step['description'] ?? ''); ?></p></div>
+                    <div class="cro-page-process-content">
+                        <h3><?php echo wp_kses_post(hd_wysiwyg_or_default($step['title'] ?? '', '')); ?></h3>
+                        <p><?php echo wp_kses_post(hd_wysiwyg_or_default($step['description'] ?? '', '')); ?></p>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -430,14 +646,14 @@ if (!$process_steps || !is_array($process_steps) || empty($process_steps)) {
 // ============================================
 // INFO SECTION 3 - CRO Tools & Technology - Background: #ffffff
 // ACF Fields:
-// - cro_tools_heading_line1 (Text)
-// - cro_tools_heading_line2 (Text)
+// - cro_tools_heading_line1 (WYSIWYG)
+// - cro_tools_heading_line2 (WYSIWYG)
 // - cro_tools_content (WYSIWYG)
 // - cro_tools_image (Image)
 // - cro_tools_button (Link)
 // ============================================
-$tools_heading_line1 = $has_acf ? get_field('cro_tools_heading_line1') : '';
-$tools_heading_line2 = $has_acf ? get_field('cro_tools_heading_line2') : '';
+$tools_heading_line1 = hd_wysiwyg_or_default($has_acf ? get_field('cro_tools_heading_line1') : '', 'Tools &');
+$tools_heading_line2 = hd_wysiwyg_or_default($has_acf ? get_field('cro_tools_heading_line2') : '', 'Technology');
 $tools_content = $has_acf ? get_field('cro_tools_content') : '';
 $tools_image = $has_acf ? get_field('cro_tools_image') : null;
 $tools_button = $has_acf ? hd_link(get_field('cro_tools_button')) : null;
@@ -448,8 +664,8 @@ if (!$tools_button) $tools_button = ['url' => '#contact', 'title' => 'Learn More
 <section class="cro-page-info cro-page-info-3" data-section-theme="light">
     <div class="cro-page-info-container">
         <h2 class="cro-page-info-heading animate-fade-in">
-            <span class="black-text"><?php echo $tools_heading_line1 ? esc_html($tools_heading_line1) : 'Tools &'; ?></span><br>
-            <span class="highlight-text-italic"><?php echo $tools_heading_line2 ? esc_html($tools_heading_line2) : 'Technology'; ?></span>
+            <span class="black-text"><?php echo wp_kses_post($tools_heading_line1); ?></span><br>
+            <span class="highlight-text-italic"><?php echo wp_kses_post($tools_heading_line2); ?></span>
         </h2>
         <div class="cro-page-info-content">
             <div class="cro-page-info-text animate-slide-left">
@@ -477,21 +693,21 @@ if (!$tools_button) $tools_button = ['url' => '#contact', 'title' => 'Learn More
 // ============================================
 // LONG CTA 3 - Background: #f8f8f8
 // ACF Fields:
-// - cro_long_cta3_label (Text)
-// - cro_long_cta3_heading_line1 (Text)
-// - cro_long_cta3_heading_line2 (Text)
-// - cro_long_cta3_text (Textarea)
+// - cro_long_cta3_label (WYSIWYG)
+// - cro_long_cta3_heading_line1 (WYSIWYG)
+// - cro_long_cta3_heading_line2 (WYSIWYG)
+// - cro_long_cta3_text (WYSIWYG)
 // - cro_long_cta3_features (Repeater)
 //   - icon_svg (Textarea)
-//   - title (Text)
-//   - description (Textarea)
+//   - title (WYSIWYG)
+//   - description (WYSIWYG)
 // - cro_long_cta3_primary_button (Link)
 // - cro_long_cta3_secondary_button (Link)
 // ============================================
-$long_cta3_label = $has_acf ? get_field('cro_long_cta3_label') : '';
-$long_cta3_heading_line1 = $has_acf ? get_field('cro_long_cta3_heading_line1') : '';
-$long_cta3_heading_line2 = $has_acf ? get_field('cro_long_cta3_heading_line2') : '';
-$long_cta3_text = $has_acf ? get_field('cro_long_cta3_text') : '';
+$long_cta3_label = hd_wysiwyg_or_default($has_acf ? get_field('cro_long_cta3_label') : '', 'PROVEN RESULTS');
+$long_cta3_heading_line1 = hd_wysiwyg_or_default($has_acf ? get_field('cro_long_cta3_heading_line1') : '', 'Ready to Boost Your');
+$long_cta3_heading_line2 = hd_wysiwyg_or_default($has_acf ? get_field('cro_long_cta3_heading_line2') : '', 'Conversions?');
+$long_cta3_text = hd_wysiwyg_or_default($has_acf ? get_field('cro_long_cta3_text') : '', '');
 $long_cta3_features = $has_acf ? get_field('cro_long_cta3_features') : [];
 $long_cta3_primary_button = $has_acf ? hd_link(get_field('cro_long_cta3_primary_button')) : null;
 $long_cta3_secondary_button = $has_acf ? hd_link(get_field('cro_long_cta3_secondary_button')) : null;
@@ -502,18 +718,21 @@ if (!$long_cta3_secondary_button) $long_cta3_secondary_button = ['url' => 'tel:0
 <section class="cro-page-longcta cro-page-longcta-3" data-section-theme="light">
     <div class="cro-page-longcta-container">
         <div class="cro-page-longcta-content animate-fade-in">
-            <span class="cro-page-longcta-label"><?php echo $long_cta3_label ? esc_html($long_cta3_label) : 'PROVEN RESULTS'; ?></span>
+            <span class="cro-page-longcta-label"><?php echo wp_kses_post($long_cta3_label); ?></span>
             <h2 class="cro-page-longcta-heading">
-                <span class="black-text"><?php echo $long_cta3_heading_line1 ? esc_html($long_cta3_heading_line1) : 'Ready to Boost Your'; ?></span><br>
-                <span class="highlight-text-italic"><?php echo $long_cta3_heading_line2 ? esc_html($long_cta3_heading_line2) : 'Conversions?'; ?></span>
+                <span class="black-text"><?php echo wp_kses_post($long_cta3_heading_line1); ?></span><br>
+                <span class="highlight-text-italic"><?php echo wp_kses_post($long_cta3_heading_line2); ?></span>
             </h2>
             <?php if ($long_cta3_text) : ?><p class="cro-page-longcta-text"><?php echo wp_kses_post($long_cta3_text); ?></p><?php endif; ?>
             <div class="cro-page-longcta-features">
                 <?php if ($long_cta3_features && is_array($long_cta3_features)) : ?>
                     <?php foreach ($long_cta3_features as $feature) : ?>
                         <div class="cro-page-longcta-feature">
-                            <div class="cro-page-longcta-feature-icon"><?php echo !empty($feature['icon_svg']) ? wp_kses_post($feature['icon_svg']) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'; ?></div>
-                            <div class="cro-page-longcta-feature-text"><h4><?php echo esc_html($feature['title'] ?? ''); ?></h4><p><?php echo esc_html($feature['description'] ?? ''); ?></p></div>
+                            <div class="cro-page-longcta-feature-icon"><?php echo !empty($feature['icon_svg']) ? hd_svg_output($feature['icon_svg']) : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'; ?></div>
+                            <div class="cro-page-longcta-feature-text">
+                                <h4><?php echo wp_kses_post(hd_wysiwyg_or_default($feature['title'] ?? '', '')); ?></h4>
+                                <p><?php echo wp_kses_post(hd_wysiwyg_or_default($feature['description'] ?? '', '')); ?></p>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>
@@ -534,20 +753,20 @@ if (!$long_cta3_secondary_button) $long_cta3_secondary_button = ['url' => 'tel:0
 // ============================================
 // RESULTS SECTION - Background: #ffffff
 // ACF Fields:
-// - cro_results_label (Text)
+// - cro_results_label (WYSIWYG)
 // - cro_results_heading (WYSIWYG)
 // - cro_results_subheading (WYSIWYG)
 // - cro_results (Repeater)
-//   - industry (Text)
-//   - title (Text)
-//   - description (Textarea)
-//   - metric1_value (Text)
-//   - metric1_label (Text)
-//   - metric2_value (Text)
-//   - metric2_label (Text)
+//   - industry (WYSIWYG)
+//   - title (WYSIWYG)
+//   - description (WYSIWYG)
+//   - metric1_value (WYSIWYG)
+//   - metric1_label (WYSIWYG)
+//   - metric2_value (WYSIWYG)
+//   - metric2_label (WYSIWYG)
 //   - image (Image)
 // ============================================
-$results_label = $has_acf ? (get_field('cro_results_label') ?: 'Case Studies') : 'Case Studies';
+$results_label = hd_wysiwyg_or_default($has_acf ? get_field('cro_results_label') : '', 'Case Studies');
 $results_heading = hd_wysiwyg_or_default($has_acf ? get_field('cro_results_heading') : '', 'Real <span class="highlight-text-italic">Results</span>');
 $results_subheading = hd_wysiwyg_or_default($has_acf ? get_field('cro_results_subheading') : '', 'See how we\'ve helped businesses dramatically improve their conversion rates');
 $results = $has_acf ? get_field('cro_results') : [];
@@ -563,7 +782,7 @@ if (!$results || !is_array($results) || empty($results)) {
 <section class="cro-page-results" data-section-theme="light">
     <div class="cro-page-results-container">
         <div class="cro-page-results-header">
-            <span class="cro-page-results-label"><?php echo esc_html($results_label); ?></span>
+            <span class="cro-page-results-label"><?php echo wp_kses_post($results_label); ?></span>
             <h2><?php echo wp_kses_post($results_heading); ?></h2>
             <p><?php echo wp_kses_post($results_subheading); ?></p>
         </div>
@@ -577,18 +796,24 @@ if (!$results || !is_array($results) || empty($results)) {
                 <div class="cro-page-result-card">
                     <div class="cro-page-result-image">
                         <?php if ($result_image) : ?>
-                            <img src="<?php echo $result_image; ?>" alt="<?php echo esc_attr($result['title'] ?? 'Case Study'); ?>">
+                            <img src="<?php echo $result_image; ?>" alt="<?php echo esc_attr(strip_tags($result['title'] ?? 'Case Study')); ?>">
                         <?php else : ?>
-                            <div class="cro-page-result-placeholder"><span><?php echo esc_html(substr($result['title'] ?? 'C', 0, 1)); ?></span></div>
+                            <div class="cro-page-result-placeholder"><span><?php echo esc_html(substr(strip_tags($result['title'] ?? 'C'), 0, 1)); ?></span></div>
                         <?php endif; ?>
                     </div>
                     <div class="cro-page-result-content">
-                        <span class="cro-page-result-industry"><?php echo esc_html($result['industry'] ?? ''); ?></span>
-                        <h3><?php echo esc_html($result['title'] ?? ''); ?></h3>
-                        <p><?php echo esc_html($result['description'] ?? ''); ?></p>
+                        <span class="cro-page-result-industry"><?php echo wp_kses_post(hd_wysiwyg_or_default($result['industry'] ?? '', '')); ?></span>
+                        <h3><?php echo wp_kses_post(hd_wysiwyg_or_default($result['title'] ?? '', '')); ?></h3>
+                        <p><?php echo wp_kses_post(hd_wysiwyg_or_default($result['description'] ?? '', '')); ?></p>
                         <div class="cro-page-result-metrics">
-                            <div class="cro-page-result-metric"><span class="cro-page-result-metric-value"><?php echo esc_html($result['metric1_value'] ?? ''); ?></span><span class="cro-page-result-metric-label"><?php echo esc_html($result['metric1_label'] ?? ''); ?></span></div>
-                            <div class="cro-page-result-metric"><span class="cro-page-result-metric-value"><?php echo esc_html($result['metric2_value'] ?? ''); ?></span><span class="cro-page-result-metric-label"><?php echo esc_html($result['metric2_label'] ?? ''); ?></span></div>
+                            <div class="cro-page-result-metric">
+                                <span class="cro-page-result-metric-value"><?php echo wp_kses_post(hd_wysiwyg_or_default($result['metric1_value'] ?? '', '')); ?></span>
+                                <span class="cro-page-result-metric-label"><?php echo wp_kses_post(hd_wysiwyg_or_default($result['metric1_label'] ?? '', '')); ?></span>
+                            </div>
+                            <div class="cro-page-result-metric">
+                                <span class="cro-page-result-metric-value"><?php echo wp_kses_post(hd_wysiwyg_or_default($result['metric2_value'] ?? '', '')); ?></span>
+                                <span class="cro-page-result-metric-label"><?php echo wp_kses_post(hd_wysiwyg_or_default($result['metric2_label'] ?? '', '')); ?></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -601,13 +826,13 @@ if (!$results || !is_array($results) || empty($results)) {
 // ============================================
 // FAQ SECTION - Background: #f8f8f8
 // ACF Fields:
-// - cro_faq_label (Text)
+// - cro_faq_label (WYSIWYG)
 // - cro_faq_heading (WYSIWYG)
 // - cro_faqs (Repeater)
-//   - question (Text)
-//   - answer (Textarea)
+//   - question (WYSIWYG)
+//   - answer (WYSIWYG)
 // ============================================
-$faq_label = $has_acf ? (get_field('cro_faq_label') ?: 'FAQ') : 'FAQ';
+$faq_label = hd_wysiwyg_or_default($has_acf ? get_field('cro_faq_label') : '', 'FAQ');
 $faq_heading = hd_wysiwyg_or_default($has_acf ? get_field('cro_faq_heading') : '', 'Frequently Asked <span class="highlight-text-italic">Questions</span>');
 $faqs = $has_acf ? get_field('cro_faqs') : [];
 if (!$faqs || !is_array($faqs) || empty($faqs)) {
@@ -624,14 +849,17 @@ if (!$faqs || !is_array($faqs) || empty($faqs)) {
 <section class="cro-page-faq" data-section-theme="light">
     <div class="cro-page-faq-container">
         <div class="cro-page-faq-header">
-            <span class="cro-page-faq-label"><?php echo esc_html($faq_label); ?></span>
+            <span class="cro-page-faq-label"><?php echo wp_kses_post($faq_label); ?></span>
             <h2><?php echo wp_kses_post($faq_heading); ?></h2>
         </div>
         <div class="cro-page-faq-list">
             <?php foreach ($faqs as $index => $faq) : ?>
                 <div class="cro-page-faq-item" data-faq-index="<?php echo $index; ?>">
-                    <button class="cro-page-faq-question" aria-expanded="false"><span><?php echo esc_html($faq['question'] ?? ''); ?></span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-                    <div class="cro-page-faq-answer"><p><?php echo wp_kses_post($faq['answer'] ?? ''); ?></p></div>
+                    <button class="cro-page-faq-question" aria-expanded="false">
+                        <span><?php echo wp_kses_post(hd_wysiwyg_or_default($faq['question'] ?? '', '')); ?></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="cro-page-faq-answer"><p><?php echo wp_kses_post(hd_wysiwyg_or_default($faq['answer'] ?? '', '')); ?></p></div>
                 </div>
             <?php endforeach; ?>
         </div>
