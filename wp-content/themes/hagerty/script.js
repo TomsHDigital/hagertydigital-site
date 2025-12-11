@@ -383,10 +383,12 @@
         var statNumbers = document.querySelectorAll('.stat-number[data-target]');
         var metricValues = document.querySelectorAll('.hd-metric-card__value[data-target]');
         var aboutStatValues = document.querySelectorAll('.about-stat-value[data-target]');
+        var casestudiesStatValues = document.querySelectorAll('.casestudies-page-stat-value[data-target]');
         
         var allCounters = Array.from(statNumbers)
             .concat(Array.from(metricValues))
-            .concat(Array.from(aboutStatValues));
+            .concat(Array.from(aboutStatValues))
+            .concat(Array.from(casestudiesStatValues));
         
         if (allCounters.length === 0) return;
         
