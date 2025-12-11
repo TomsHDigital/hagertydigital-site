@@ -1,0 +1,1795 @@
+{
+    "key": "group_email_marketing_services",
+    "title": "Email Marketing Services Page",
+    "fields": [
+        {
+            "key": "field_email_tab_hero",
+            "label": "Hero",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_email_hero_label",
+            "label": "Hero Label",
+            "name": "email_hero_label",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_hero_heading_line_1",
+            "label": "Hero Heading Line 1",
+            "name": "email_hero_heading_line_1",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "First line of the hero H1.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_hero_heading_line_2",
+            "label": "Hero Heading Line 2",
+            "name": "email_hero_heading_line_2",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Second line of the hero H1. Can include span highlight HTML.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_hero_description",
+            "label": "Hero Description",
+            "name": "email_hero_description",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Short paragraph under the hero heading.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_hero_background_type",
+            "label": "Hero Background Type",
+            "name": "email_hero_background_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Choose hero background type.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "none": "None",
+                "image": "Image",
+                "video": "Video"
+            },
+            "default_value": "none",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 1,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_email_hero_background_image",
+            "label": "Hero Background Image",
+            "name": "email_hero_background_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Used when background type is Image.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_email_hero_background_type",
+                        "operator": "==",
+                        "value": "image"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "large",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_email_hero_background_video_mp4",
+            "label": "Hero Background Video (MP4)",
+            "name": "email_hero_background_video_mp4",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "MP4 video source, used when background type is Video.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_email_hero_background_type",
+                        "operator": "==",
+                        "value": "video"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "mp4"
+        },
+        {
+            "key": "field_email_hero_background_video_webm",
+            "label": "Hero Background Video (WebM)",
+            "name": "email_hero_background_video_webm",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "Optional WebM video source.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_email_hero_background_type",
+                        "operator": "==",
+                        "value": "video"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "webm"
+        },
+        {
+            "key": "field_email_hero_background_video_poster",
+            "label": "Hero Background Video Poster",
+            "name": "email_hero_background_video_poster",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Optional poster image for video background.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_email_hero_background_type",
+                        "operator": "==",
+                        "value": "video"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_email_hero_background_overlay_opacity",
+            "label": "Hero Background Overlay Opacity",
+            "name": "email_hero_background_overlay_opacity",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Opacity between 0 and 1.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0.5,
+            "min": 0,
+            "max": 1,
+            "step": 0.05,
+            "prepend": "",
+            "append": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_email_hero_primary_button",
+            "label": "Hero Primary Button",
+            "name": "email_hero_primary_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Main CTA button.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_email_hero_secondary_button",
+            "label": "Hero Secondary Button",
+            "name": "email_hero_secondary_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Secondary CTA button (not currently rendered in template, but available).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_email_tab_stats",
+            "label": "Stats",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_email_stats",
+            "label": "Stats",
+            "name": "email_stats",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Key statistics to show under the hero.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "row",
+            "button_label": "Add Stat",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_email_stats_number",
+                    "label": "Number",
+                    "name": "number",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Stat number\/value (e.g. 320%, 100+).",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_stats"
+                },
+                {
+                    "key": "field_email_stats_label",
+                    "label": "Label",
+                    "name": "label",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Stat label (e.g. Revenue Increase).",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_stats"
+                }
+            ]
+        },
+        {
+            "key": "field_email_tab_what_is",
+            "label": "What is Email Marketing?",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_email_what_is_heading_line1",
+            "label": "Heading Line 1",
+            "name": "email_what_is_heading_line1",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "First line of the heading (e.g. What is).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_what_is_heading_line2",
+            "label": "Heading Line 2",
+            "name": "email_what_is_heading_line2",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Second line of the heading (e.g. Email Marketing?).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_what_is_content",
+            "label": "Content",
+            "name": "email_what_is_content",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Main explanatory body content.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_email_what_is_image",
+            "label": "Image",
+            "name": "email_what_is_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Side image for the section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "large",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_email_what_is_button",
+            "label": "Button",
+            "name": "email_what_is_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "CTA button for this section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_email_tab_long_cta1",
+            "label": "Long CTA 1",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_email_long_cta1_label",
+            "label": "Label",
+            "name": "email_long_cta1_label",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Small label above the heading (e.g. READY TO CONNECT?).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_long_cta1_heading_line1",
+            "label": "Heading Line 1",
+            "name": "email_long_cta1_heading_line1",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "First line of the CTA heading.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_long_cta1_heading_line2",
+            "label": "Heading Line 2",
+            "name": "email_long_cta1_heading_line2",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Second line of the CTA heading.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_long_cta1_text",
+            "label": "Text",
+            "name": "email_long_cta1_text",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Optional supporting paragraph under CTA heading.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_long_cta1_features",
+            "label": "Features",
+            "name": "email_long_cta1_features",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Feature bullets under the CTA (icon + title + description).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "row",
+            "button_label": "Add Feature",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_email_long_cta1_icon_svg",
+                    "label": "Icon SVG",
+                    "name": "icon_svg",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Raw inline SVG markup for the feature icon.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "new_lines": "",
+                    "maxlength": "",
+                    "rows": 5,
+                    "placeholder": "",
+                    "parent_repeater": "field_email_long_cta1_features"
+                },
+                {
+                    "key": "field_email_long_cta1_feature_title",
+                    "label": "Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Short feature title.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_long_cta1_features"
+                },
+                {
+                    "key": "field_email_long_cta1_feature_description",
+                    "label": "Description",
+                    "name": "description",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Feature description text.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_long_cta1_features"
+                }
+            ]
+        },
+        {
+            "key": "field_email_long_cta1_primary_button",
+            "label": "Primary Button",
+            "name": "email_long_cta1_primary_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Primary CTA button.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_email_long_cta1_secondary_button",
+            "label": "Secondary Button",
+            "name": "email_long_cta1_secondary_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Secondary CTA button (phone etc.).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_email_tab_services",
+            "label": "Services",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_email_services_label",
+            "label": "Services Label",
+            "name": "email_services_label",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Small label above services section heading (e.g. What We Offer).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_services_heading",
+            "label": "Services Heading",
+            "name": "email_services_heading",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Main heading for services grid.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_services_subheading",
+            "label": "Services Subheading",
+            "name": "email_services_subheading",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Short paragraph under the services heading.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_services",
+            "label": "Services",
+            "name": "email_services",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Main email marketing services (first 4 shown).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "row",
+            "button_label": "Add Service",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_email_services_title",
+                    "label": "Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Service name\/title.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_services"
+                },
+                {
+                    "key": "field_email_services_description",
+                    "label": "Description",
+                    "name": "description",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Service description.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_services"
+                },
+                {
+                    "key": "field_email_services_icon_svg",
+                    "label": "Icon SVG",
+                    "name": "icon_svg",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Inline SVG icon for this service.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "new_lines": "",
+                    "maxlength": "",
+                    "rows": 5,
+                    "placeholder": "",
+                    "parent_repeater": "field_email_services"
+                }
+            ]
+        },
+        {
+            "key": "field_email_tab_sells",
+            "label": "Emails That Sell",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_email_sells_heading_line1",
+            "label": "Heading Line 1",
+            "name": "email_sells_heading_line1",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "First heading line (e.g. Emails That).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_sells_heading_line2",
+            "label": "Heading Line 2",
+            "name": "email_sells_heading_line2",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Second heading line (e.g. Sell).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_sells_content",
+            "label": "Content",
+            "name": "email_sells_content",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Main body content for this section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_email_sells_image",
+            "label": "Image",
+            "name": "email_sells_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Side image for the section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "large",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_email_sells_button",
+            "label": "Button",
+            "name": "email_sells_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "CTA button for this section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_email_tab_process",
+            "label": "Process",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_email_process_label",
+            "label": "Process Label",
+            "name": "email_process_label",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Small label above process heading (e.g. How We Work).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_process_heading",
+            "label": "Process Heading",
+            "name": "email_process_heading",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Main heading for the process\/timeline section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_process_subheading",
+            "label": "Process Subheading",
+            "name": "email_process_subheading",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Short paragraph under the process heading.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_process_steps",
+            "label": "Process Steps",
+            "name": "email_process_steps",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Steps displayed in the email process timeline.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "row",
+            "button_label": "Add Step",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_email_process_step_title",
+                    "label": "Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Step title.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_process_steps"
+                },
+                {
+                    "key": "field_email_process_step_description",
+                    "label": "Description",
+                    "name": "description",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Step description.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_process_steps"
+                }
+            ]
+        },
+        {
+            "key": "field_email_tab_automation",
+            "label": "Automation",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_email_automation_heading_line1",
+            "label": "Heading Line 1",
+            "name": "email_automation_heading_line1",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "First heading line (e.g. Ask Us About).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_automation_heading_line2",
+            "label": "Heading Line 2",
+            "name": "email_automation_heading_line2",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Second heading line (e.g. Automation).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_automation_content",
+            "label": "Content",
+            "name": "email_automation_content",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Main body content for automation section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_email_automation_image",
+            "label": "Image",
+            "name": "email_automation_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Side image for automation section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "large",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_email_automation_button",
+            "label": "Button",
+            "name": "email_automation_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "CTA button for automation section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_email_tab_additional_services",
+            "label": "Additional Services \/ Campaign Types",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_email_additional_services_label",
+            "label": "Label",
+            "name": "email_additional_services_label",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Small label (e.g. More Services).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_additional_services_heading",
+            "label": "Heading",
+            "name": "email_additional_services_heading",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Main heading for additional campaign types.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_additional_services_subheading",
+            "label": "Subheading",
+            "name": "email_additional_services_subheading",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Short paragraph under heading.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_additional_services",
+            "label": "Additional Services",
+            "name": "email_additional_services",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Different campaign types (grid of up to 6).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "row",
+            "button_label": "Add Campaign Type",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_email_additional_services_title",
+                    "label": "Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Campaign type name\/title.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_additional_services"
+                },
+                {
+                    "key": "field_email_additional_services_description",
+                    "label": "Description",
+                    "name": "description",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Campaign type description.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_additional_services"
+                },
+                {
+                    "key": "field_email_additional_services_icon_svg",
+                    "label": "Icon SVG",
+                    "name": "icon_svg",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Inline SVG icon for this campaign type.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "new_lines": "",
+                    "maxlength": "",
+                    "rows": 5,
+                    "placeholder": "",
+                    "parent_repeater": "field_email_additional_services"
+                }
+            ]
+        },
+        {
+            "key": "field_email_tab_faq",
+            "label": "FAQ",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_email_faq_label",
+            "label": "FAQ Label",
+            "name": "email_faq_label",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Small label above FAQ heading (e.g. FAQ).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_faq_heading",
+            "label": "FAQ Heading",
+            "name": "email_faq_heading",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Main FAQ heading.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_faqs",
+            "label": "FAQs",
+            "name": "email_faqs",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Frequently asked questions and answers.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "row",
+            "button_label": "Add FAQ",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_email_faq_question",
+                    "label": "Question",
+                    "name": "question",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "FAQ question text.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_faqs"
+                },
+                {
+                    "key": "field_email_faq_answer",
+                    "label": "Answer",
+                    "name": "answer",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "FAQ answer text.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_faqs"
+                }
+            ]
+        },
+        {
+            "key": "field_email_tab_long_cta2",
+            "label": "Long CTA 2 (Final CTA)",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_email_long_cta2_label",
+            "label": "Label",
+            "name": "email_long_cta2_label",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Small label above final CTA heading (e.g. READY TO GROW?).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_long_cta2_heading_line1",
+            "label": "Heading Line 1",
+            "name": "email_long_cta2_heading_line1",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "First line of the final CTA heading.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_long_cta2_heading_line2",
+            "label": "Heading Line 2",
+            "name": "email_long_cta2_heading_line2",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Second line of the final CTA heading.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_long_cta2_text",
+            "label": "Text",
+            "name": "email_long_cta2_text",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Optional supporting text under final CTA heading.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_email_long_cta2_features",
+            "label": "Features",
+            "name": "email_long_cta2_features",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Feature bullets under the final CTA (icon + title + description).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "row",
+            "button_label": "Add Feature",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_email_long_cta2_icon_svg",
+                    "label": "Icon SVG",
+                    "name": "icon_svg",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Inline SVG icon markup.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "new_lines": "",
+                    "maxlength": "",
+                    "rows": 5,
+                    "placeholder": "",
+                    "parent_repeater": "field_email_long_cta2_features"
+                },
+                {
+                    "key": "field_email_long_cta2_feature_title",
+                    "label": "Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Feature title.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_long_cta2_features"
+                },
+                {
+                    "key": "field_email_long_cta2_feature_description",
+                    "label": "Description",
+                    "name": "description",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Feature description.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_email_long_cta2_features"
+                }
+            ]
+        },
+        {
+            "key": "field_email_long_cta2_primary_button",
+            "label": "Primary Button",
+            "name": "email_long_cta2_primary_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Primary final CTA button.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_email_long_cta2_secondary_button",
+            "label": "Secondary Button",
+            "name": "email_long_cta2_secondary_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Secondary final CTA button.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page",
+                "operator": "==",
+                "value": "1825"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Field group for the Email Marketing Services page template.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1765458510
+}
