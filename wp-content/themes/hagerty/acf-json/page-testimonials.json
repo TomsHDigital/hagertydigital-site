@@ -1,0 +1,597 @@
+[
+  {
+    "key": "group_testimonials_page",
+    "title": "Testimonials Page",
+    "fields": [
+      {
+        "key": "field_testimonials_tab_hero",
+        "label": "Hero",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_testimonials_hero_label",
+        "label": "Hero Label",
+        "name": "testimonials_hero_label",
+        "type": "text"
+      },
+      {
+        "key": "field_testimonials_hero_heading_line_1",
+        "label": "Hero Heading Line 1",
+        "name": "testimonials_hero_heading_line_1",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_hero_heading_line_2",
+        "label": "Hero Heading Line 2",
+        "name": "testimonials_hero_heading_line_2",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_hero_text",
+        "label": "Hero Text",
+        "name": "testimonials_hero_text",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "full",
+        "media_upload": 1,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_hero_video",
+        "label": "Hero Video (MP4)",
+        "name": "testimonials_hero_video",
+        "type": "file",
+        "return_format": "array",
+        "library": "all",
+        "mime_types": "mp4"
+      },
+      {
+        "key": "field_testimonials_hero_image",
+        "label": "Hero Image",
+        "name": "testimonials_hero_image",
+        "type": "image",
+        "return_format": "array",
+        "preview_size": "medium",
+        "library": "all"
+      },
+
+      {
+        "key": "field_testimonials_tab_featured",
+        "label": "Featured Testimonial",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_testimonials_featured_client_logo",
+        "label": "Featured Client Logo",
+        "name": "testimonials_featured_client_logo",
+        "type": "image",
+        "return_format": "array",
+        "preview_size": "thumbnail",
+        "library": "all"
+      },
+      {
+        "key": "field_testimonials_featured_client_image",
+        "label": "Featured Client Image",
+        "name": "testimonials_featured_client_image",
+        "type": "image",
+        "return_format": "array",
+        "preview_size": "medium",
+        "library": "all"
+      },
+      {
+        "key": "field_testimonials_featured_quote",
+        "label": "Featured Quote",
+        "name": "testimonials_featured_quote",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "full",
+        "media_upload": 1,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_featured_author_name",
+        "label": "Featured Author Name",
+        "name": "testimonials_featured_author_name",
+        "type": "text"
+      },
+      {
+        "key": "field_testimonials_featured_author_role",
+        "label": "Featured Author Role",
+        "name": "testimonials_featured_author_role",
+        "type": "text"
+      },
+      {
+        "key": "field_testimonials_featured_case_study_link",
+        "label": "Featured Case Study Link",
+        "name": "testimonials_featured_case_study_link",
+        "type": "link",
+        "return_format": "array"
+      },
+
+      {
+        "key": "field_testimonials_tab_stats",
+        "label": "Stats",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_testimonials_stats_heading_line_1",
+        "label": "Stats Heading Line 1",
+        "name": "testimonials_stats_heading_line_1",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_stats_heading_line_2",
+        "label": "Stats Heading Line 2",
+        "name": "testimonials_stats_heading_line_2",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_stats_items",
+        "label": "Stats Items",
+        "name": "testimonials_stats_items",
+        "type": "repeater",
+        "layout": "row",
+        "button_label": "Add Stat",
+        "sub_fields": [
+          {
+            "key": "field_testimonials_stat_number",
+            "label": "Number",
+            "name": "number",
+            "type": "number"
+          },
+          {
+            "key": "field_testimonials_stat_suffix",
+            "label": "Suffix",
+            "name": "suffix",
+            "type": "text",
+            "instructions": "Optional. E.g. +, %, k"
+          },
+          {
+            "key": "field_testimonials_stat_label",
+            "label": "Label",
+            "name": "label",
+            "type": "text"
+          }
+        ]
+      },
+
+      {
+        "key": "field_testimonials_tab_grid",
+        "label": "Testimonials Grid",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_testimonials_grid_heading_line_1",
+        "label": "Grid Heading Line 1",
+        "name": "testimonials_grid_heading_line_1",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_grid_heading_line_2",
+        "label": "Grid Heading Line 2",
+        "name": "testimonials_grid_heading_line_2",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_grid_intro_text",
+        "label": "Grid Intro Text",
+        "name": "testimonials_grid_intro_text",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "full",
+        "media_upload": 1,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_grid_items",
+        "label": "Grid Items",
+        "name": "testimonials_grid_items",
+        "type": "repeater",
+        "layout": "row",
+        "button_label": "Add Testimonial",
+        "sub_fields": [
+          {
+            "key": "field_testimonials_grid_quote",
+            "label": "Quote",
+            "name": "quote",
+            "type": "wysiwyg",
+            "tabs": "visual",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+          },
+          {
+            "key": "field_testimonials_grid_author_name",
+            "label": "Author Name",
+            "name": "author_name",
+            "type": "text"
+          },
+          {
+            "key": "field_testimonials_grid_author_role",
+            "label": "Author Role",
+            "name": "author_role",
+            "type": "text"
+          },
+          {
+            "key": "field_testimonials_grid_rating",
+            "label": "Rating",
+            "name": "rating",
+            "type": "number",
+            "default_value": 5,
+            "min": 1,
+            "max": 5,
+            "step": 1
+          },
+          {
+            "key": "field_testimonials_grid_author_image",
+            "label": "Author Image",
+            "name": "author_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all"
+          },
+          {
+            "key": "field_testimonials_grid_client_logo",
+            "label": "Client Logo",
+            "name": "client_logo",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all"
+          }
+        ]
+      },
+
+      {
+        "key": "field_testimonials_tab_logos",
+        "label": "Client Logos",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_testimonials_logos_heading_line_1",
+        "label": "Logos Heading Line 1",
+        "name": "testimonials_logos_heading_line_1",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_logos_heading_line_2",
+        "label": "Logos Heading Line 2",
+        "name": "testimonials_logos_heading_line_2",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_client_logos",
+        "label": "Client Logos",
+        "name": "testimonials_client_logos",
+        "type": "repeater",
+        "layout": "row",
+        "button_label": "Add Logo",
+        "sub_fields": [
+          {
+            "key": "field_testimonials_client_logo_image",
+            "label": "Logo",
+            "name": "logo",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all"
+          }
+        ]
+      },
+
+      {
+        "key": "field_testimonials_tab_video",
+        "label": "Video Testimonials",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_testimonials_video_heading_line_1",
+        "label": "Video Heading Line 1",
+        "name": "testimonials_video_heading_line_1",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_video_heading_line_2",
+        "label": "Video Heading Line 2",
+        "name": "testimonials_video_heading_line_2",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_video_intro_text",
+        "label": "Video Intro Text",
+        "name": "testimonials_video_intro_text",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "full",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_video_items",
+        "label": "Video Items",
+        "name": "testimonials_video_items",
+        "type": "repeater",
+        "layout": "row",
+        "button_label": "Add Video",
+        "sub_fields": [
+          {
+            "key": "field_testimonials_video_url",
+            "label": "Video URL",
+            "name": "video_url",
+            "type": "url",
+            "instructions": "YouTube/Vimeo embed URL, or a direct video URL suitable for iframe."
+          },
+          {
+            "key": "field_testimonials_video_thumbnail",
+            "label": "Thumbnail",
+            "name": "thumbnail",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+          },
+          {
+            "key": "field_testimonials_video_client_name",
+            "label": "Client Name",
+            "name": "client_name",
+            "type": "text"
+          },
+          {
+            "key": "field_testimonials_video_client_company",
+            "label": "Client Company",
+            "name": "client_company",
+            "type": "text"
+          }
+        ]
+      },
+
+      {
+        "key": "field_testimonials_tab_carousel",
+        "label": "Full Testimonials Carousel",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_testimonials_carousel_heading_line_1",
+        "label": "Carousel Heading Line 1",
+        "name": "testimonials_carousel_heading_line_1",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_carousel_heading_line_2",
+        "label": "Carousel Heading Line 2",
+        "name": "testimonials_carousel_heading_line_2",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_carousel_items",
+        "label": "Carousel Items",
+        "name": "testimonials_carousel_items",
+        "type": "repeater",
+        "layout": "row",
+        "button_label": "Add Testimonial",
+        "sub_fields": [
+          {
+            "key": "field_testimonials_carousel_quote",
+            "label": "Quote",
+            "name": "quote",
+            "type": "wysiwyg",
+            "tabs": "visual",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+          },
+          {
+            "key": "field_testimonials_carousel_author_name",
+            "label": "Author Name",
+            "name": "author_name",
+            "type": "text"
+          },
+          {
+            "key": "field_testimonials_carousel_author_role",
+            "label": "Author Role",
+            "name": "author_role",
+            "type": "text"
+          },
+          {
+            "key": "field_testimonials_carousel_rating",
+            "label": "Rating",
+            "name": "rating",
+            "type": "number",
+            "default_value": 5,
+            "min": 1,
+            "max": 5,
+            "step": 1
+          },
+          {
+            "key": "field_testimonials_carousel_author_image",
+            "label": "Author Image",
+            "name": "author_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all"
+          },
+          {
+            "key": "field_testimonials_carousel_client_logo",
+            "label": "Client Logo",
+            "name": "client_logo",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all"
+          }
+        ]
+      },
+
+      {
+        "key": "field_testimonials_tab_cta",
+        "label": "CTA",
+        "name": "",
+        "type": "tab",
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_testimonials_cta_label",
+        "label": "CTA Label",
+        "name": "testimonials_cta_label",
+        "type": "text"
+      },
+      {
+        "key": "field_testimonials_cta_heading_line_1",
+        "label": "CTA Heading Line 1",
+        "name": "testimonials_cta_heading_line_1",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_cta_heading_line_2",
+        "label": "CTA Heading Line 2",
+        "name": "testimonials_cta_heading_line_2",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "basic",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_cta_text",
+        "label": "CTA Text",
+        "name": "testimonials_cta_text",
+        "type": "wysiwyg",
+        "tabs": "visual",
+        "toolbar": "full",
+        "media_upload": 0,
+        "delay": 0
+      },
+      {
+        "key": "field_testimonials_cta_button_text",
+        "label": "CTA Button Text",
+        "name": "testimonials_cta_button_text",
+        "type": "text"
+      },
+      {
+        "key": "field_testimonials_cta_button_link",
+        "label": "CTA Button Link",
+        "name": "testimonials_cta_button_link",
+        "type": "link",
+        "return_format": "array"
+      },
+      {
+        "key": "field_testimonials_cta_features",
+        "label": "CTA Features",
+        "name": "testimonials_cta_features",
+        "type": "repeater",
+        "layout": "row",
+        "button_label": "Add Feature",
+        "sub_fields": [
+          {
+            "key": "field_testimonials_cta_feature_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text"
+          },
+          {
+            "key": "field_testimonials_cta_feature_description",
+            "label": "Description",
+            "name": "description",
+            "type": "textarea",
+            "rows": 3,
+            "new_lines": ""
+          }
+        ]
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "page-testimonials.php"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "ACF field group for the Testimonials template (hero, featured testimonial, stats, grid, logos, video, carousel, and CTA).",
+    "show_in_rest": 0
+  }
+]

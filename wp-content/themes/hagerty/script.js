@@ -2277,3 +2277,844 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 })();
+// ========================================
+// TESTIMONIALS PAGE SCRIPTS
+// ========================================
+
+// Testimonials Counter Animation
+(function() {
+    function animateCounters() {
+        var counters = document.querySelectorAll('.testimonials-page-counter');
+        
+        counters.forEach(function(counter) {
+            var target = parseFloat(counter.getAttribute('data-target')) || 0;
+            var suffix = counter.getAttribute('data-suffix') || '';
+            var duration = 2000;
+            var start = 0;
+            var startTime = null;
+            var isDecimal = target % 1 !== 0;
+            
+            function easeOutQuart(t) {
+                return 1 - Math.pow(1 - t, 4);
+            }
+            
+            function updateCounter(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var easedProgress = easeOutQuart(progress);
+                var current = start + (target - start) * easedProgress;
+                
+                if (isDecimal) {
+                    counter.textContent = current.toFixed(1) + suffix;
+                } else {
+                    counter.textContent = Math.floor(current) + suffix;
+                }
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    if (isDecimal) {
+                        counter.textContent = target.toFixed(1) + suffix;
+                    } else {
+                        counter.textContent = target + suffix;
+                    }
+                }
+            }
+            
+            // Start animation when in view
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        requestAnimationFrame(updateCounter);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(counter);
+        });
+    }
+    
+    // Initialize counters when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', animateCounters);
+    } else {
+        animateCounters();
+    }
+})();
+
+
+// Testimonials Carousel
+(function() {
+    var carousel = document.querySelector('.testimonials-page-carousel-track');
+    var slides = document.querySelectorAll('.testimonials-page-carousel-slide');
+    var prevBtn = document.querySelector('.testimonials-page-carousel-prev');
+    var nextBtn = document.querySelector('.testimonials-page-carousel-next');
+    var dotsContainer = document.querySelector('.testimonials-page-carousel-dots');
+    
+    if (!carousel || slides.length === 0) return;
+    
+    var currentIndex = 0;
+    var totalSlides = slides.length;
+    var autoplayInterval;
+    var isPlaying = true;
+    
+    // Create dots
+    for (var i = 0; i < totalSlides; i++) {
+        var dot = document.createElement('div');
+        dot.className = 'testimonials-page-carousel-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('data-index', i);
+        dotsContainer.appendChild(dot);
+        
+        dot.addEventListener('click', function() {
+            goToSlide(parseInt(this.getAttribute('data-index')));
+            resetAutoplay();
+        });
+    }
+    
+    var dots = document.querySelectorAll('.testimonials-page-carousel-dot');
+    
+    function goToSlide(index) {
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        
+        currentIndex = index;
+        carousel.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+        
+        // Update dots
+        dots.forEach(function(dot, i) {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+    
+    function nextSlide() {
+        goToSlide(currentIndex + 1);
+    }
+    
+    function prevSlide() {
+        goToSlide(currentIndex - 1);
+    }
+    
+    function startAutoplay() {
+        if (isPlaying) {
+            autoplayInterval = setInterval(nextSlide, 5000);
+        }
+    }
+    
+    function resetAutoplay() {
+        clearInterval(autoplayInterval);
+        startAutoplay();
+    }
+    
+    // Event listeners
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            prevSlide();
+            resetAutoplay();
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            nextSlide();
+            resetAutoplay();
+        });
+    }
+    
+    // Touch/swipe support
+    var touchStartX = 0;
+    var touchEndX = 0;
+    
+    carousel.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    carousel.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+    
+    function handleSwipe() {
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+            resetAutoplay();
+        }
+    }
+    
+    // Pause on hover
+    carousel.addEventListener('mouseenter', function() {
+        isPlaying = false;
+        clearInterval(autoplayInterval);
+    });
+    
+    carousel.addEventListener('mouseleave', function() {
+        isPlaying = true;
+        startAutoplay();
+    });
+    
+    // Start autoplay
+    startAutoplay();
+})();
+
+
+// Video Modal Functionality
+(function() {
+    var videoThumbnails = document.querySelectorAll('.testimonials-page-video-thumbnail');
+    var modal = document.getElementById('testimonialVideoModal');
+    var iframe = document.getElementById('testimonialVideoIframe');
+    var closeBtn = document.querySelector('.testimonials-page-video-modal-close');
+    
+    if (!modal || !iframe) return;
+    
+    function openModal(videoUrl) {
+        // Convert YouTube URL to embed format if necessary
+        var embedUrl = videoUrl;
+        
+        if (videoUrl.includes('youtube.com/watch')) {
+            var videoId = videoUrl.split('v=')[1];
+            var ampersandPosition = videoId.indexOf('&');
+            if (ampersandPosition !== -1) {
+                videoId = videoId.substring(0, ampersandPosition);
+            }
+            embedUrl = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+        } else if (videoUrl.includes('youtu.be')) {
+            var videoId = videoUrl.split('youtu.be/')[1];
+            embedUrl = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+        } else if (videoUrl.includes('vimeo.com')) {
+            var videoId = videoUrl.split('vimeo.com/')[1];
+            embedUrl = 'https://player.vimeo.com/video/' + videoId + '?autoplay=1';
+        }
+        
+        iframe.src = embedUrl;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+        modal.classList.remove('active');
+        iframe.src = '';
+        document.body.style.overflow = '';
+    }
+    
+    videoThumbnails.forEach(function(thumbnail) {
+        thumbnail.addEventListener('click', function() {
+            var videoUrl = this.getAttribute('data-video-url');
+            if (videoUrl) {
+                openModal(videoUrl);
+            }
+        });
+    });
+    
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
+    
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+})();
+
+
+// Masonry Card Hover Effects with Stagger
+(function() {
+    var cards = document.querySelectorAll('.testimonials-page-masonry-card');
+    
+    cards.forEach(function(card, index) {
+        // Add staggered animation delay
+        card.style.animationDelay = (index * 0.05) + 's';
+        
+        // Enhanced hover effect
+        card.addEventListener('mouseenter', function() {
+            this.querySelector('.testimonials-page-masonry-front').style.transform = 'translateY(-10px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.querySelector('.testimonials-page-masonry-front').style.transform = 'translateY(0)';
+        });
+    });
+})();
+
+
+// Parallax Effect for Full Quote Section
+(function() {
+    var quoteSection = document.querySelector('.testimonials-page-full-quote');
+    
+    if (!quoteSection) return;
+    
+    function parallaxScroll() {
+        var scrolled = window.pageYOffset;
+        var rect = quoteSection.getBoundingClientRect();
+        var sectionTop = rect.top + scrolled;
+        var sectionHeight = quoteSection.offsetHeight;
+        var windowHeight = window.innerHeight;
+        
+        if (scrolled + windowHeight > sectionTop && scrolled < sectionTop + sectionHeight) {
+            var parallaxValue = (scrolled - sectionTop + windowHeight) * 0.1;
+            var pattern = quoteSection.querySelector('.testimonials-page-full-quote-pattern');
+            if (pattern) {
+                pattern.style.transform = 'translateY(' + parallaxValue + 'px)';
+            }
+        }
+    }
+    
+    window.addEventListener('scroll', parallaxScroll, { passive: true });
+})();
+
+
+// Smooth Scroll for Hero CTA
+(function() {
+    var heroCta = document.querySelector('.testimonials-page-hero-cta');
+    
+    if (!heroCta) return;
+    
+    heroCta.addEventListener('click', function(e) {
+        var href = this.getAttribute('href');
+        
+        if (href && href.startsWith('#')) {
+            e.preventDefault();
+            var target = document.querySelector(href);
+            
+            if (target) {
+                var headerHeight = document.getElementById('siteHeader') ? document.getElementById('siteHeader').offsetHeight : 80;
+                var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    });
+})();
+
+
+// Logo Marquee - Ensure smooth infinite scroll
+(function() {
+    var track = document.querySelector('.testimonials-page-logos-track');
+    
+    if (!track) return;
+    
+    // Clone items for seamless loop
+    var items = track.querySelectorAll('.testimonials-page-logo-item');
+    
+    // Pause animation on hover
+    track.addEventListener('mouseenter', function() {
+        this.style.animationPlayState = 'paused';
+    });
+    
+    track.addEventListener('mouseleave', function() {
+        this.style.animationPlayState = 'running';
+    });
+})();
+
+
+// Intersection Observer for Testimonials Page Animations
+(function() {
+    var observerOptions = {
+        threshold: 0.1,
+        rootMargin: '-50px 0px'
+    };
+    
+    function handleIntersection(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }
+    
+    var observer = new IntersectionObserver(handleIntersection, observerOptions);
+    
+    // Select all animated elements on testimonials page
+    var animatedElements = document.querySelectorAll(
+        '.testimonials-page-featured .animate-slide-right, ' +
+        '.testimonials-page-featured .animate-slide-left, ' +
+        '.testimonials-page-stats .animate-fade-in, ' +
+        '.testimonials-page-stats .animate-scale-in, ' +
+        '.testimonials-page-grid-section .animate-fade-in, ' +
+        '.testimonials-page-logos .animate-fade-in, ' +
+        '.testimonials-page-video-section .animate-fade-in, ' +
+        '.testimonials-page-video-section .animate-scale-in, ' +
+        '.testimonials-page-carousel-section .animate-fade-in, ' +
+        '.testimonials-page-full-quote .animate-fade-in, ' +
+        '.testimonials-page-cta .animate-fade-in'
+    );
+    
+    animatedElements.forEach(function(el) {
+        observer.observe(el);
+    });
+})();
+
+
+// Stagger animation for masonry cards
+(function() {
+    var masonryCards = document.querySelectorAll('.testimonials-page-masonry-card');
+    
+    if (masonryCards.length === 0) return;
+    
+    var observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px'
+    };
+    
+    var cardObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry, index) {
+            if (entry.isIntersecting) {
+                setTimeout(function() {
+                    entry.target.classList.add('is-visible');
+                }, index * 100);
+                cardObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    masonryCards.forEach(function(card) {
+        cardObserver.observe(card);
+    });
+})();
+
+// ========================================
+// CONTACT US PAGE SCRIPTS
+// ========================================
+
+// Contact Page Animations - Intersection Observer
+(function() {
+    var observerOptions = {
+        threshold: 0.1,
+        rootMargin: '-50px 0px'
+    };
+    
+    function handleIntersection(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }
+    
+    var observer = new IntersectionObserver(handleIntersection, observerOptions);
+    
+    // Select all animated elements on contact page
+    var animatedElements = document.querySelectorAll(
+        '.contact-hero .animate-fade-in, ' +
+        '.contact-form-section .animate-slide-left, ' +
+        '.contact-form-section .animate-slide-right, ' +
+        '.contact-form-section .animate-fade-up, ' +
+        '.contact-booking-section .animate-fade-in, ' +
+        '.contact-booking-section .animate-scale-in, ' +
+        '.contact-map-section .animate-fade-in, ' +
+        '.contact-map-section .animate-scale-in, ' +
+        '.contact-map-section .animate-fade-up, ' +
+        '.contact-faq-section .animate-fade-in, ' +
+        '.contact-cta-section .animate-fade-in'
+    );
+    
+    animatedElements.forEach(function(el) {
+        observer.observe(el);
+    });
+})();
+
+
+// Contact FAQ Accordion
+(function() {
+    var faqItems = document.querySelectorAll('.contact-faq-item');
+    
+    if (faqItems.length === 0) return;
+    
+    faqItems.forEach(function(item) {
+        var question = item.querySelector('.contact-faq-question');
+        var answer = item.querySelector('.contact-faq-answer');
+        
+        if (!question || !answer) return;
+        
+        question.addEventListener('click', function() {
+            var isActive = item.classList.contains('active');
+            
+            // Close all other items
+            faqItems.forEach(function(otherItem) {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    var otherAnswer = otherItem.querySelector('.contact-faq-answer');
+                    var otherQuestion = otherItem.querySelector('.contact-faq-question');
+                    if (otherAnswer) otherAnswer.style.maxHeight = '0';
+                    if (otherQuestion) otherQuestion.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Toggle current item
+            if (isActive) {
+                item.classList.remove('active');
+                answer.style.maxHeight = '0';
+                question.setAttribute('aria-expanded', 'false');
+            } else {
+                item.classList.add('active');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                question.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+})();
+
+
+// Contact Form Validation & Submission
+(function() {
+    var form = document.getElementById('contactPageForm');
+    
+    if (!form) return;
+    
+    // Add floating label effect
+    var inputs = form.querySelectorAll('input, textarea, select');
+    
+    inputs.forEach(function(input) {
+        // Add focus/blur effects
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+        
+        // Check on load if field has value
+        if (input.value) {
+            input.parentElement.classList.add('focused');
+        }
+    });
+    
+    // Form submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        var submitBtn = form.querySelector('.contact-form-submit');
+        var originalText = submitBtn.innerHTML;
+        
+        // Show loading state
+        submitBtn.innerHTML = '<span>Sending...</span><svg class="contact-form-spinner" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission (replace with actual AJAX call)
+        setTimeout(function() {
+            submitBtn.innerHTML = '<span>Message Sent!</span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
+            submitBtn.style.background = '#22c55e';
+            
+            // Reset form after delay
+            setTimeout(function() {
+                form.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                submitBtn.style.background = '';
+                
+                // Remove focused class from all fields
+                inputs.forEach(function(input) {
+                    input.parentElement.classList.remove('focused');
+                });
+            }, 3000);
+        }, 2000);
+    });
+})();
+
+
+// Smooth scroll for anchor links on contact page
+(function() {
+    var contactPage = document.querySelector('.contact-hero');
+    
+    if (!contactPage) return;
+    
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+            var targetId = this.getAttribute('href');
+            
+            if (targetId === '#') return;
+            
+            var target = document.querySelector(targetId);
+            
+            if (target) {
+                e.preventDefault();
+                
+                var headerHeight = 80;
+                var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+})();
+
+
+// Parallax effect for hero shapes
+(function() {
+    var shapes = document.querySelectorAll('.contact-hero-shape');
+    
+    if (shapes.length === 0) return;
+    
+    var heroSection = document.querySelector('.contact-hero');
+    
+    if (!heroSection) return;
+    
+    window.addEventListener('scroll', function() {
+        var scrolled = window.pageYOffset;
+        var heroHeight = heroSection.offsetHeight;
+        
+        if (scrolled > heroHeight) return;
+        
+        shapes.forEach(function(shape, index) {
+            var speed = 0.1 + (index * 0.05);
+            var yPos = scrolled * speed;
+            shape.style.transform = 'translateY(' + yPos + 'px)';
+        });
+    }, { passive: true });
+})();
+
+
+// Contact info cards hover effect
+(function() {
+    var infoCards = document.querySelectorAll('.contact-info-card');
+    
+    infoCards.forEach(function(card) {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+        });
+    });
+})();
+
+
+// Magnetic button effect for CTA buttons
+(function() {
+    var magneticBtns = document.querySelectorAll('.contact-hero-btn, .contact-cta-btn');
+    
+    magneticBtns.forEach(function(btn) {
+        btn.addEventListener('mousemove', function(e) {
+            var rect = this.getBoundingClientRect();
+            var x = e.clientX - rect.left - rect.width / 2;
+            var y = e.clientY - rect.top - rect.height / 2;
+            
+            this.style.transform = 'translate(' + (x * 0.1) + 'px, ' + (y * 0.1) + 'px)';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+        });
+    });
+})();
+
+
+// Typing effect for hero heading (optional - activate by adding class)
+(function() {
+    var typingElement = document.querySelector('.contact-hero-typing');
+    
+    if (!typingElement) return;
+    
+    var text = typingElement.textContent;
+    typingElement.textContent = '';
+    typingElement.style.visibility = 'visible';
+    
+    var i = 0;
+    var speed = 50;
+    
+    function typeWriter() {
+        if (i < text.length) {
+            typingElement.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+    
+    // Start typing when element is in view
+    var observer = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+            typeWriter();
+            observer.disconnect();
+        }
+    });
+    
+    observer.observe(typingElement);
+})();
+
+
+// Counter animation for any stats on the page
+(function() {
+    var counters = document.querySelectorAll('.contact-counter');
+    
+    if (counters.length === 0) return;
+    
+    var observerOptions = {
+        threshold: 0.5
+    };
+    
+    var counterObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                var counter = entry.target;
+                var target = parseInt(counter.getAttribute('data-target'));
+                var duration = 2000;
+                var step = target / (duration / 16);
+                var current = 0;
+                
+                function updateCounter() {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                }
+                
+                updateCounter();
+                counterObserver.unobserve(counter);
+            }
+        });
+    }, observerOptions);
+    
+    counters.forEach(function(counter) {
+        counterObserver.observe(counter);
+    });
+})();
+
+
+// Map card tilt effect
+(function() {
+    var mapCard = document.querySelector('.contact-map-card');
+    
+    if (!mapCard) return;
+    
+    mapCard.addEventListener('mousemove', function(e) {
+        var rect = this.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        
+        var centerX = rect.width / 2;
+        var centerY = rect.height / 2;
+        
+        var rotateX = (y - centerY) / 50;
+        var rotateY = (centerX - x) / 50;
+        
+        this.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+    });
+    
+    mapCard.addEventListener('mouseleave', function() {
+        this.style.transform = '';
+    });
+})();
+
+
+// Staggered animation for contact info cards
+(function() {
+    var cards = document.querySelectorAll('.contact-info-card');
+    
+    if (cards.length === 0) return;
+    
+    var observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px'
+    };
+    
+    var cardObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry, index) {
+            if (entry.isIntersecting) {
+                var card = entry.target;
+                var delay = Array.from(cards).indexOf(card) * 150;
+                
+                setTimeout(function() {
+                    card.classList.add('is-visible');
+                }, delay);
+                
+                cardObserver.unobserve(card);
+            }
+        });
+    }, observerOptions);
+    
+    cards.forEach(function(card) {
+        card.classList.add('animate-fade-up');
+        cardObserver.observe(card);
+    });
+})();
+
+
+// Quick links staggered animation
+(function() {
+    var quickLinks = document.querySelectorAll('.contact-quick-link');
+    
+    if (quickLinks.length === 0) return;
+    
+    var observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px'
+    };
+    
+    var linkObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                var link = entry.target;
+                var delay = Array.from(quickLinks).indexOf(link) * 100;
+                
+                setTimeout(function() {
+                    link.classList.add('is-visible');
+                }, delay);
+                
+                linkObserver.unobserve(link);
+            }
+        });
+    }, observerOptions);
+    
+    quickLinks.forEach(function(link) {
+        link.classList.add('animate-fade-up');
+        linkObserver.observe(link);
+    });
+})();
+
+
+// Form input ripple effect
+(function() {
+    var formInputs = document.querySelectorAll('.contact-form-group input, .contact-form-group textarea');
+    
+    formInputs.forEach(function(input) {
+        input.addEventListener('focus', function() {
+            var ripple = document.createElement('span');
+            ripple.className = 'contact-input-ripple';
+            this.parentElement.appendChild(ripple);
+            
+            setTimeout(function() {
+                ripple.remove();
+            }, 600);
+        });
+    });
+})();
+
+
+// Scroll progress indicator (optional)
+(function() {
+    var progressBar = document.querySelector('.contact-scroll-progress');
+    
+    if (!progressBar) return;
+    
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.pageYOffset;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var scrollPercent = (scrollTop / docHeight) * 100;
+        
+        progressBar.style.width = scrollPercent + '%';
+    }, { passive: true });
+})();
