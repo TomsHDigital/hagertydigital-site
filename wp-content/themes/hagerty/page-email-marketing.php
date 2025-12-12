@@ -320,11 +320,6 @@ $hero_text_class = $has_hero_media ? 'has-media' : '';
     </div>
   </div>
 
-  <!-- Decorative Shapes -->
-  <div class="email-page-hero-shapes">
-    <div class="email-page-shape email-page-shape-1"></div>
-    <div class="email-page-shape email-page-shape-2"></div>
-  </div>
 </section>
 
 <?php

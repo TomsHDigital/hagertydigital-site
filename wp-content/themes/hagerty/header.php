@@ -125,7 +125,6 @@ function hd_get_link($link) {
         <h3>Our Work</h3>
         <ul>
           <li><a href="/case-studies">Case Studies</a></li>
-          <li><a href="/results">Our Results</a></li>
           <li><a href="/testimonials">Client Testimonials</a></li>
           <li><a href="/news">News</a></li>
         </ul>
@@ -174,7 +173,7 @@ function hd_get_link($link) {
         <div class="menu-mobile-submenu">
           <a href="/about-us">About Us</a>
           <a href="/meet-the-team">Meet The Team</a>
-          <a href="#careers">Careers</a>
+          <a href="/careers">Careers</a>
         </div>
       </div>
 
@@ -201,14 +200,13 @@ function hd_get_link($link) {
           <span class="menu-arrow">▼</span>
         </div>
         <div class="menu-mobile-submenu">
-          <a href="#case-studies">Case Studies</a>
-          <a href="#results">Our Results</a>
-          <a href="#testimonials">Client Testimonials</a>
-          <a href="#news">News</a>
+          <a href="/case-studies">Case Studies</a>
+          <a href="/testimonials">Client Testimonials</a>
+          <a href="/news">News</a>
         </div>
       </div>
 
-      <a href="#contact" class="menu-mobile-link">Contact Us</a>
+      <a href="/contact" class="menu-mobile-link">Contact Us</a>
 
       <!-- Mobile Menu Contact Slideshow -->
       <div class="menu-mobile-contact-slideshow" id="menuMobileSlideshow">
