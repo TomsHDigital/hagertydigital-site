@@ -2687,434 +2687,479 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 
 // ========================================
-// CONTACT US PAGE SCRIPTS
+// MENU BANNER SLIDESHOW
 // ========================================
-
-// Contact Page Animations - Intersection Observer
 (function() {
-    var observerOptions = {
-        threshold: 0.1,
-        rootMargin: '-50px 0px'
-    };
+    var bannerSlideshow = document.getElementById('menuBannerSlideshow');
     
-    function handleIntersection(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
+    if (!bannerSlideshow) return;
+    
+    var slides = bannerSlideshow.querySelectorAll('.menu-banner-slide');
+    var dots = bannerSlideshow.querySelectorAll('.menu-banner-dot');
+    var prevBtn = bannerSlideshow.querySelector('.menu-banner-prev');
+    var nextBtn = bannerSlideshow.querySelector('.menu-banner-next');
+    
+    if (slides.length === 0) return;
+    
+    var currentIndex = 0;
+    var autoPlayInterval;
+    var autoPlayDelay = 5000;
+    
+    function showSlide(index) {
+        // Wrap around
+        if (index >= slides.length) index = 0;
+        if (index < 0) index = slides.length - 1;
+        
+        currentIndex = index;
+        
+        // Update slides
+        slides.forEach(function(slide, i) {
+            slide.classList.toggle('active', i === currentIndex);
+        });
+        
+        // Update dots
+        dots.forEach(function(dot, i) {
+            dot.classList.toggle('active', i === currentIndex);
         });
     }
     
-    var observer = new IntersectionObserver(handleIntersection, observerOptions);
+    function nextSlide() {
+        showSlide(currentIndex + 1);
+    }
     
-    // Select all animated elements on contact page
-    var animatedElements = document.querySelectorAll(
-        '.contact-hero .animate-fade-in, ' +
-        '.contact-form-section .animate-slide-left, ' +
-        '.contact-form-section .animate-slide-right, ' +
-        '.contact-form-section .animate-fade-up, ' +
-        '.contact-booking-section .animate-fade-in, ' +
-        '.contact-booking-section .animate-scale-in, ' +
-        '.contact-map-section .animate-fade-in, ' +
-        '.contact-map-section .animate-scale-in, ' +
-        '.contact-map-section .animate-fade-up, ' +
-        '.contact-faq-section .animate-fade-in, ' +
-        '.contact-cta-section .animate-fade-in'
-    );
+    function prevSlide() {
+        showSlide(currentIndex - 1);
+    }
     
-    animatedElements.forEach(function(el) {
-        observer.observe(el);
-    });
-})();
-
-
-// Contact FAQ Accordion
-(function() {
-    var faqItems = document.querySelectorAll('.contact-faq-item');
+    function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayInterval = setInterval(nextSlide, autoPlayDelay);
+    }
     
-    if (faqItems.length === 0) return;
-    
-    faqItems.forEach(function(item) {
-        var question = item.querySelector('.contact-faq-question');
-        var answer = item.querySelector('.contact-faq-answer');
-        
-        if (!question || !answer) return;
-        
-        question.addEventListener('click', function() {
-            var isActive = item.classList.contains('active');
-            
-            // Close all other items
-            faqItems.forEach(function(otherItem) {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                    var otherAnswer = otherItem.querySelector('.contact-faq-answer');
-                    var otherQuestion = otherItem.querySelector('.contact-faq-question');
-                    if (otherAnswer) otherAnswer.style.maxHeight = '0';
-                    if (otherQuestion) otherQuestion.setAttribute('aria-expanded', 'false');
-                }
-            });
-            
-            // Toggle current item
-            if (isActive) {
-                item.classList.remove('active');
-                answer.style.maxHeight = '0';
-                question.setAttribute('aria-expanded', 'false');
-            } else {
-                item.classList.add('active');
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-                question.setAttribute('aria-expanded', 'true');
-            }
-        });
-    });
-})();
-
-
-// Contact Form Validation & Submission
-(function() {
-    var form = document.getElementById('contactPageForm');
-    
-    if (!form) return;
-    
-    // Add floating label effect
-    var inputs = form.querySelectorAll('input, textarea, select');
-    
-    inputs.forEach(function(input) {
-        // Add focus/blur effects
-        input.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
-        });
-        
-        input.addEventListener('blur', function() {
-            if (!this.value) {
-                this.parentElement.classList.remove('focused');
-            }
-        });
-        
-        // Check on load if field has value
-        if (input.value) {
-            input.parentElement.classList.add('focused');
-        }
-    });
-    
-    // Form submission
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        var submitBtn = form.querySelector('.contact-form-submit');
-        var originalText = submitBtn.innerHTML;
-        
-        // Show loading state
-        submitBtn.innerHTML = '<span>Sending...</span><svg class="contact-form-spinner" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>';
-        submitBtn.disabled = true;
-        
-        // Simulate form submission (replace with actual AJAX call)
-        setTimeout(function() {
-            submitBtn.innerHTML = '<span>Message Sent!</span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
-            submitBtn.style.background = '#22c55e';
-            
-            // Reset form after delay
-            setTimeout(function() {
-                form.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                submitBtn.style.background = '';
-                
-                // Remove focused class from all fields
-                inputs.forEach(function(input) {
-                    input.parentElement.classList.remove('focused');
-                });
-            }, 3000);
-        }, 2000);
-    });
-})();
-
-
-// Smooth scroll for anchor links on contact page
-(function() {
-    var contactPage = document.querySelector('.contact-hero');
-    
-    if (!contactPage) return;
-    
-    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-        anchor.addEventListener('click', function(e) {
-            var targetId = this.getAttribute('href');
-            
-            if (targetId === '#') return;
-            
-            var target = document.querySelector(targetId);
-            
-            if (target) {
-                e.preventDefault();
-                
-                var headerHeight = 80;
-                var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-})();
-
-
-// Parallax effect for hero shapes
-(function() {
-    var shapes = document.querySelectorAll('.contact-hero-shape');
-    
-    if (shapes.length === 0) return;
-    
-    var heroSection = document.querySelector('.contact-hero');
-    
-    if (!heroSection) return;
-    
-    window.addEventListener('scroll', function() {
-        var scrolled = window.pageYOffset;
-        var heroHeight = heroSection.offsetHeight;
-        
-        if (scrolled > heroHeight) return;
-        
-        shapes.forEach(function(shape, index) {
-            var speed = 0.1 + (index * 0.05);
-            var yPos = scrolled * speed;
-            shape.style.transform = 'translateY(' + yPos + 'px)';
-        });
-    }, { passive: true });
-})();
-
-
-// Contact info cards hover effect
-(function() {
-    var infoCards = document.querySelectorAll('.contact-info-card');
-    
-    infoCards.forEach(function(card) {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateX(10px) scale(1.02)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = '';
-        });
-    });
-})();
-
-
-// Magnetic button effect for CTA buttons
-(function() {
-    var magneticBtns = document.querySelectorAll('.contact-hero-btn, .contact-cta-btn');
-    
-    magneticBtns.forEach(function(btn) {
-        btn.addEventListener('mousemove', function(e) {
-            var rect = this.getBoundingClientRect();
-            var x = e.clientX - rect.left - rect.width / 2;
-            var y = e.clientY - rect.top - rect.height / 2;
-            
-            this.style.transform = 'translate(' + (x * 0.1) + 'px, ' + (y * 0.1) + 'px)';
-        });
-        
-        btn.addEventListener('mouseleave', function() {
-            this.style.transform = '';
-        });
-    });
-})();
-
-
-// Typing effect for hero heading (optional - activate by adding class)
-(function() {
-    var typingElement = document.querySelector('.contact-hero-typing');
-    
-    if (!typingElement) return;
-    
-    var text = typingElement.textContent;
-    typingElement.textContent = '';
-    typingElement.style.visibility = 'visible';
-    
-    var i = 0;
-    var speed = 50;
-    
-    function typeWriter() {
-        if (i < text.length) {
-            typingElement.textContent += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
+    function stopAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
         }
     }
     
-    // Start typing when element is in view
-    var observer = new IntersectionObserver(function(entries) {
-        if (entries[0].isIntersecting) {
-            typeWriter();
-            observer.disconnect();
-        }
+    // Event listeners
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            nextSlide();
+            startAutoPlay();
+        });
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            prevSlide();
+            startAutoPlay();
+        });
+    }
+    
+    dots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+            var index = parseInt(this.getAttribute('data-index'));
+            showSlide(index);
+            startAutoPlay();
+        });
     });
     
-    observer.observe(typingElement);
-})();
-
-
-// Counter animation for any stats on the page
-(function() {
-    var counters = document.querySelectorAll('.contact-counter');
+    // Pause on hover
+    bannerSlideshow.addEventListener('mouseenter', stopAutoPlay);
+    bannerSlideshow.addEventListener('mouseleave', startAutoPlay);
     
-    if (counters.length === 0) return;
-    
-    var observerOptions = {
-        threshold: 0.5
-    };
-    
-    var counterObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-                var counter = entry.target;
-                var target = parseInt(counter.getAttribute('data-target'));
-                var duration = 2000;
-                var step = target / (duration / 16);
-                var current = 0;
-                
-                function updateCounter() {
-                    current += step;
-                    if (current < target) {
-                        counter.textContent = Math.floor(current);
-                        requestAnimationFrame(updateCounter);
+    // Start autoplay when menu opens
+    var menuOverlay = document.getElementById('menuOverlay');
+    if (menuOverlay) {
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    if (menuOverlay.classList.contains('active')) {
+                        startAutoPlay();
                     } else {
-                        counter.textContent = target;
+                        stopAutoPlay();
                     }
                 }
-                
-                updateCounter();
-                counterObserver.unobserve(counter);
-            }
+            });
         });
-    }, observerOptions);
-    
-    counters.forEach(function(counter) {
-        counterObserver.observe(counter);
-    });
+        
+        observer.observe(menuOverlay, { attributes: true });
+    }
 })();
 
 
-// Map card tilt effect
+// Mobile Banner Slideshow
+(function() {
+    var mobileSlideshow = document.getElementById('menuMobileBannerSlideshow');
+    
+    if (!mobileSlideshow) return;
+    
+    var slides = mobileSlideshow.querySelectorAll('.menu-slideshow-slide');
+    
+    if (slides.length <= 1) return;
+    
+    var currentIndex = 0;
+    var autoPlayInterval;
+    
+    function showSlide(index) {
+        if (index >= slides.length) index = 0;
+        if (index < 0) index = slides.length - 1;
+        
+        currentIndex = index;
+        
+        slides.forEach(function(slide, i) {
+            slide.classList.toggle('active', i === currentIndex);
+        });
+    }
+    
+    function nextSlide() {
+        showSlide(currentIndex + 1);
+    }
+    
+    // Auto rotate every 4 seconds
+    var menuOverlay = document.getElementById('menuOverlay');
+    if (menuOverlay) {
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    if (menuOverlay.classList.contains('active')) {
+                        autoPlayInterval = setInterval(nextSlide, 4000);
+                    } else {
+                        if (autoPlayInterval) clearInterval(autoPlayInterval);
+                    }
+                }
+            });
+        });
+        
+        observer.observe(menuOverlay, { attributes: true });
+    }
+})();
+
+
+// Remove map card tilt effect - override any existing JS
 (function() {
     var mapCard = document.querySelector('.contact-map-card');
     
     if (!mapCard) return;
     
-    mapCard.addEventListener('mousemove', function(e) {
-        var rect = this.getBoundingClientRect();
-        var x = e.clientX - rect.left;
-        var y = e.clientY - rect.top;
-        
-        var centerX = rect.width / 2;
-        var centerY = rect.height / 2;
-        
-        var rotateX = (y - centerY) / 50;
-        var rotateY = (centerX - x) / 50;
-        
-        this.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
-    });
+    // Remove any existing event listeners by cloning
+    var newMapCard = mapCard.cloneNode(true);
+    mapCard.parentNode.replaceChild(newMapCard, mapCard);
+})();
+// ============================================
+// WHO WE ARE PAGE - JAVASCRIPT
+// ============================================
+
+// Who We Are - Stats Counter Animation
+(function() {
+  const statValues = document.querySelectorAll('.wwa-stat-value[data-target]');
+  if (!statValues.length) return;
+  
+  const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px'
+  };
+  
+  function animateCounter(element) {
+    const target = parseFloat(element.dataset.target) || 0;
+    const suffix = element.dataset.suffix || '';
+    const prefix = element.dataset.prefix || '';
+    const duration = 2000;
+    const startTime = performance.now();
+    const isDecimal = target % 1 !== 0;
     
-    mapCard.addEventListener('mouseleave', function() {
-        this.style.transform = '';
+    function updateCounter(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function for smoother animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentValue = target * easeOutQuart;
+      
+      if (isDecimal) {
+        element.textContent = prefix + currentValue.toFixed(1) + suffix;
+      } else {
+        element.textContent = prefix + Math.floor(currentValue) + suffix;
+      }
+      
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        if (isDecimal) {
+          element.textContent = prefix + target.toFixed(1) + suffix;
+        } else {
+          element.textContent = prefix + Math.floor(target) + suffix;
+        }
+      }
+    }
+    
+    requestAnimationFrame(updateCounter);
+  }
+  
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+        entry.target.classList.add('counted');
+        animateCounter(entry.target);
+      }
     });
+  }, observerOptions);
+  
+  statValues.forEach(function(stat) {
+    observer.observe(stat);
+  });
 })();
 
 
-// Staggered animation for contact info cards
+// Who We Are - Leader Modal
 (function() {
-    var cards = document.querySelectorAll('.contact-info-card');
+  const modal = document.getElementById('wwaLeaderModal');
+  const expandButtons = document.querySelectorAll('.wwa-leader-expand-btn');
+  const leaderCards = document.querySelectorAll('.wwa-leader-card');
+  const closeBtn = modal ? modal.querySelector('.wwa-leader-modal-close') : null;
+  
+  if (!modal || !window.wwaLeaderData) return;
+  
+  function openModal(leaderId) {
+    const data = window.wwaLeaderData[leaderId];
+    if (!data) return;
     
-    if (cards.length === 0) return;
+    const modalImage = document.getElementById('wwaModalImage');
+    const modalName = document.getElementById('wwaModalName');
+    const modalTitle = document.getElementById('wwaModalTitle');
+    const modalBio = document.getElementById('wwaModalBio');
+    const modalLinkedIn = document.getElementById('wwaModalLinkedIn');
+    const modalEmail = document.getElementById('wwaModalEmail');
     
-    var observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px'
-    };
+    if (modalImage) modalImage.src = data.image;
+    if (modalName) modalName.textContent = data.name;
+    if (modalTitle) modalTitle.textContent = data.title;
+    if (modalBio) modalBio.innerHTML = data.bio;
     
-    var cardObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry, index) {
-            if (entry.isIntersecting) {
-                var card = entry.target;
-                var delay = Array.from(cards).indexOf(card) * 150;
-                
-                setTimeout(function() {
-                    card.classList.add('is-visible');
-                }, delay);
-                
-                cardObserver.unobserve(card);
-            }
-        });
-    }, observerOptions);
+    if (modalLinkedIn) {
+      if (data.linkedin) {
+        modalLinkedIn.href = data.linkedin;
+        modalLinkedIn.style.display = 'flex';
+      } else {
+        modalLinkedIn.style.display = 'none';
+      }
+    }
     
-    cards.forEach(function(card) {
-        card.classList.add('animate-fade-up');
-        cardObserver.observe(card);
+    if (modalEmail) {
+      if (data.email) {
+        modalEmail.href = 'mailto:' + data.email;
+        modalEmail.style.display = 'flex';
+      } else {
+        modalEmail.style.display = 'none';
+      }
+    }
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  expandButtons.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const leaderId = this.dataset.leaderId;
+      openModal(leaderId);
     });
+  });
+  
+  leaderCards.forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      // Don't open modal if clicking on a link
+      if (e.target.closest('a')) return;
+      const leaderId = this.dataset.leaderId;
+      if (leaderId !== undefined) {
+        openModal(leaderId);
+      }
+    });
+  });
+  
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+  
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+  
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
 })();
 
 
-// Quick links staggered animation
+// Who We Are - Team Member Video Hover
 (function() {
-    var quickLinks = document.querySelectorAll('.contact-quick-link');
+  const teamMembers = document.querySelectorAll('.wwa-team-member, .wwa-leader-card');
+  
+  teamMembers.forEach(function(member) {
+    const video = member.querySelector('video');
+    if (!video) return;
     
-    if (quickLinks.length === 0) return;
-    
-    var observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px'
-    };
-    
-    var linkObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-                var link = entry.target;
-                var delay = Array.from(quickLinks).indexOf(link) * 100;
-                
-                setTimeout(function() {
-                    link.classList.add('is-visible');
-                }, delay);
-                
-                linkObserver.unobserve(link);
-            }
-        });
-    }, observerOptions);
-    
-    quickLinks.forEach(function(link) {
-        link.classList.add('animate-fade-up');
-        linkObserver.observe(link);
+    member.addEventListener('mouseenter', function() {
+      video.play().catch(function(e) {
+        // Video play failed, ignore
+      });
     });
+    
+    member.addEventListener('mouseleave', function() {
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
 })();
 
 
-// Form input ripple effect
+// Who We Are - Mosaic Hover Effects
 (function() {
-    var formInputs = document.querySelectorAll('.contact-form-group input, .contact-form-group textarea');
-    
-    formInputs.forEach(function(input) {
-        input.addEventListener('focus', function() {
-            var ripple = document.createElement('span');
-            ripple.className = 'contact-input-ripple';
-            this.parentElement.appendChild(ripple);
-            
-            setTimeout(function() {
-                ripple.remove();
-            }, 600);
-        });
+  const mosaicItems = document.querySelectorAll('.wwa-mosaic-item');
+  
+  mosaicItems.forEach(function(item) {
+    item.addEventListener('mouseenter', function() {
+      // Add slight parallax effect on hover
+      const image = item.querySelector('img');
+      if (image) {
+        item.addEventListener('mousemove', handleMouseMove);
+      }
     });
+    
+    item.addEventListener('mouseleave', function() {
+      const image = item.querySelector('img');
+      if (image) {
+        image.style.transform = 'scale(1.1)';
+        item.removeEventListener('mousemove', handleMouseMove);
+      }
+    });
+    
+    function handleMouseMove(e) {
+      const rect = item.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      
+      const image = item.querySelector('img');
+      if (image) {
+        image.style.transform = 'scale(1.1) translate(' + (x * 10) + 'px, ' + (y * 10) + 'px)';
+      }
+    }
+  });
 })();
 
 
-// Scroll progress indicator (optional)
+// Who We Are - Parallax Hero Effect
 (function() {
-    var progressBar = document.querySelector('.contact-scroll-progress');
+  const heroSection = document.querySelector('.wwa-hero');
+  const heroContent = document.querySelector('.wwa-hero-content');
+  
+  if (!heroSection || !heroContent) return;
+  
+  function parallaxHero() {
+    const scrollY = window.pageYOffset;
+    const heroHeight = heroSection.offsetHeight;
     
-    if (!progressBar) return;
-    
-    window.addEventListener('scroll', function() {
-        var scrollTop = window.pageYOffset;
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        var scrollPercent = (scrollTop / docHeight) * 100;
-        
-        progressBar.style.width = scrollPercent + '%';
-    }, { passive: true });
+    if (scrollY < heroHeight) {
+      const opacity = 1 - (scrollY / heroHeight) * 0.5;
+      const translateY = scrollY * 0.3;
+      
+      heroContent.style.opacity = opacity;
+      heroContent.style.transform = 'translateY(' + translateY + 'px)';
+    }
+  }
+  
+  window.addEventListener('scroll', parallaxHero, { passive: true });
+})();
+
+
+// Who We Are - Smooth Scroll for Anchor Links
+(function() {
+  const wwaAnchorLinks = document.querySelectorAll('.wwa-hero-btn[href^="#"], .wwa-hero a[href^="#"]');
+  
+  wwaAnchorLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href.length > 1) {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          const headerOffset = 100;
+          const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+})();
+
+
+// Who We Are - Gallery Lightbox Effect on Culture Section
+(function() {
+  const galleryItems = document.querySelectorAll('.wwa-gallery-item');
+  
+  galleryItems.forEach(function(item, index) {
+    item.addEventListener('click', function() {
+      // Simple zoom effect on click
+      if (item.classList.contains('expanded')) {
+        item.classList.remove('expanded');
+      } else {
+        // Remove expanded from all others
+        galleryItems.forEach(function(g) { g.classList.remove('expanded'); });
+        item.classList.add('expanded');
+      }
+    });
+  });
+})();
+
+
+// Who We Are - Value Cards Stagger Animation on Scroll
+(function() {
+  const valueCards = document.querySelectorAll('.wwa-value-card');
+  
+  if (!valueCards.length) return;
+  
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry, index) {
+      if (entry.isIntersecting) {
+        setTimeout(function() {
+          entry.target.classList.add('is-visible');
+        }, index * 100);
+      }
+    });
+  }, {
+    threshold: 0.2,
+    rootMargin: '-50px 0px'
+  });
+  
+  valueCards.forEach(function(card) {
+    observer.observe(card);
+  });
+})();
+
+
+// Who We Are - Avatar Stack Animation
+(function() {
+  const avatarStack = document.querySelector('.wwa-hero-avatars');
+  if (!avatarStack) return;
+  
+  const avatars = avatarStack.querySelectorAll('.wwa-hero-avatar');
+  
+  avatars.forEach(function(avatar, index) {
+    avatar.style.animationDelay = (index * 0.15) + 's';
+  });
 })();

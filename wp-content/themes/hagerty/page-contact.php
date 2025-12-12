@@ -73,11 +73,13 @@ $cta_button_text                = function_exists('get_field') ? get_field('cont
 $cta_button_link                = function_exists('get_field') ? get_field('contact_cta_button_link') : '';
 
 // Helper function for WYSIWYG content
-function contact_wysiwyg($content, $fallback = '') {
-    $output = !empty($content) ? $content : $fallback;
-    $output = apply_filters('the_content', $output);
-    $output = preg_replace('#^\s*<p[^>]*>|</p>\s*$#i', '', trim($output));
-    return $output;
+if (!function_exists('contact_wysiwyg')) {
+    function contact_wysiwyg($content, $fallback = '') {
+        $output = !empty($content) ? $content : $fallback;
+        $output = apply_filters('the_content', $output);
+        $output = preg_replace('#^\s*<p[^>]*>|</p>\s*$#i', '', trim($output));
+        return $output;
+    }
 }
 ?>
 
@@ -113,8 +115,7 @@ function contact_wysiwyg($content, $fallback = '') {
         <span class="contact-hero-line-1">
           <?php echo contact_wysiwyg($contact_hero_heading_line_1, "Let's Start a"); ?>
         </span>
-        <br>
-        <span class="contact-hero-line-2 highlight-text-italic">
+                <span class="contact-hero-line-2 highlight-text-italic">
           <?php echo contact_wysiwyg($contact_hero_heading_line_2, 'Conversation'); ?>
         </span>
       </h1>
@@ -140,12 +141,6 @@ function contact_wysiwyg($content, $fallback = '') {
           <span>Book a Call</span>
         </a>
       </div>
-    </div>
-
-    <!-- Scroll indicator -->
-    <div class="contact-hero-scroll">
-      <div class="contact-hero-scroll-line"></div>
-      <span>Scroll</span>
     </div>
   </div>
 </section>
@@ -401,13 +396,12 @@ function contact_wysiwyg($content, $fallback = '') {
       </h2>
     </div>
 
-    <div class="contact-map-wrapper animate-scale-in">
+    <div class="contact-map-wrapper animate-fade-in">
       <div class="contact-map-card">
         <!-- Info overlay on map -->
         <div class="contact-map-info-overlay">
           <div class="contact-map-info-card">
             <div class="contact-map-info-logo">
-              <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/logo-dark.png" alt="Hagerty Digital" onerror="this.style.display='none'">
               <span class="contact-map-info-name">Hagerty Digital</span>
             </div>
             <div class="contact-map-info-address">
@@ -437,7 +431,6 @@ function contact_wysiwyg($content, $fallback = '') {
 
         <!-- Interactive Map -->
         <div class="contact-map-interactive" id="contactMap">
-          <!-- Fallback to Google Maps embed if no API key -->
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2486.1642898553395!2d-2.5891661!3d51.4487843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48718e7a9e6f7c45%3A0x5f6ef91f55f9bc21!2sTemple%201852!5e0!3m2!1sen!2suk!4v1702389600000!5m2!1sen!2suk"
             width="100%" 
@@ -454,7 +447,7 @@ function contact_wysiwyg($content, $fallback = '') {
       <div class="contact-map-quick-links">
         <a href="https://www.google.com/maps/dir//Temple+1852,+Temple+Campus,+Lower+Approach+Rd,+Bristol+BS1+6QA" 
            target="_blank" 
-           class="contact-quick-link animate-fade-up" style="animation-delay: 0.1s;">
+           class="contact-quick-link">
           <div class="contact-quick-link-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"/>
@@ -468,7 +461,7 @@ function contact_wysiwyg($content, $fallback = '') {
         </a>
 
         <a href="tel:<?php echo esc_attr(preg_replace('/[^0-9]/', '', $contact_phone ?: '01172565466')); ?>" 
-           class="contact-quick-link animate-fade-up" style="animation-delay: 0.2s;">
+           class="contact-quick-link">
           <div class="contact-quick-link-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
@@ -481,7 +474,7 @@ function contact_wysiwyg($content, $fallback = '') {
         </a>
 
         <a href="mailto:<?php echo esc_attr($contact_email ?: 'hello@hagertydigital.co.uk'); ?>" 
-           class="contact-quick-link animate-fade-up" style="animation-delay: 0.3s;">
+           class="contact-quick-link">
           <div class="contact-quick-link-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -619,8 +612,7 @@ function contact_wysiwyg($content, $fallback = '') {
 </section>
 
 
-
-<!-- Long CTA Section - Before Reviews -->
+<!-- Long CTA Section -->
 <section class="long-cta-section" data-section-theme="light">
   <div class="long-cta-container">
     <div class="long-cta-content animate-fade-in">
@@ -678,7 +670,7 @@ function contact_wysiwyg($content, $fallback = '') {
       </div>
 
       <div class="long-cta-buttons">
-        <a href="#contact" class="long-cta-btn long-cta-btn-primary">
+        <a href="#contact-form" class="long-cta-btn long-cta-btn-primary">
           <span>Start Your Project</span>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
